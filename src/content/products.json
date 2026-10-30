@@ -1,0 +1,306 @@
+[
+  {
+    "id": "tb-dst-agar-module",
+    "visible": true,
+    "featured": true,
+    "order": 1,
+    "category": "Module 01",
+    "status": {
+      "ko": "개발 중",
+      "en": "In development",
+      "fr": "En développement",
+      "ja": "開発中"
+    },
+    "title": {
+      "ko": "항결핵 약제 배지 모듈",
+      "en": "Anti-TB Drug Agar Module",
+      "fr": "Module de milieu agar pour médicaments antituberculeux",
+      "ja": "抗結核薬剤寒天培地モジュール"
+    },
+    "summary": {
+      "ko": "결핵균 약제감수성시험 워크플로우를 지원하기 위해 개발 중인 배양 기반 모듈입니다. 검사 편의성과 결과 관리의 표준화를 목표로 합니다.",
+      "en": "A culture-based module under development to support tuberculosis drug susceptibility testing workflows, with an emphasis on operational consistency and result management.",
+      "fr": "Module basé sur la culture, en cours de développement pour soutenir les flux de tests de sensibilité aux antituberculeux, avec une attention portée à la cohérence opérationnelle et à la gestion des résultats.",
+      "ja": "結核菌薬剤感受性試験のワークフローを支援するために開発中の培養ベースのモジュールです。運用の一貫性と結果管理を重視しています。"
+    },
+    "listSummary": {
+      "ko": "결핵균 약제감수성시험 흐름을 지원하는 배양 기반 모듈입니다.",
+      "en": "A culture-based module supporting TB drug susceptibility testing workflows.",
+      "fr": "Module basé sur la culture pour les flux de tests de sensibilité aux antituberculeux.",
+      "ja": "結核菌薬剤感受性試験の流れを支援する培養ベースのモジュールです。"
+    },
+    "detailSummary": {
+      "ko": "결핵균 약제감수성시험 과정에서 배양, 성장 대조, 결과 판독 흐름을 더 일관되게 관리하기 위해 개발 중인 모듈입니다. 공개 페이지에서는 제품의 역할과 운영 방향만 안내하며, 구체 조성이나 세부 운용 조건은 검증 단계와 협의 범위에 따라 별도로 제공합니다.",
+      "en": "A module under development to help manage culture, growth-control, and result-interpretation workflows more consistently in TB drug susceptibility testing. This public page describes the module role and operational direction only; detailed composition and operating conditions are shared separately according to validation stage and discussion scope.",
+      "fr": "Module en cours de développement pour gérer de manière plus cohérente les étapes de culture, de contrôle de croissance et d'interprétation des résultats dans les tests de sensibilité aux antituberculeux. Cette page publique présente uniquement le rôle du module et son orientation opérationnelle ; la composition détaillée et les conditions d'utilisation sont communiquées séparément selon l'étape de validation et le périmètre des échanges.",
+      "ja": "結核菌薬剤感受性試験における培養、増殖対照、結果判定の流れをより一貫して管理するために開発中のモジュールです。公開ページでは製品の役割と運用方針のみを案内し、具体的な組成や詳細な運用条件は検証段階および協議範囲に応じて別途提供します。"
+    },
+    "listFeatures": [
+      {
+        "ko": "배양 기반 검사 흐름 지원",
+        "en": "Supports culture-based workflows",
+        "fr": "Prend en charge les flux de travail basés sur la culture",
+        "ja": "培養ベースの検査フローを支援"
+      },
+      {
+        "ko": "결과 관리 표준화 지향",
+        "en": "Designed for consistent result management",
+        "fr": "Conçu pour une gestion cohérente des résultats",
+        "ja": "結果管理の標準化を志向"
+      }
+    ],
+    "detailFeatures": [
+      {
+        "ko": "검사 워크플로우 표준화를 고려한 배양 모듈 구성",
+        "en": "Culture-module configuration designed around standardized testing workflows",
+        "fr": "Configuration du module de culture pensée pour des flux de test standardisés",
+        "ja": "検査ワークフローの標準化を考慮した培養モジュール構成"
+      },
+      {
+        "ko": "품질 관리와 재현성을 고려한 운영 체계",
+        "en": "Operational framework developed with quality control and reproducibility in mind",
+        "fr": "Cadre opérationnel développé en tenant compte du contrôle qualité et de la reproductibilité",
+        "ja": "品質管理と再現性を考慮した運用体系"
+      },
+      {
+        "ko": "성장 대조와 결과 판독 흐름을 지원하는 설계 방향",
+        "en": "Design direction supporting growth-control and result-interpretation workflows",
+        "fr": "Orientation de conception prenant en charge le contrôle de croissance et l'interprétation des résultats",
+        "ja": "増殖対照と結果判定フローを支援する設計方針"
+      },
+      {
+        "ko": "연구·검증 단계에 맞춰 공개 가능한 범위 내 정보 제공",
+        "en": "Information disclosed only within the scope appropriate for ongoing research and validation",
+        "fr": "Informations communiquées uniquement dans le périmètre approprié aux étapes de recherche et de validation",
+        "ja": "研究・検証段階に応じて公開可能な範囲内で情報を提供"
+      }
+    ],
+    "specs": [
+      {
+        "ko": "검사 워크플로우 표준화를 고려한 배양 모듈 구성",
+        "en": "Culture-module configuration designed around standardized testing workflows",
+        "fr": "Configuration du module de culture pensée pour des flux de test standardisés",
+        "ja": "検査ワークフローの標準化を考慮した培養モジュール構成"
+      },
+      {
+        "ko": "품질 관리와 재현성을 고려한 운영 체계",
+        "en": "Operational framework developed with quality control and reproducibility in mind",
+        "fr": "Cadre opérationnel développé en tenant compte du contrôle qualité et de la reproductibilité",
+        "ja": "品質管理と再現性を考慮した運用体系"
+      },
+      {
+        "ko": "성장 대조와 결과 판독 흐름을 지원하는 설계 방향",
+        "en": "Design direction supporting growth-control and result-interpretation workflows",
+        "fr": "Orientation de conception prenant en charge le contrôle de croissance et l'interprétation des résultats",
+        "ja": "増殖対照と結果判定フローを支援する設計方針"
+      },
+      {
+        "ko": "연구·검증 단계에 맞춰 공개 가능한 범위 내 정보 제공",
+        "en": "Information disclosed only within the scope appropriate for ongoing research and validation",
+        "fr": "Informations communiquées uniquement dans le périmètre approprié aux étapes de recherche et de validation",
+        "ja": "研究・検証段階に応じて公開可能な範囲内で情報を提供"
+      }
+    ],
+    "tags": ["TB DST", "Culture module", "Workflow"]
+  },
+  {
+    "id": "tb-dst-auto-inoculation-module",
+    "visible": true,
+    "order": 2,
+    "category": "Module 02",
+    "status": {
+      "ko": "설계·개발 중",
+      "en": "In design and development",
+      "fr": "En conception et développement",
+      "ja": "設計・開発中"
+    },
+    "title": {
+      "ko": "자동 접종 모듈",
+      "en": "Automated Inoculation Module",
+      "fr": "Module d'inoculation automatisée",
+      "ja": "自動接種モジュール"
+    },
+    "summary": {
+      "ko": "배양 기반 검사 과정에서 접종 흐름의 일관성과 사용 편의성을 높이기 위해 개발 중인 자동화 모듈입니다.",
+      "en": "An automation module under development to improve consistency and usability in culture-based testing workflows.",
+      "fr": "Module d'automatisation en cours de développement pour améliorer la cohérence et la facilité d'utilisation des flux de tests basés sur la culture.",
+      "ja": "培養ベースの検査工程における接種フローの一貫性と使いやすさを高めるために開発中の自動化モジュールです。"
+    },
+    "listSummary": {
+      "ko": "배양 기반 검사 과정의 접종 흐름을 돕는 자동화 모듈입니다.",
+      "en": "An automation module supporting inoculation workflows in culture-based testing.",
+      "fr": "Module d'automatisation prenant en charge les flux d'inoculation des tests basés sur la culture.",
+      "ja": "培養ベース検査における接種フローを支援する自動化モジュールです。"
+    },
+    "detailSummary": {
+      "ko": "배양 기반 검사에서 반복적인 접종 작업의 일관성을 높이고 사용자의 작업 부담을 줄이기 위해 개발 중인 자동화 모듈입니다. 배양 모듈과의 연동성을 고려해 설계하고 있으며, 실험실 환경에서의 사용성과 작업 흐름 개선을 목표로 합니다.",
+      "en": "An automation module under development to improve consistency in repetitive inoculation tasks and reduce operator burden in culture-based testing. It is designed with integration into culture modules in mind, focusing on laboratory usability and workflow continuity.",
+      "fr": "Module d'automatisation en cours de développement pour améliorer la cohérence des tâches répétitives d'inoculation et réduire la charge de travail des opérateurs dans les tests basés sur la culture. Il est conçu pour s'intégrer aux modules de culture, avec un accent sur l'ergonomie en laboratoire et la continuité du flux de travail.",
+      "ja": "培養ベースの検査における反復的な接種作業の一貫性を高め、作業者の負担を減らすために開発中の自動化モジュールです。培養モジュールとの連携を考慮して設計しており、実験室での使いやすさと作業フローの改善を目指しています。"
+    },
+    "listFeatures": [
+      {
+        "ko": "접종 흐름 자동화 지원",
+        "en": "Supports inoculation automation",
+        "fr": "Prend en charge l'automatisation de l'inoculation",
+        "ja": "接種フローの自動化を支援"
+      },
+      {
+        "ko": "실험실 사용성 개선 지향",
+        "en": "Designed to improve lab usability",
+        "fr": "Conçu pour améliorer l'ergonomie en laboratoire",
+        "ja": "実験室での使いやすさの向上を志向"
+      }
+    ],
+    "detailFeatures": [
+      {
+        "ko": "표준화된 접종 흐름을 목표로 한 자동화 구조",
+        "en": "Automation structure aimed at standardized inoculation workflows",
+        "fr": "Structure d'automatisation visant des flux d'inoculation standardisés",
+        "ja": "標準化された接種フローを目指した自動化構造"
+      },
+      {
+        "ko": "배양 모듈과 연동 가능한 운영 방향",
+        "en": "Operational direction designed for integration with culture modules",
+        "fr": "Orientation opérationnelle conçue pour l'intégration avec les modules de culture",
+        "ja": "培養モジュールと連携可能な運用方針"
+      },
+      {
+        "ko": "실험실 사용성과 작업 흐름을 고려한 설계",
+        "en": "Design approach focused on laboratory usability and workflow continuity",
+        "fr": "Conception axée sur l'ergonomie en laboratoire et la continuité du flux de travail",
+        "ja": "実験室での使いやすさと作業フローを考慮した設計"
+      },
+      {
+        "ko": "검증 단계에 따라 적용 범위와 세부 운용 방식 순차 공개",
+        "en": "Application scope and detailed operation to be disclosed progressively according to validation stage",
+        "fr": "Périmètre d'application et modalités détaillées communiqués progressivement selon l'étape de validation",
+        "ja": "検証段階に応じて適用範囲と詳細な運用方式を順次公開"
+      }
+    ],
+    "specs": [
+      {
+        "ko": "표준화된 접종 흐름을 목표로 한 자동화 구조",
+        "en": "Automation structure aimed at standardized inoculation workflows",
+        "fr": "Structure d'automatisation visant des flux d'inoculation standardisés",
+        "ja": "標準化された接種フローを目指した自動化構造"
+      },
+      {
+        "ko": "배양 모듈과 연동 가능한 운영 방향",
+        "en": "Operational direction designed for integration with culture modules",
+        "fr": "Orientation opérationnelle conçue pour l'intégration avec les modules de culture",
+        "ja": "培養モジュールと連携可能な運用方針"
+      },
+      {
+        "ko": "실험실 사용성과 작업 흐름을 고려한 설계",
+        "en": "Design approach focused on laboratory usability and workflow continuity",
+        "fr": "Conception axée sur l'ergonomie en laboratoire et la continuité du flux de travail",
+        "ja": "実験室での使いやすさと作業フローを考慮した設計"
+      }
+    ],
+    "tags": ["Automation", "Inoculation", "Workflow"]
+  },
+  {
+    "id": "tb-dst-ai-incubation-reader",
+    "visible": true,
+    "order": 3,
+    "category": "Module 03",
+    "status": {
+      "ko": "개발·검증 중",
+      "en": "In development and validation",
+      "fr": "En développement et validation",
+      "ja": "開発・検証中"
+    },
+    "title": {
+      "ko": "자동 배양·AI 판독 시스템",
+      "en": "Automated Incubation & AI Reading System",
+      "fr": "Système d'incubation automatisée et de lecture IA",
+      "ja": "自動培養・AI判定システム"
+    },
+    "summary": {
+      "ko": "배양 상태 모니터링과 이미지 기반 판독을 지원하기 위해 개발 중인 자동 배양·AI 판독 시스템입니다.",
+      "en": "An automated incubation and AI-assisted reading system under development to support culture monitoring and image-based interpretation.",
+      "fr": "Système d'incubation automatisée et de lecture assistée par IA, en cours de développement pour soutenir le suivi des cultures et l'interprétation basée sur l'image.",
+      "ja": "培養状態のモニタリングと画像ベースの判定を支援するために開発中の自動培養・AI判定システムです。"
+    },
+    "listSummary": {
+      "ko": "배양 상태 모니터링과 이미지 기반 판독을 지원하는 시스템입니다.",
+      "en": "A system supporting culture monitoring and image-based interpretation.",
+      "fr": "Système prenant en charge le suivi des cultures et l'interprétation basée sur l'image.",
+      "ja": "培養状態のモニタリングと画像ベースの判定を支援するシステムです。"
+    },
+    "detailSummary": {
+      "ko": "배양 과정의 상태 변화를 관찰하고 이미지 기반 판독을 지원하기 위해 개발 중인 시스템입니다. 배양 모니터링, 데이터 수집, 판독 결과 관리 흐름을 하나의 운영 환경으로 연결하는 것을 목표로 하며, 세부 성능 정보는 검증 단계에 맞춰 순차 공개합니다.",
+      "en": "A system under development to observe culture-status changes and support image-based interpretation. It aims to connect culture monitoring, data acquisition, and result-management workflows into one operating environment, with detailed performance information disclosed progressively according to validation stage.",
+      "fr": "Système en cours de développement pour observer les changements d'état des cultures et soutenir l'interprétation basée sur l'image. Il vise à relier le suivi des cultures, l'acquisition de données et la gestion des résultats dans un environnement opérationnel unique, avec des informations de performance détaillées communiquées progressivement selon l'étape de validation.",
+      "ja": "培養過程の状態変化を観察し、画像ベースの判定を支援するために開発中のシステムです。培養モニタリング、データ収集、判定結果管理の流れを一つの運用環境につなぐことを目指しており、詳細な性能情報は検証段階に応じて順次公開します。"
+    },
+    "listFeatures": [
+      {
+        "ko": "배양 상태 모니터링 지원",
+        "en": "Supports culture monitoring",
+        "fr": "Prend en charge le suivi des cultures",
+        "ja": "培養状態のモニタリングを支援"
+      },
+      {
+        "ko": "이미지 기반 판독 흐름 지원",
+        "en": "Supports image-based interpretation",
+        "fr": "Prend en charge l'interprétation basée sur l'image",
+        "ja": "画像ベースの判定フローを支援"
+      }
+    ],
+    "detailFeatures": [
+      {
+        "ko": "배양 상태 모니터링과 이미지 기반 판독 지원",
+        "en": "Support for culture monitoring and image-based interpretation",
+        "fr": "Prise en charge du suivi des cultures et de l'interprétation basée sur l'image",
+        "ja": "培養状態のモニタリングと画像ベース判定を支援"
+      },
+      {
+        "ko": "성장 변화 추적을 위한 데이터 수집 구조",
+        "en": "Data-acquisition structure for tracking growth changes",
+        "fr": "Structure d'acquisition de données pour suivre les changements de croissance",
+        "ja": "成長変化を追跡するためのデータ収集構造"
+      },
+      {
+        "ko": "판독 결과 관리와 외부 시스템 연계를 고려한 설계",
+        "en": "Design approach considering result management and external-system connectivity",
+        "fr": "Conception tenant compte de la gestion des résultats et de la connectivité avec des systèmes externes",
+        "ja": "判定結果管理と外部システム連携を考慮した設計"
+      },
+      {
+        "ko": "검증 단계에 따라 성능 정보 순차 공개",
+        "en": "Performance information to be disclosed progressively according to validation stage",
+        "fr": "Informations de performance communiquées progressivement selon l'étape de validation",
+        "ja": "検証段階に応じて性能情報を順次公開"
+      }
+    ],
+    "specs": [
+      {
+        "ko": "배양 상태 모니터링과 이미지 기반 판독 지원",
+        "en": "Support for culture monitoring and image-based interpretation",
+        "fr": "Prise en charge du suivi des cultures et de l'interprétation basée sur l'image",
+        "ja": "培養状態のモニタリングと画像ベース判定を支援"
+      },
+      {
+        "ko": "성장 변화 추적을 위한 데이터 수집 구조",
+        "en": "Data-acquisition structure for tracking growth changes",
+        "fr": "Structure d'acquisition de données pour suivre les changements de croissance",
+        "ja": "成長変化を追跡するためのデータ収集構造"
+      },
+      {
+        "ko": "판독 결과 관리와 외부 시스템 연계를 고려한 설계",
+        "en": "Design approach considering result management and external-system connectivity",
+        "fr": "Conception tenant compte de la gestion des résultats et de la connectivité avec des systèmes externes",
+        "ja": "判定結果管理と外部システム連携を考慮した設計"
+      },
+      {
+        "ko": "검증 단계에 따라 성능 정보 순차 공개",
+        "en": "Performance information to be disclosed progressively according to validation stage",
+        "fr": "Informations de performance communiquées progressivement selon l'étape de validation",
+        "ja": "検証段階に応じて性能情報を順次公開"
+      }
+    ],
+    "tags": ["Incubation", "AI reading", "Data workflow"]
+  }
+]

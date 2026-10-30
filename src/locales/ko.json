@@ -1,0 +1,526 @@
+{
+  "menu": {
+    "HOME": "HOME",
+    "ABOUT": "ABOUT",
+    "PRODUCT": "PRODUCT",
+    "MEMBERS": "MEMBERS",
+    "NEWS": "NEWS",
+    "RESEARCH": "RESEARCH"
+  },
+  "header": {
+    "primaryNav": "주요 메뉴",
+    "mobileNav": "모바일 메뉴",
+    "contact": "문의하기",
+    "changeLanguage": "언어 변경",
+    "openMenu": "메뉴 열기",
+    "closeMenu": "메뉴 닫기",
+    "navigation": {
+      "about": "회사소개",
+      "product": "제품소개",
+      "gallery": "갤러리",
+      "news": "소식",
+      "publications": "논문",
+      "contact": "문의",
+      "careers": "채용"
+    }
+  },
+  "researchNavigation": {
+    "aria": "Research 하위 메뉴",
+    "breadcrumbAria": "현재 위치",
+    "introduction": "MycoDx 소개",
+    "areas": "연구 분야"
+  },
+  "research": {
+    "kicker": "Research Areas",
+    "title": "감염성 질환 진단을 위한 정밀 연구",
+    "description": "MycoDx는 감염성 질환 진단에 필요한 배양, 검출, 약제 내성 분석과 영상 판독을 연결하는 통합 진단 플랫폼 기술을 연구합니다.",
+    "initiativesTitle": "주요 연구과제",
+    "initiativesDescription": "연도별 중복 기록을 하나의 과제로 통합하여 MycoDx 연구진이 수행하거나 참여한 연구개발 이력을 소개합니다.",
+    "total": "Total.",
+    "projectBadge": "과제",
+    "period": "연구기간",
+    "principalInvestigator": "연구책임자",
+    "organization": "수행기관"
+  },
+  "gallery": {
+    "kicker": "Gallery",
+    "title": "연구 현장",
+    "description": "MycoDx의 실험 환경과 연구 활동을 소개합니다.",
+    "empty": "등록된 갤러리 이미지가 없습니다."
+  },
+  "about": {
+    "kicker": "About MycoDx",
+    "title": "보이지 않는 감염성 질환을,\n가장 정확하게 드러내다.",
+    "lead": "마이코디엑스는 다년간 바이오 산업의 최전선에서 전문성을 쌓아온 전문가들이 설립한 감염병 진단 혁신 스타트업입니다.",
+    "heroImageAlt": "페트리 접시의 미생물 배양 시료를 관찰하는 연구원",
+    "focusLabel": "MycoDx 핵심 진단 영역",
+    "intro": {
+      "kicker": "Who we are",
+      "title": "정밀 진단의 새로운 기준을 만드는 바이오 기술 기업",
+      "paragraph1": "MycoDx는 감염성 질환 진단에 필요한 배양, 검출, 약제 내성 분석 및 영상 판독 기술을 연결하여 진단 과정 전반을 지원하는 통합 플랫폼을 개발합니다.",
+      "paragraph2": "개별 검사 기술에 머무르지 않고, 검사 과정의 표준화와 자동화를 통해 보다 신속하고 신뢰할 수 있는 진단 환경을 구축하는 것을 목표로 합니다.",
+      "paragraph3": "연구실에서 실제 임상 현장에 이르기까지 누구나 믿고 사용할 수 있는 진단 기술을 제공하기 위해 끊임없이 연구하고 있습니다."
+    },
+    "focus": {
+      "culture": {
+        "title": "배양 기반 진단",
+        "description": "Culture-based diagnostics"
+      },
+      "ntm": {
+        "title": "감염성 질환 통합 분석",
+        "description": "Infectious disease analysis"
+      },
+      "resistance": {
+        "title": "약제 내성 분석",
+        "description": "Drug resistance analysis"
+      },
+      "imaging": {
+        "title": "지능형 영상 판독",
+        "description": "Intelligent imaging"
+      }
+    },
+    "camellia": {
+      "kicker": "The Camellia Philosophy",
+      "title": "추운 겨울에도 선명하고 강인하게 피어나는 동백처럼.",
+      "description": "진단이 까다롭고 눈에 보이지 않는 미세한 병원체를 정확히 탐지하기 위해 배양, 검출, 분석, 영상 판독 기술을 연결하고, 의료진과 환자가 마주한 어려운 진단 문제를 정밀한 기술력으로 해결합니다."
+    },
+    "history": {
+      "kicker": "History",
+      "title": "회사 연혁",
+      "label": "MycoDx Timeline",
+      "description": "마이코디엑스의 설립, 연구 기반 구축, 인증 및 협력 이력을 정리했습니다.",
+      "aria": "마이코디엑스 회사 연혁",
+      "items": [
+        {
+          "year": "2025.04",
+          "title": "정책자금 확보",
+          "description": "감염병 예방치료 기술개발사업 과제를 확보하고, 국립창원대학교 산학협력단으로 과제를 이전했습니다. (2026.01)"
+        },
+        {
+          "year": "2026.01",
+          "title": "법인 설립",
+          "description": "(주)마이코디엑스를 설립하고 중소기업 확인을 완료했습니다."
+        },
+        {
+          "year": "2026.02",
+          "title": "기업부설연구소",
+          "description": "기업부설연구소 설립 인정을 완료했습니다."
+        },
+        {
+          "year": "2026.05",
+          "title": "창업기업 인증",
+          "description": "창업기업 확인, 교원·연구원 창업기업 인정, 의료기기판매업 신고를 완료했습니다. (2026.04)"
+        },
+        {
+          "year": "2026.06",
+          "title": "RISE 참여기업 협약",
+          "description": "국립창원대학교 지역혁신중심 대학지원체계(RISE) 참여기업 협약을 체결했습니다."
+        }
+      ]
+    },
+    "mission": {
+      "title": "정확성과 신뢰성을 통해 환자의 생명을 지킵니다.",
+      "description": "치료의 시작은 정확한 진단으로부터 출발합니다. MycoDx는 타협하지 않는 정확성과 객관적인 임상 데이터를 바탕으로 전 세계 의료 현장에 신뢰할 수 있는 진단 기준을 제시하고, 인류의 건강한 삶에 기여합니다."
+    },
+    "vision": {
+      "kicker": "Mission & Vision",
+      "title": "정확한 진단에서 시작하는 더 건강한 미래",
+      "statement": "감염성 질환 통합 진단 플랫폼의 글로벌 리더로.",
+      "description": "배양 기반 진단, 분자 기반 탐지, 약제 내성 분석, 지능형 영상 기술을 연결해 진단이 필요한 현장에 더 빠르고 명확한 답을 전달합니다.",
+      "pillars": {
+        "validation": {
+          "title": "기술의 고도화와 검증",
+          "description": "국내외 우수 의료·연구기관과의 긴밀한 공동 연구 및 임상 협력을 통해 진단 기술의 완성도와 신뢰성을 지속적으로 높여갑니다."
+        },
+        "scalability": {
+          "title": "통합 플랫폼의 확장성",
+          "description": "감염성 질환 진단 전 과정을 연결하는 플랫폼 기반을 고도화하며, 검사실과 임상 현장의 다양한 진단 흐름에 적용할 수 있도록 확장합니다."
+        },
+        "global": {
+          "title": "글로벌 시장 진출",
+          "description": "글로벌 산업 파트너와 함께 진단 플랫폼을 세계 시장에 전개하여 보건 의료 사각지대 없는 세상을 만들어갑니다."
+        }
+      }
+    }
+  },
+  "people": {
+    "kicker": "People",
+    "title": "MycoDx 연구진",
+    "description": "배양, 분자 기반 탐지, 약제 내성 분석, 영상 판독을 연결하는 감염성 질환 통합 진단 플랫폼을 만들어가는 구성원입니다.",
+    "representative": "대표",
+    "researchers": "연구진"
+  },
+  "publication": {
+    "kicker": "논문",
+    "title": "연구 논문",
+    "description": "MycoDx 연구진과의 공동 연구로 수행된 과학 연구를 소개합니다.",
+    "yearNavigation": "논문 연도",
+    "mycodxAuthors": "MycoDx 저자",
+    "publicationInfo": "{{year}} · {{volume}}권 · Article {{article}}",
+    "viewPublication": "논문 보기",
+    "sectionNavigation": "연구 성과 섹션",
+    "total": "Total.",
+    "yearUnknown": "연도 미기재",
+    "emptyPapers": "등록된 논문 자료가 없습니다.",
+    "emptyPatents": "특허 자료가 준비되는 대로 업데이트됩니다.",
+    "country": "국가",
+    "registrationNumber": "등록번호"
+  },
+  "product": {
+    "kicker": "Product",
+    "title": "제품소개",
+    "description": "개발 중인 결핵 DST 통합 플랫폼의 구성과 공개 가능한 제품 개요를 소개합니다.",
+    "bundleName": "TB-DST Integrated Platform",
+    "bundleBadge": "Integrated platform",
+    "bundleDescription": "세 가지 모듈을 하나의 결핵 약제내성 검사 플랫폼으로 연결해, 배양 기반 검사 흐름을 더 일관되게 운영할 수 있도록 개발하고 있습니다.",
+    "status": "현재 상태",
+    "backToList": "목록으로",
+    "specsTitle": "주요 특징",
+    "placeholderTitle": "제품 정보를 준비하고 있습니다.",
+    "placeholderDescription": "확인되지 않은 제품 정보를 임의로 표시하지 않습니다. 공개 가능한 제품 정보가 준비되면 이 페이지에서 정확하게 안내하겠습니다."
+  },
+  "newsPage": {
+    "readMore": "자세히 보기",
+    "backToList": "소식 목록으로",
+    "relatedLink": "관련 링크 (새 창)",
+    "photos": "행사 사진",
+    "kicker": "News",
+    "title": "MycoDx 소식",
+    "description": "MycoDx의 공식 소식과 공지사항을 전합니다.",
+    "empty": "등록된 소식이 없습니다.",
+    "websiteLaunch": {
+      "date": "2026.06",
+      "title": "MycoDx 공식 홈페이지를 개설했습니다.",
+      "summary": "MycoDx의 연구 방향, 연구진, 연구 성과와 회사 소식을 보다 명확하게 전달하기 위해 공식 홈페이지를 개설했습니다."
+    }
+  },
+  "home": {
+    "titleLine1": "보이지 않는 것을",
+    "titleLine2": "명확하게",
+    "description": "MycoDx는 감염성 질환의 검출부터 배양, 분석까지 진단 전 과정을 아우르는 통합 진단 플랫폼을 개발합니다.\n미생물 배양 기술을 기반으로 분자 기반 탐지, 약제 내성 분석, 지능형 영상분석을 융합하여 더 신속하고 정확한 감염성 질환 진단 환경을 만들어갑니다.",
+    "keywords": {
+      "label": "MycoDx 핵심 키워드",
+      "culture": "배양 기반 진단 기술",
+      "integrated": "감염성 질환 통합 분석",
+      "intelligent": "지능형 진단 플랫폼"
+    },
+    "cta": {
+      "label": "주요 이동 경로",
+      "products": "제품·파이프라인 보기",
+      "contact": "문의하기"
+    },
+    "indexLabel": "Explore MycoDx",
+    "indexIntro": "연구실의 정밀함을 실제 임상과 진단 현장까지 연결하는 연구 중심의 진단 기술을 만듭니다.",
+    "indexAria": "MycoDx 주요 메뉴",
+    "scroll": "연구 살펴보기",
+    "backToTop": "맨 위로 이동",
+    "slides": {
+      "previous": "이전 비주얼",
+      "next": "다음 비주얼"
+    },
+    "navigation": {
+      "research": "배양 기반 진단 · 통합 분석",
+      "people": "연구진 · 임상 협력",
+      "publication": "연구 성과 · 성능 검증",
+      "equipment": "플랫폼 정보 · 준비 중",
+      "gallery": "연구소 · 연구 기록",
+      "news": "새 소식 · 공지사항",
+      "contact": "파트너십 · 일반 문의"
+    },
+    "visuals": {
+      "assay": "일반 단일 채널 마이크로피펫과 96웰 플레이트로 분석 실험을 진행하는 연구원",
+      "petriCulture": "페트리 접시의 미생물 배양 샘플을 관찰하는 연구원",
+      "collaboration": "진단 데이터를 함께 검토하는 연구진"
+    },
+    "focus": {
+      "kicker": "Our focus",
+      "title": "가장 발견하기 어려운 병원체를 위한 정밀 진단",
+      "description": "미생물 배양 기술을 기반으로 분자 기반 탐지, 약제 내성 분석, 지능형 영상 기술을 연결해 감염성 질환 진단 흐름을 더 빠르고 명확하게 만듭니다.",
+      "link": "MycoDx 소개 보기"
+    },
+    "capabilities": {
+      "kicker": "Core Technology",
+      "title": "배양부터 판독까지 하나의 흐름",
+      "culture": {
+        "title": "Culture-based Diagnostics",
+        "label": "배양 기반 진단 기술",
+        "description": "감염성 병원체의 배양·검출 과정을 개선하고 자동화해 표준화된 미생물 진단 환경을 구축합니다."
+      },
+      "detection": {
+        "title": "Molecular Detection",
+        "label": "분자 기반 탐지",
+        "description": "감염성 병원체를 신속하고 정확하게 확인하기 위한 분자 기반 검출 기술을 개발합니다."
+      },
+      "resistance": {
+        "title": "Drug Resistance Analysis",
+        "label": "약제 내성 분석",
+        "description": "감염성 질환의 약제 내성을 효과적으로 확인하고 치료 의사결정을 지원하는 분석 기술을 개발합니다."
+      },
+      "imaging": {
+        "title": "Intelligent Imaging",
+        "label": "지능형 영상 기술",
+        "description": "배양 과정의 성장과 형태적 특징을 영상으로 분석하고, AI 기반 자동 판독 및 정량화 기술을 개발합니다."
+      },
+      "chain": "Culture · Molecular Detection · Drug Resistance · Intelligent Imaging",
+      "platformMessage": "MycoDx는 개별 진단 기술에 머무르지 않고, 검체에서 결과 판독까지 이어지는 감염성 질환 통합 진단 플랫폼을 구축합니다."
+    },
+    "pipeline": {
+      "kicker": "Product Pipeline",
+      "title": "제품 개발 흐름만 간결하게",
+      "description": "MycoDx의 제품은 배지, 자동 접종, 배양·AI 판독으로 이어지는 모듈형 흐름을 기준으로 개발되고 있습니다.",
+      "note": "홈에서는 방향만 짧게 보여주고, 제품 페이지에서는 공개 가능한 범위의 개요만 제공합니다.",
+      "link": "제품 자세히 보기"
+    },
+    "story": {
+      "kicker": "The Camellia Story",
+      "title": "보이지 않는 신호를 명확한 진단 근거로",
+      "description": "MycoDx는 감염성 질환 관련 병원체의 배양, 검출, 약제 내성 분석, 영상 판독을 하나의 진단 흐름으로 연결합니다. 검사 과정의 표준화와 자동화를 통해 더 신속하고 신뢰할 수 있는 환경을 만들어갑니다.",
+      "link": "MycoDx 소개"
+    },
+    "contact": {
+      "kicker": "Work with MycoDx",
+      "title": "Contact",
+      "description": "공동 연구, 제품 문의, 임상 검증과 파트너십에 관한 이야기를 편하게 남겨 주세요.",
+      "prompt": "문의 유형을 고르고 간단히 남겨 주시면, 내용을 확인한 뒤 적절한 담당자가 연락드리겠습니다.",
+      "address": "51139 경상남도 창원시 의창구 용동로83번안길 7 미래드림빌딩 202호 206호",
+      "direct": {
+        "email": "이메일",
+        "phone": "전화",
+        "office": "주소"
+      },
+      "mapTitle": "MycoDx 위치 Google 지도",
+      "form": {
+        "name": "성함",
+        "namePlaceholder": "성함",
+        "organization": "소속 (선택)",
+        "organizationPlaceholder": "소속 기관 또는 회사명",
+        "inquiryType": "문의 유형",
+        "inquiryTypes": {
+          "research": "공동 연구",
+          "product": "제품 문의",
+          "validation": "임상 검증",
+          "partnership": "사업 파트너십",
+          "other": "기타"
+        },
+        "email": "이메일",
+        "message": "문의 내용",
+        "messagePlaceholder": "궁금한 점이나 논의하고 싶은 내용을 편하게 적어 주세요.",
+        "privacyConsent": "개인정보 수집·이용 안내를 확인했으며 이에 동의합니다. (필수)",
+        "privacyLink": "자세히 보기",
+        "submit": "문의 보내기",
+        "sending": "전송 중...",
+        "sent": "문의가 전송되었습니다.",
+        "failed": "전송에 실패했습니다. 이메일로 문의해 주세요."
+      }
+    }
+  },
+  "hero": {
+    "title": "보이지 않는 것을 명확하게",
+    "subtitle": "MycoDx는 감염성 질환의 검출부터 배양, 분석까지 진단 전 과정을 아우르는 통합 진단 플랫폼을 개발합니다. 미생물 배양 기술을 기반으로 분자 기반 탐지, 약제 내성 분석, 지능형 영상분석을 융합하여 더 신속하고 정확한 감염성 질환 진단 환경을 만들어갑니다.",
+    "point1": "배양 기반 진단 기술",
+    "point2": "감염성 질환 통합 분석",
+    "point3": "지능형 진단 플랫폼"
+  },
+  "story": {
+    "title": "The Camellia Story",
+    "subtitle": "동백꽃의 절개와 인내, 보이지 않는 곳에서 빛을 발하는 MycoDx의 연구",
+    "description": "MycoDx는 감염성 질환 관련 병원체의 배양, 검출, 약제 내성 분석, 영상 판독을 하나의 진단 흐름으로 연결합니다. 검사 과정의 표준화와 자동화를 통해 더 신속하고 신뢰할 수 있는 환경을 만들어갑니다."
+  },
+  "tech": {
+    "title": "Core Technology",
+    "subtitle": "Culture · Molecular Detection · Drug Resistance · Intelligent Imaging",
+    "card1_title": "Culture-based Diagnostics",
+    "card1_desc": "감염성 병원체의 배양·검출 과정을 개선하고 자동화해 표준화된 미생물 진단 환경을 구축합니다.",
+    "card2_title": "Molecular Detection",
+    "card2_desc": "감염성 병원체를 신속하고 정확하게 확인하기 위한 분자 기반 검출 기술을 개발합니다.",
+    "card3_title": "Drug Resistance Analysis",
+    "card3_desc": "감염성 질환의 약제 내성을 효과적으로 확인하고 치료 의사결정을 지원하는 분석 기술을 개발합니다.",
+    "card4_title": "Intelligent Imaging",
+    "card4_desc": "배양 과정의 성장과 형태적 특징을 영상으로 분석하고, AI 기반 자동 판독 및 정량화 기술을 개발합니다.",
+    "platformMessage": "MycoDx는 개별 진단 기술에 머무르지 않고, 검체에서 결과 판독까지 이어지는 감염성 질환 통합 진단 플랫폼을 구축합니다."
+  },
+  "rd": {
+    "title": "R&D Center",
+    "subtitle": "미생물 영상 분석 기술의 고도화",
+    "card1_title": "Certified R&D Organization",
+    "card2_title": "Research Focus",
+    "card3_title": "Research Infrastructure"
+  },
+  "pipeline": {
+    "title": "Development Pipeline",
+    "subtitle": "검체에서 결과 판독까지 이어지는 통합 진단 플랫폼 개발 단계",
+    "step1": "Research",
+    "step1_description": "배양·분자 기반 탐지·영상분석 핵심 기술 개발 및 최적화",
+    "step1_status": "진행중",
+    "step2": "Validation",
+    "step2_description": "감염성 질환 진단 기술 성능 검증 및 통합",
+    "step2_status": "진행중",
+    "step3": "Application & Deployment",
+    "step3_description": "통합 진단 플랫폼 고도화 및 현장 적용 확대",
+    "step3_status": "예정"
+  },
+  "validation": {
+    "title": "Scientific Validation",
+    "subtitle": "성능 평가 결과 및 글로벌 연동 테스트 학술 성과"
+  },
+  "partnership": {
+    "title": "파트너십 문의",
+    "description": "MycoDx와 함께 동반 성장을 이뤄갈 파트너를 모십니다. 문의 주시면 담당 부서에서 신속히 연락드리겠습니다.",
+    "button": "문의하기"
+  },
+  "slogan": {
+    "main": "마이코디엑스",
+    "sub": "감염성 질환 진단 전 과정을 연결하는 통합 진단 플랫폼을 개발합니다."
+  },
+  "careers": {
+    "kicker": "Careers · Talent Pool",
+    "title": "<line>함께 <strong>새로운 가능성</strong>을</line><line>만들어갈 인재를 기다립니다.</line>",
+    "lead": "마이코디엑스는 감염병 진단을 중심으로 바이오·체외진단·헬스케어 기술을 연구하며, 각 분야의 전문성과 새로운 시각을 가진 인재와 함께 성장하고자 합니다.",
+    "heroAlt": "연구 결과를 함께 검토하는 MycoDx 팀",
+    "introLabel": "Why MycoDx",
+    "introTitle": "<line>채용 시기에 한정하지 않는</line><line><strong>상시 인재풀을 운영</strong>합니다.</line>",
+    "introBody": "현재 진행 중인 채용이 없더라도 마이코디엑스와 함께하고 싶은 분은 언제든지 지원하실 수 있습니다. 향후 채용 수요가 발생하면 전공·경력·연구 경험 및 직무 적합성을 검토하여 <strong>적합한 분께 개별적으로 연락드립니다.</strong>",
+    "fieldsLabel": "Application Areas",
+    "fieldsTitle": "지원 분야",
+    "fieldsDescription": "연구개발부터 제품화, 생산 및 품질, 새로운 기술과 산업의 융합까지 다양한 분야의 인재를 기다립니다.",
+    "fields": [
+      [
+        "바이오·체외진단 연구개발",
+        "감염병 진단을 중심으로 한 바이오·체외진단 기술 연구 및 제품 개발"
+      ],
+      [
+        "생산·품질",
+        "제품 생산, 품질관리 및 안정적인 제품 공급을 위한 운영"
+      ],
+      [
+        "헬스케어 융합기술",
+        "바이오 기술과 데이터·소프트웨어 등 새로운 기술의 융합"
+      ],
+      [
+        "기타 사업",
+        "사업개발, 운영 및 마이코디엑스의 성장에 필요한 다양한 분야"
+      ]
+    ],
+    "processLabel": "Talent Pool Journey",
+    "processTitle": "인재풀은 이렇게 운영됩니다",
+    "processDescription": "지원서 등록 후 채용 수요와 직무 적합성에 따라 아래와 같이 검토가 진행됩니다.",
+    "steps": [
+      [
+        "01",
+        "프로필 등록",
+        "경력과 관심 분야를 알려주세요."
+      ],
+      [
+        "02",
+        "인재풀 검토",
+        "보내주신 정보를 안전하게 검토합니다."
+      ],
+      [
+        "03",
+        "포지션 매칭",
+        "적합한 기회가 생기면 개별 연락드립니다."
+      ],
+      [
+        "04",
+        "채용 절차 안내",
+        "포지션에 맞는 다음 절차를 안내합니다."
+      ]
+    ],
+    "notice": "인재풀 등록은 특정 포지션의 채용이나 전형 진행을 보장하지 않습니다.",
+    "ctaEyebrow": "Stay connected",
+    "ctaTitle": "새로운 가능성을 함께 만들어가요.",
+    "ctaBody": "준비된 지원 서류와 함께 인재풀에 등록해 주세요.",
+    "ctaButton": "지원서 작성하기"
+  },
+  "careersMeta": {
+    "title": "상시 인재풀",
+    "description": "MycoDx와 함께 감염성 질환 진단의 미래를 만들어 갈 인재를 기다립니다.",
+    "applyTitle": "지원서 작성",
+    "applyDescription": "MycoDx 채용 지원 안내를 확인하고 지원서를 제출합니다."
+  },
+  "careersApply": {
+    "back": "상시 인재풀 안내",
+    "title": "지원서 작성",
+    "lead": "지원 안내를 확인한 후 입사지원서와 증빙서류를 제출해 주세요.",
+    "successConfirm": "확인",
+    "successTitle": "지원서 전송 요청이 완료되었습니다.",
+    "successBody": "마이코디엑스 인재풀에 지원해 주셔서 감사합니다.",
+    "formTitle": "지원자 정보",
+    "required": "* 표시는 필수 입력 항목입니다. 제출 정보는 채용 검토를 위해 지원일로부터 1년간 보관·이용됩니다.",
+    "area": "지원 분야",
+    "areas": [
+      "바이오·체외진단 연구개발",
+      "생산·품질",
+      "헬스케어 융합기술",
+      "기타 사업"
+    ],
+    "name": "성명",
+    "email": "이메일",
+    "phone": "연락처",
+    "education": "최종 학력",
+    "select": "선택해 주세요",
+    "degrees": [
+      "학사",
+      "석사",
+      "박사",
+      "기타"
+    ],
+    "experience": "경력 구분",
+    "experiences": [
+      "신입",
+      "경력"
+    ],
+    "message": "주요 경력 및 지원 내용",
+    "messagePlaceholder": "주요 경력, 연구 경험 및 관심 직무를 간략히 작성해 주세요.",
+    "chars": "자",
+    "files": "서류 첨부",
+    "fileHelp": "각 항목에서 선택 가능한 파일 형식으로 첨부해 주세요. 전체 파일 용량은 10MB 이하여야 하며, 민감정보가 포함된 불필요한 서류는 제출하지 마세요.",
+    "fileSizeError": "첨부파일의 전체 용량은 10MB를 초과할 수 없습니다. 파일 크기를 줄인 후 다시 시도해 주세요.",
+    "download": "자사 입사지원서 다운로드",
+    "downloadMeta": "DOCX · 개인정보 동의서 포함",
+    "application": "자사 입사지원서",
+    "degree": "학위 증명서",
+    "transcript": "성적 증명서",
+    "papers": "논문 및 기타 자료",
+    "consent": "개인정보 수집·이용 및 인재풀 등록에 동의합니다. 제출 정보는 채용 검토를 위해 지원일로부터 1년간 보관·이용됩니다.",
+    "submit": "지원서 제출하기",
+    "sending": "제출 중...",
+    "failed": "전송 완료를 확인하지 못했습니다. 입력 내용과 첨부파일은 유지되어 있습니다. 중복 제출을 피하려면 jakim@mycodx.com으로 접수 여부를 먼저 확인해 주세요."
+  },
+  "footer": {
+    "privacy": "개인정보처리방침",
+    "rights": "© 2026 MycoDx. All rights reserved.",
+    "address": "경상남도 창원시 의창구 용동로83번안길 7 미래드림빌딩 202호 206호",
+    "email": "info@mycodx.com",
+    "phone": "+82-70-8657-1848"
+  },
+  "forms": {
+    "checkingAvailability": "접수 가능 여부를 확인하고 있습니다.",
+    "unavailable": "온라인 접수를 준비 중입니다. 급한 문의는 이메일로 보내 주세요.",
+    "checkStatus": "전송 상태 확인",
+    "accepted": "메일 서버가 전송 요청을 접수했습니다. 실제 수신 여부는 담당자 확인이 필요합니다.",
+    "receipt": "접수번호: {{id}}",
+    "storageNotice": "지원 내용과 첨부파일은 Vercel에서 처리하고 Resend로 담당자에게 전송합니다. Vercel의 비공개 임시 자료는 업로드 후 7일이 지난 다음 정리 작업에서 삭제합니다. 발송 서비스의 기록은 별도로 관리하며, 담당자에게 전달된 지원 정보의 보유기간은 위 동의 내용에 따릅니다.",
+    "progress": {
+      "preparing": "제출을 준비하고 있습니다.",
+      "uploading": "서류 업로드 중… {{percentage}}%",
+      "sending": "메일을 전송하고 있습니다.",
+      "checking": "전송 상태를 확인하고 있습니다."
+    },
+    "errors": {
+      "UNAVAILABLE": "현재 온라인 전송을 이용할 수 없습니다. 입력 내용은 유지됩니다. 잠시 후 다시 시도하거나 이메일로 보내 주세요.",
+      "INVALID_FIELDS": "필수 항목과 이메일 주소를 확인해 주세요.",
+      "CONSENT_REQUIRED": "개인정보 수집·이용에 동의해 주세요.",
+      "INVALID_SUBMISSION": "입력 내용을 확인한 뒤 잠시 후 다시 시도해 주세요.",
+      "FILE_COUNT": "파일은 최대 10개까지 첨부할 수 있습니다.",
+      "FILE_TYPE": "허용된 형식의 정상적인 파일인지 확인해 주세요.",
+      "FILE_SIZE": "빈 파일은 제출할 수 없으며, 전체 첨부 용량은 10MB 이하여야 합니다.",
+      "FILES_REQUIRED": "입사지원서, 학위 증명서, 성적 증명서를 모두 첨부해 주세요.",
+      "RATE_LIMITED": "제출 시도가 많습니다. 잠시 후 다시 시도하거나 이메일로 보내 주세요.",
+      "UPLOAD_FAILED": "파일 업로드에 실패했습니다. 입력 내용과 선택한 파일은 유지됩니다. 다시 시도해 주세요.",
+      "UPLOAD_INCOMPLETE": "일부 파일의 업로드가 완료되지 않았습니다. 다시 시도해 주세요.",
+      "SESSION_EXPIRED": "제출 유효시간이 지났습니다. 입력 내용을 확인하고 다시 시도해 주세요.",
+      "DELIVERY_UNCERTAIN": "메일 전송 결과를 확인하지 못했습니다. 중복 발송을 막기 위해 재전송하지 않습니다. 전송 상태를 다시 확인하거나 담당자에게 접수 여부를 문의해 주세요."
+    }
+  }
+}

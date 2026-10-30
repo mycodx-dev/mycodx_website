@@ -1,0 +1,526 @@
+{
+  "menu": {
+    "HOME": "HOME",
+    "ABOUT": "ABOUT",
+    "PRODUCT": "PRODUCT",
+    "MEMBERS": "MEMBERS",
+    "NEWS": "NEWS",
+    "RESEARCH": "RESEARCH"
+  },
+  "header": {
+    "primaryNav": "Primary navigation",
+    "mobileNav": "Mobile navigation",
+    "contact": "Contact",
+    "changeLanguage": "Change language",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "navigation": {
+      "about": "About",
+      "product": "Products",
+      "gallery": "Gallery",
+      "news": "News",
+      "publications": "Publications",
+      "contact": "Contact",
+      "careers": "Careers"
+    }
+  },
+  "researchNavigation": {
+    "aria": "Research sections",
+    "breadcrumbAria": "Breadcrumb",
+    "introduction": "About MycoDx",
+    "areas": "Research Areas"
+  },
+  "research": {
+    "kicker": "Research Areas",
+    "title": "Precision research for infectious disease diagnostics",
+    "description": "MycoDx researches integrated infectious disease diagnostic platform technologies that connect culture, detection, drug resistance analysis, and image interpretation.",
+    "initiativesTitle": "Research Projects",
+    "initiativesDescription": "An overview of research and development projects conducted or supported by members of the MycoDx research team, with annual duplicate records consolidated.",
+    "total": "Total.",
+    "projectBadge": "Project",
+    "period": "Period",
+    "principalInvestigator": "Principal investigator",
+    "organization": "Organization"
+  },
+  "gallery": {
+    "kicker": "Gallery",
+    "title": "Inside Our Research",
+    "description": "A closer look at the MycoDx laboratory environment and research activities.",
+    "empty": "No gallery images are currently available."
+  },
+  "about": {
+    "kicker": "About MycoDx",
+    "title": "Revealing invisible infectious diseases\nwith uncompromising precision.",
+    "lead": "MycoDx is an infectious-disease diagnostics startup founded by experts with extensive experience at the forefront of the biotechnology industry.",
+    "heroImageAlt": "A researcher examining a Petri dish containing a microbial culture sample",
+    "focusLabel": "MycoDx core diagnostic areas",
+    "intro": {
+      "kicker": "Who we are",
+      "title": "A biotechnology company setting a new standard in precision diagnostics",
+      "paragraph1": "MycoDx develops an integrated platform that connects culture, detection, drug resistance analysis, and image interpretation technologies for infectious disease diagnostics, supporting the full diagnostic process.",
+      "paragraph2": "Rather than stopping at individual testing technologies, we aim to build a faster and more reliable diagnostic environment through standardized and automated testing workflows.",
+      "paragraph3": "From the research laboratory to real clinical settings, we continuously advance diagnostic technologies that healthcare professionals and patients can trust."
+    },
+    "focus": {
+      "culture": {
+        "title": "Culture-based Diagnostics",
+        "description": "Culture-based diagnostics"
+      },
+      "ntm": {
+        "title": "Integrated Infectious Disease Analysis",
+        "description": "Infectious disease analysis"
+      },
+      "resistance": {
+        "title": "Drug Resistance Analysis",
+        "description": "Drug resistance analysis"
+      },
+      "imaging": {
+        "title": "Intelligent Imaging",
+        "description": "Intelligent imaging"
+      }
+    },
+    "camellia": {
+      "kicker": "The Camellia Philosophy",
+      "title": "Like the camellia, blooming vividly and resiliently through winter.",
+      "description": "To accurately detect microscopic pathogens that are difficult to diagnose and impossible to see, we connect culture, detection, analysis, and image-interpretation technologies for the challenging diagnostic problems faced by healthcare professionals and patients."
+    },
+    "history": {
+      "kicker": "History",
+      "title": "Company History",
+      "label": "MycoDx Timeline",
+      "description": "Key milestones in MycoDx's establishment, research infrastructure, certification, and collaboration.",
+      "aria": "MycoDx company history",
+      "items": [
+        {
+          "year": "2025.04",
+          "title": "Policy Funding Secured",
+          "description": "Secured an infectious disease prevention and treatment technology development project and transferred the project to the Industry-Academic Cooperation Foundation at Changwon National University. (2026.01)"
+        },
+        {
+          "year": "2026.01",
+          "title": "Corporate Establishment",
+          "description": "Established MycoDx Co., Ltd. and completed SME confirmation."
+        },
+        {
+          "year": "2026.02",
+          "title": "Corporate R&D Center",
+          "description": "Received recognition for the establishment of a corporate R&D center."
+        },
+        {
+          "year": "2026.05",
+          "title": "Startup Certification",
+          "description": "Completed startup company confirmation, recognition as a faculty/researcher-founded startup, and medical device sales business registration. (2026.04)"
+        },
+        {
+          "year": "2026.06",
+          "title": "RISE Participating Company Agreement",
+          "description": "Signed a participating company agreement for Changwon National University's Regional Innovation System & Education (RISE) program."
+        }
+      ]
+    },
+    "mission": {
+      "title": "Protecting patients through accuracy and trust.",
+      "description": "Effective treatment begins with an accurate diagnosis. Through uncompromising precision and objective clinical evidence, MycoDx establishes dependable diagnostic standards for healthcare settings worldwide and contributes to healthier lives."
+    },
+    "vision": {
+      "kicker": "Mission & Vision",
+      "title": "A healthier future that begins with accurate diagnosis",
+      "statement": "Toward global leadership in integrated infectious disease diagnostic platforms.",
+      "description": "By connecting culture-based diagnostics, molecular detection, drug resistance analysis, and intelligent imaging, we deliver faster and clearer answers wherever reliable diagnosis is needed.",
+      "pillars": {
+        "validation": {
+          "title": "Technology Advancement & Validation",
+          "description": "We continuously improve the quality and reliability of our diagnostic technology through close joint research and clinical collaboration with leading medical and research institutions."
+        },
+        "scalability": {
+          "title": "Integrated Platform Expansion",
+          "description": "We continue to advance a platform that connects the full infectious disease diagnostic process and can adapt to diverse laboratory and clinical diagnostic workflows."
+        },
+        "global": {
+          "title": "Global Market Expansion",
+          "description": "Together with global industry partners, we will bring our diagnostic platform to markets worldwide and help eliminate gaps in access to healthcare."
+        }
+      }
+    }
+  },
+  "people": {
+    "kicker": "People",
+    "title": "Meet the MycoDx Team",
+    "description": "Our team builds an integrated infectious disease diagnostic platform that connects culture, molecular detection, drug resistance analysis, and image interpretation.",
+    "representative": "Representative Director",
+    "researchers": "Research Team"
+  },
+  "publication": {
+    "kicker": "PUBLICATIONS",
+    "title": "Research & Publications",
+    "description": "Scientific research conducted in collaboration with MycoDx researchers.",
+    "yearNavigation": "Publication years",
+    "mycodxAuthors": "MycoDx Authors",
+    "publicationInfo": "{{year}} · Volume {{volume}} · Article {{article}}",
+    "viewPublication": "View Publication",
+    "sectionNavigation": "Publication sections",
+    "total": "Total.",
+    "yearUnknown": "Year not provided",
+    "emptyPapers": "No paper records are currently available.",
+    "emptyPatents": "Patent records will be updated when the source data is available.",
+    "country": "Country",
+    "registrationNumber": "Registration No."
+  },
+  "product": {
+    "kicker": "Product",
+    "title": "Product Introduction",
+    "description": "A public overview of the in-development TB DST integrated platform and its modules.",
+    "bundleName": "TB-DST Integrated Platform",
+    "bundleBadge": "Integrated platform",
+    "bundleDescription": "Three specialized modules are being connected into a single TB drug susceptibility testing platform for more consistent culture-based workflows.",
+    "status": "Current status",
+    "backToList": "Back to list",
+    "specsTitle": "Key features",
+    "placeholderTitle": "Product information is being prepared.",
+    "placeholderDescription": "We do not display unverified product information. Accurate product details will be added here when they are ready for publication."
+  },
+  "newsPage": {
+    "readMore": "Read more",
+    "backToList": "Back to news",
+    "relatedLink": "Related link (opens in a new tab)",
+    "photos": "Photos",
+    "kicker": "News",
+    "title": "MycoDx News",
+    "description": "Official news and announcements from MycoDx.",
+    "empty": "No news items are currently available.",
+    "websiteLaunch": {
+      "date": "Jun 2026",
+      "title": "The official MycoDx website is now open.",
+      "summary": "We launched the official MycoDx website to share our research direction, team, research output, and company news more clearly."
+    }
+  },
+  "home": {
+    "titleLine1": "Making the",
+    "titleLine2": "invisible visible",
+    "description": "MycoDx develops an integrated diagnostic platform spanning detection, culture, and analysis for infectious diseases.\nBuilt on microbial culture technology, we combine molecular detection, drug resistance analysis, and intelligent imaging for faster, more accurate infectious disease diagnosis.",
+    "keywords": {
+      "label": "MycoDx core keywords",
+      "culture": "Culture-based diagnostics",
+      "integrated": "Integrated infectious disease analysis",
+      "intelligent": "Intelligent diagnostic platform"
+    },
+    "cta": {
+      "label": "Primary actions",
+      "products": "View product pipeline",
+      "contact": "Contact us"
+    },
+    "indexLabel": "Explore MycoDx",
+    "indexIntro": "Research-led diagnostics, designed to move from the laboratory into real clinical workflows.",
+    "indexAria": "MycoDx main menu",
+    "scroll": "Discover our work",
+    "backToTop": "Back to top",
+    "slides": {
+      "previous": "Previous visual",
+      "next": "Next visual"
+    },
+    "navigation": {
+      "research": "Culture diagnostics · Integrated analysis",
+      "people": "Researchers · Clinical collaborators",
+      "publication": "Research output · Validation",
+      "equipment": "Platform information · Coming soon",
+      "gallery": "Laboratory · Research moments",
+      "news": "Updates · Announcements",
+      "contact": "Partnership · General inquiry"
+    },
+    "visuals": {
+      "assay": "A researcher performing an assay with a standard single-channel micropipette and a 96-well plate",
+      "petriCulture": "A researcher examining a Petri dish containing a microbial culture sample",
+      "collaboration": "Researchers reviewing diagnostic data together"
+    },
+    "focus": {
+      "kicker": "Our focus",
+      "title": "Precision diagnostics for hard-to-see pathogens",
+      "description": "Built on microbial culture technology, MycoDx connects molecular detection, drug resistance analysis, and intelligent imaging to make infectious disease diagnostic workflows faster and clearer.",
+      "link": "About MycoDx"
+    },
+    "capabilities": {
+      "kicker": "Core Technology",
+      "title": "Culture to interpretation in one workflow",
+      "culture": {
+        "title": "Culture-based Diagnostics",
+        "label": "Culture-based diagnostic technology",
+        "description": "We improve and automate infectious pathogen culture and detection workflows for a standardized microbiological diagnostic environment."
+      },
+      "detection": {
+        "title": "Molecular Detection",
+        "label": "Molecular detection",
+        "description": "We develop molecular detection technologies to identify infectious pathogens rapidly and accurately."
+      },
+      "resistance": {
+        "title": "Drug Resistance Analysis",
+        "label": "Drug resistance analysis",
+        "description": "We develop analytical technologies that identify antimicrobial resistance and support treatment decisions."
+      },
+      "imaging": {
+        "title": "Intelligent Imaging",
+        "label": "Intelligent imaging technology",
+        "description": "We analyze growth and morphological features during culture, developing AI-based interpretation and quantification."
+      },
+      "chain": "Culture · Molecular Detection · Drug Resistance · Intelligent Imaging",
+      "platformMessage": "MycoDx goes beyond individual diagnostic technologies to build an integrated infectious disease platform from specimen to result interpretation."
+    },
+    "pipeline": {
+      "kicker": "Product Pipeline",
+      "title": "A compact view of the product flow",
+      "description": "MycoDx is developing a modular flow from media to automated inoculation, incubation, and AI interpretation.",
+      "note": "The homepage keeps the pipeline brief; the product page provides only a public overview of each module.",
+      "link": "View product details"
+    },
+    "story": {
+      "kicker": "The Camellia Story",
+      "title": "Turning hidden signals into diagnostic evidence",
+      "description": "MycoDx connects infectious pathogen culture, detection, drug resistance analysis, and image interpretation in one diagnostic workflow. Through standardization and automation, we build a faster and more reliable testing environment.",
+      "link": "About MycoDx"
+    },
+    "contact": {
+      "kicker": "Work with MycoDx",
+      "title": "Contact",
+      "description": "Leave a note about research, products, clinical validation, or partnership opportunities.",
+      "prompt": "Choose a topic and send a short message. The right MycoDx contact will follow up.",
+      "address": "Room 202, Mirae Building, 7 Yongdong-ro 83beonan-gil, Uichang-gu, Changwon-si, Gyeongsangnam-do 51139 Republic of Korea",
+      "direct": {
+        "email": "Email",
+        "phone": "Phone",
+        "office": "Office"
+      },
+      "mapTitle": "Google map showing the MycoDx office",
+      "form": {
+        "name": "Name",
+        "namePlaceholder": "Your name",
+        "organization": "Organization (optional)",
+        "organizationPlaceholder": "Company or institution",
+        "inquiryType": "Inquiry type",
+        "inquiryTypes": {
+          "research": "Joint research",
+          "product": "Product inquiry",
+          "validation": "Clinical validation",
+          "partnership": "Business partnership",
+          "other": "Other"
+        },
+        "email": "Email",
+        "message": "Message",
+        "messagePlaceholder": "Tell us what you would like to discuss.",
+        "privacyConsent": "I have read and agree to the privacy notice. (Required)",
+        "privacyLink": "View details",
+        "submit": "Send inquiry",
+        "sending": "Sending...",
+        "sent": "Your inquiry has been sent.",
+        "failed": "We could not send your inquiry. Please contact us by email."
+      }
+    }
+  },
+  "hero": {
+    "title": "Making the Invisible Visible",
+    "subtitle": "MycoDx develops an integrated diagnostic platform spanning detection, culture, and analysis for infectious diseases. Built on microbial culture technology, we combine molecular detection, drug resistance analysis, and intelligent imaging for faster, more accurate infectious disease diagnosis.",
+    "point1": "Culture-based diagnostic technology",
+    "point2": "Integrated infectious disease analysis",
+    "point3": "Intelligent diagnostic platform"
+  },
+  "story": {
+    "title": "The Camellia Story",
+    "subtitle": "The Integrity and Patience of Camellia, MycoDx's Research Shining Invisibly",
+    "description": "MycoDx connects infectious pathogen culture, detection, drug resistance analysis, and image interpretation in one diagnostic workflow. Through standardization and automation, we build a faster and more reliable testing environment."
+  },
+  "tech": {
+    "title": "Core Technology",
+    "subtitle": "Culture · Molecular Detection · Drug Resistance · Intelligent Imaging",
+    "card1_title": "Culture-based Diagnostics",
+    "card1_desc": "We improve and automate infectious pathogen culture and detection workflows for a standardized diagnostic environment.",
+    "card2_title": "Molecular Detection",
+    "card2_desc": "We develop molecular detection technologies to identify infectious pathogens rapidly and accurately.",
+    "card3_title": "Drug Resistance Analysis",
+    "card3_desc": "We develop analytical technologies that identify antimicrobial resistance and support treatment decisions.",
+    "card4_title": "Intelligent Imaging",
+    "card4_desc": "We analyze growth and morphological features during culture, developing AI-based interpretation and quantification.",
+    "platformMessage": "MycoDx goes beyond individual diagnostic technologies to build an integrated infectious disease platform from specimen to result interpretation."
+  },
+  "rd": {
+    "title": "R&D Center",
+    "subtitle": "Advancement of Microbiology Image Analysis Technology",
+    "card1_title": "Certified R&D Organization",
+    "card2_title": "Research Focus",
+    "card3_title": "Research Infrastructure"
+  },
+  "pipeline": {
+    "title": "Development Pipeline",
+    "subtitle": "Development stages for an integrated diagnostic platform from specimen to result interpretation",
+    "step1": "Research",
+    "step1_description": "Development and optimization of core culture, molecular detection, and image-analysis technologies",
+    "step1_status": "In Progress",
+    "step2": "Validation",
+    "step2_description": "Performance validation and integration of infectious disease diagnostic technologies",
+    "step2_status": "In Progress",
+    "step3": "Application & Deployment",
+    "step3_description": "Advancement of the integrated diagnostic platform and expansion of field application",
+    "step3_status": "Upcoming"
+  },
+  "validation": {
+    "title": "Scientific Validation",
+    "subtitle": "Performance Evaluation Results & Global Interoperability Test Academic Achievements"
+  },
+  "partnership": {
+    "title": "Partnership Inquiries",
+    "description": "We invite partners to grow together with MycoDx. Please contact us, and the relevant department will get back to you promptly.",
+    "button": "Contact Us"
+  },
+  "slogan": {
+    "main": "MycoDx",
+    "sub": "Developing an integrated diagnostic platform that connects the full infectious disease diagnostic process."
+  },
+  "careers": {
+    "kicker": "Careers · Talent Pool",
+    "title": "<line>Join us in creating</line><line>new possibilities</line>",
+    "lead": "MycoDx researches biotechnology, in vitro diagnostics, and healthcare technologies centered on infectious-disease diagnostics. We aim to grow with people who bring expertise and fresh perspectives.",
+    "heroAlt": "The MycoDx team reviewing research results together",
+    "introLabel": "Why MycoDx",
+    "introTitle": "<line>Our talent pool is open</line><line>beyond specific hiring periods.</line>",
+    "introBody": "You are welcome to apply even when no position is currently open. When a hiring need arises, we review each applicant’s education, experience, research background, and role fit, then contact suitable candidates individually.",
+    "fieldsLabel": "Application Areas",
+    "fieldsTitle": "Areas of opportunity",
+    "fieldsDescription": "We welcome people with diverse expertise—from research and product development to manufacturing, quality, and the convergence of new technologies and industries.",
+    "fields": [
+      [
+        "Bio & IVD Research and Development",
+        "Research and product development in biotechnology and in vitro diagnostics, with a focus on infectious-disease diagnostics"
+      ],
+      [
+        "Manufacturing & Quality",
+        "Product manufacturing, quality management, and operations supporting a reliable product supply"
+      ],
+      [
+        "Healthcare Convergence Technology",
+        "Convergence of biotechnology with data, software, and other emerging technologies"
+      ],
+      [
+        "Other Business Functions",
+        "Business development, operations, and other functions supporting the growth of MycoDx"
+      ]
+    ],
+    "processLabel": "Talent Pool Journey",
+    "processTitle": "How the talent pool works",
+    "processDescription": "After registration, applications are reviewed according to hiring needs and suitability for relevant roles.",
+    "steps": [
+      [
+        "01",
+        "Share your profile",
+        "Tell us about your experience and interests."
+      ],
+      [
+        "02",
+        "Profile review",
+        "We review the information you provide."
+      ],
+      [
+        "03",
+        "Opportunity match",
+        "We contact you when a relevant role opens."
+      ],
+      [
+        "04",
+        "Hiring process",
+        "We guide you through the process for that role."
+      ]
+    ],
+    "notice": "Joining the talent pool does not guarantee an open position or a hiring process.",
+    "ctaEyebrow": "Stay connected",
+    "ctaTitle": "Let’s explore what comes next\nwith MycoDx.",
+    "ctaBody": "Prepare your application documents and submit them through our online form.",
+    "ctaButton": "Apply now"
+  },
+  "careersMeta": {
+    "title": "Talent Pool",
+    "description": "Join the MycoDx talent pool and help shape the future of infectious-disease diagnostics.",
+    "applyTitle": "Job Application",
+    "applyDescription": "Review the application guide and submit your application to MycoDx."
+  },
+  "careersApply": {
+    "back": "Talent pool overview",
+    "title": "Job application",
+    "lead": "Review the application guide, then submit your application form and supporting documents.",
+    "successConfirm": "Done",
+    "successTitle": "Your application was submitted for delivery.",
+    "successBody": "Thank you for applying to the MycoDx talent pool.",
+    "formTitle": "Applicant information",
+    "required": "* indicates a required field. Submitted information will be retained and used for recruitment review for one year from the application date.",
+    "area": "Application area",
+    "areas": [
+      "Bio & IVD R&D",
+      "Manufacturing & Quality",
+      "Healthcare Convergence Technology",
+      "Other Business Functions"
+    ],
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone number",
+    "education": "Highest education",
+    "select": "Please select",
+    "degrees": [
+      "Bachelor’s",
+      "Master’s",
+      "Doctorate",
+      "Other"
+    ],
+    "experience": "Experience level",
+    "experiences": [
+      "Entry level",
+      "Experienced"
+    ],
+    "message": "Key experience and application details",
+    "messagePlaceholder": "Briefly describe your key experience, research background, and roles of interest.",
+    "chars": "characters",
+    "files": "Attachments",
+    "fileHelp": "Upload files in the formats available for each field. The combined file size must not exceed 10 MB. Do not submit unnecessary documents containing sensitive information.",
+    "fileSizeError": "The combined size of all attachments cannot exceed 10 MB. Reduce the file size and try again.",
+    "download": "Download MycoDx application form",
+    "downloadMeta": "DOCX · Korean form with privacy consent",
+    "application": "MycoDx application form",
+    "degree": "Degree certificate",
+    "transcript": "Academic transcript",
+    "papers": "Papers and other materials",
+    "consent": "I consent to the collection and use of my personal information and registration in the talent pool. The submitted information will be retained and used for recruitment review for one year from the application date.",
+    "submit": "Submit application",
+    "sending": "Submitting...",
+    "failed": "We could not confirm submission. Your entries and files have been kept. Please check with jakim@mycodx.com before retrying to avoid a duplicate application."
+  },
+  "footer": {
+    "privacy": "Privacy",
+    "rights": "© 2026 MycoDx. All rights reserved.",
+    "address": "Room 202, Mirae Building, 7 Yongdong-ro 83beonan-gil, Uichang-gu, Changwon-si, Gyeongsangnam-do 51139 Republic of Korea",
+    "email": "info@mycodx.com",
+    "phone": "+82-70-8657-1848"
+  },
+  "forms": {
+    "checkingAvailability": "Checking submission availability.",
+    "unavailable": "Online submissions are being prepared. Please email us for urgent requests.",
+    "checkStatus": "Check delivery status",
+    "accepted": "The mail server accepted the message for delivery. The recipient must confirm actual receipt.",
+    "receipt": "Reference: {{id}}",
+    "storageNotice": "Application details and attachments are processed on Vercel and sent to our team through Resend. Private temporary Vercel data is removed by the next cleanup after seven days. Sending-service records are managed separately; the consent above governs retention by our team.",
+    "progress": {
+      "preparing": "Preparing your submission…",
+      "uploading": "Uploading documents… {{percentage}}%",
+      "sending": "Sending your message…",
+      "checking": "Checking delivery status…"
+    },
+    "errors": {
+      "UNAVAILABLE": "Online delivery is currently unavailable. Your entries are preserved. Please try later or email us.",
+      "INVALID_FIELDS": "Check the required fields and email address.",
+      "CONSENT_REQUIRED": "Please agree to the privacy notice.",
+      "INVALID_SUBMISSION": "Check your entries and try again shortly.",
+      "FILE_COUNT": "Attach no more than 10 files.",
+      "FILE_TYPE": "Check that each file is valid and in an accepted format.",
+      "FILE_SIZE": "Files must not be empty. Combined attachments must not exceed 10 MB.",
+      "FILES_REQUIRED": "Attach your application, degree certificate and transcript.",
+      "RATE_LIMITED": "Too many submission attempts. Please try later or email us.",
+      "UPLOAD_FAILED": "File upload failed. Your entries and selected files are preserved. Please try again.",
+      "UPLOAD_INCOMPLETE": "Some files have not finished uploading. Please try again.",
+      "SESSION_EXPIRED": "The submission session expired. Check your entries and try again.",
+      "DELIVERY_UNCERTAIN": "We could not confirm delivery. To prevent duplicates, we will not resend automatically. Check the status again or contact our team to confirm receipt."
+    }
+  }
+}

@@ -1,0 +1,526 @@
+{
+  "menu": {
+    "HOME": "HOME",
+    "ABOUT": "ABOUT",
+    "PRODUCT": "PRODUCT",
+    "MEMBERS": "MEMBERS",
+    "NEWS": "NEWS",
+    "RESEARCH": "RESEARCH"
+  },
+  "header": {
+    "primaryNav": "メインナビゲーション",
+    "mobileNav": "モバイルナビゲーション",
+    "contact": "お問い合わせ",
+    "changeLanguage": "言語変更",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる",
+    "navigation": {
+      "about": "会社紹介",
+      "product": "製品紹介",
+      "gallery": "ギャラリー",
+      "news": "お知らせ",
+      "publications": "論文",
+      "contact": "お問い合わせ",
+      "careers": "採用"
+    }
+  },
+  "researchNavigation": {
+    "aria": "研究サブメニュー",
+    "breadcrumbAria": "現在地",
+    "introduction": "MycoDx紹介",
+    "areas": "研究分野"
+  },
+  "research": {
+    "kicker": "Research Areas",
+    "title": "感染症診断のための精密研究",
+    "description": "MycoDxは、感染症診断に必要な培養、検出、薬剤耐性解析、画像判定を統合する診断プラットフォーム技術を研究しています。",
+    "initiativesTitle": "主要研究課題",
+    "initiativesDescription": "年度ごとの重複記録を一つの課題に統合し、MycoDx研究陣が遂行・参加した研究開発実績をご紹介します。",
+    "total": "Total.",
+    "projectBadge": "課題",
+    "period": "研究期間",
+    "principalInvestigator": "研究責任者",
+    "organization": "遂行機関"
+  },
+  "gallery": {
+    "kicker": "Gallery",
+    "title": "研究現場",
+    "description": "MycoDxの実験環境と研究活動をご紹介します。",
+    "empty": "登録されたギャラリー画像がありません。"
+  },
+  "about": {
+    "kicker": "About MycoDx",
+    "title": "見えない感染症を、最も正確に明らかにする。",
+    "lead": "MycoDxは、長年にわたりバイオ産業の最前線で専門性を培ってきたエキスパート達が設立した感染症診断イノベーション・スタートアップです。",
+    "heroImageAlt": "シャーレ（ペトリ皿）の微生物培養試料を観察する研究員",
+    "focusLabel": "MycoDxコア診断領域",
+    "intro": {
+      "kicker": "Who we are",
+      "title": "精密診断の新しい基準を創るバイオテクノロジー企業",
+      "paragraph1": "MycoDxは、感染症診断に必要な培養、検出、薬剤耐性解析、画像判定技術を統合し、診断プロセス全体を支援する統合プラットフォームを開発しています。",
+      "paragraph2": "個別の検査技術にとどまらず、検査工程の標準化と自動化により、より迅速で信頼性の高い診断環境を構築することを目指しています。",
+      "paragraph3": "研究室から実際の臨床現場に至るまで、誰もが安心して使用できる診断技術を提供するために絶えず研究を重ねています。"
+    },
+    "focus": {
+      "culture": {
+        "title": "培養ベースの診断",
+        "description": "培養ベースの診断"
+      },
+      "ntm": {
+        "title": "感染症統合解析",
+        "description": "感染症解析"
+      },
+      "resistance": {
+        "title": "薬剤耐性解析",
+        "description": "薬剤耐性解析"
+      },
+      "imaging": {
+        "title": "インテリジェント画像判定",
+        "description": "インテリジェント画像判定"
+      }
+    },
+    "camellia": {
+      "kicker": "The Camellia Philosophy",
+      "title": "寒い冬にも鮮やかでたくましく咲き誇る椿（ツバキ）のように。",
+      "description": "診断が難しく目に見えない微小な病原体を正確に検出するため、培養、検出、解析、画像判定技術を統合し、医療陣や患者が直面する困難な診断課題を精密な技術力で解決します。"
+    },
+    "history": {
+      "kicker": "History",
+      "title": "沿革",
+      "label": "MycoDx Timeline",
+      "description": "MycoDxの設立、研究基盤の構築、認証および連携の実績をまとめています。",
+      "aria": "MycoDx 沿革",
+      "items": [
+        {
+          "year": "2025.04",
+          "title": "政策資金の確保",
+          "description": "感染症予防治療技術開発事業の課題を獲得し、国立昌原大学校産学協力団に課題を移管しました。(2026.01)"
+        },
+        {
+          "year": "2026.01",
+          "title": "法人設立",
+          "description": "株式会社MycoDxを設立し、中小企業確認を完了しました。"
+        },
+        {
+          "year": "2026.02",
+          "title": "企業付設研究所",
+          "description": "企業付設研究所の設立認定を完了しました。"
+        },
+        {
+          "year": "2026.05",
+          "title": "スタートアップ認証",
+          "description": "創業企業の確認、教員・研究員創業企業の認定、医療機器販売業の届出を完了しました。(2026.04)"
+        },
+        {
+          "year": "2026.06",
+          "title": "RISE参加企業協定",
+          "description": "国立昌原大学校の地域革新中心大学支援体系（RISE）参加企業協定を締結しました。"
+        }
+      ]
+    },
+    "mission": {
+      "title": "正確性と信頼性を通じて患者の生命を守ります。",
+      "description": "治療の始まりは正確な診断からスタートします。MycoDxは妥協のない正確性と客観的な臨床データに基づき、世界中の医療現場に信頼できる診断基準を提示し、人類の健康な暮らしに貢献します。"
+    },
+    "vision": {
+      "kicker": "Mission & Vision",
+      "title": "正確な診断から始まる、より健康な未来",
+      "statement": "感染症統合診断プラットフォームのグローバルリーダーへ。",
+      "description": "培養ベースの診断、分子ベースの検出、薬剤耐性解析、インテリジェント画像技術を統合し、診断を必要とする現場へより迅速で明確な答えを届けます。",
+      "pillars": {
+        "validation": {
+          "title": "技術の高度化と検証",
+          "description": "国内外の優れた医療・研究機関との緊密な共同研究および臨床協力により、診断技術の完成度と信頼性を継続的に高めていきます。"
+        },
+        "scalability": {
+          "title": "統合プラットフォームの拡張性",
+          "description": "感染症診断の全工程をつなぐプラットフォーム基盤を高度化し、検査室や臨床現場の多様な診断ワークフローに適用できるよう拡張します。"
+        },
+        "global": {
+          "title": "グローバル市場への進出",
+          "description": "グローバルな産業パートナーとともに診断プラットフォームを世界市場へ展開し、医療の死角がない世界を作っていきます。"
+        }
+      }
+    }
+  },
+  "people": {
+    "kicker": "People",
+    "title": "MycoDx 研究陣",
+    "description": "培養、分子ベースの検出、薬剤耐性解析、画像判定を統合する感染症統合診断プラットフォームを構築するメンバーです。",
+    "representative": "代表",
+    "researchers": "研究陣"
+  },
+  "publication": {
+    "kicker": "論文",
+    "title": "研究論文",
+    "description": "MycoDx研究者との共同研究による科学研究をご紹介します。",
+    "yearNavigation": "論文の年",
+    "mycodxAuthors": "MycoDx 著者",
+    "publicationInfo": "{{year}} · {{volume}}巻 · Article {{article}}",
+    "viewPublication": "論文を見る",
+    "sectionNavigation": "研究成果セクション",
+    "total": "Total.",
+    "yearUnknown": "年未記載",
+    "emptyPapers": "登録された論文資料がありません。",
+    "emptyPatents": "特許資料は準備ができ次第更新されます。",
+    "country": "国",
+    "registrationNumber": "登録番号"
+  },
+  "product": {
+    "kicker": "Product",
+    "title": "製品紹介",
+    "description": "開発中の結核DST統合プラットフォームの構成とコア仕様を簡潔にご紹介します。",
+    "bundleName": "TB-DST Integrated Platform",
+    "bundleBadge": "Integrated platform",
+    "bundleDescription": "3つのモジュールを1つの結核薬剤耐性検査プラットフォームに統合し、培地、接種、培養・判定のプロセスを統合的に提供します。",
+    "status": "現在のステータス",
+    "backToList": "一覧へ戻る",
+    "specsTitle": "主な仕様",
+    "placeholderTitle": "製品情報を準備中です。",
+    "placeholderDescription": "未確認の製品情報を無造作に表示することはありません。公開可能な製品情報が準備でき次第、本ページにて正確にご案内いたします。"
+  },
+  "newsPage": {
+    "readMore": "詳しく見る",
+    "backToList": "ニュース一覧へ",
+    "relatedLink": "関連リンク（新しいタブ）",
+    "photos": "写真",
+    "kicker": "News",
+    "title": "MycoDxニュース",
+    "description": "MycoDxの公式ニュースとお知らせをお届けします。",
+    "empty": "登録されたお知らせがありません。",
+    "websiteLaunch": {
+      "date": "2026.06",
+      "title": "MycoDx公式ウェブサイトを開設しました。",
+      "summary": "MycoDxの研究方向性、研究陣、研究成果、会社ニュースをより明確にお伝えするため、公式ウェブサイトを開設しました。"
+    }
+  },
+  "home": {
+    "titleLine1": "見えないものを",
+    "titleLine2": "明確に",
+    "description": "MycoDxは感染症の検出から培養、解析まで、診断の全工程を網羅する統合診断プラットフォームを開発しています。微生物培養技術をベースに、分子ベースの検出、薬剤耐性解析、インテリジェント画像解析を融合し、より迅速で正確な感染症診断環境を創造していきます。",
+    "keywords": {
+      "label": "MycoDxコアキーワード",
+      "culture": "培養ベースの診断技術",
+      "integrated": "感染症統合解析",
+      "intelligent": "インテリジェント診断プラットフォーム"
+    },
+    "cta": {
+      "label": "主要アクション",
+      "products": "製品パイプラインを見る",
+      "contact": "お問い合わせ"
+    },
+    "indexLabel": "Explore MycoDx",
+    "indexIntro": "研究室の精密さを実際の臨床や診断現場へとつなぐ、研究中心の診断技術を創造します。",
+    "indexAria": "MycoDxメインメニュー",
+    "scroll": "研究を見る",
+    "backToTop": "トップへ戻る",
+    "slides": {
+      "previous": "前のビジュアル",
+      "next": "次のビジュアル"
+    },
+    "navigation": {
+      "research": "培養ベースの診断・統合解析",
+      "people": "研究陣・臨床協力",
+      "publication": "研究成果・性能検証",
+      "equipment": "プラットフォーム情報・準備中",
+      "gallery": "研究所・研究記録",
+      "news": "ニュース・お知らせ",
+      "contact": "パートナーシップ・お問い合わせ"
+    },
+    "visuals": {
+      "assay": "シングルチャンネルマイクロピペットと96ウェルプレートで解析実験を行う研究員",
+      "petriCulture": "シャーレ（ペトリ皿）の微生物培養サンプルを観察する研究員",
+      "collaboration": "診断データを共に検討する研究陣"
+    },
+    "focus": {
+      "kicker": "Our focus",
+      "title": "最も発見が困難な病原体のための精密診断",
+      "description": "微生物培養技術をベースに、分子ベースの検出、薬剤耐性解析、インテリジェント画像技術を統合し、感染症診断のワークフローをより迅速かつ明確にします。",
+      "link": "MycoDxの紹介を見る"
+    },
+    "capabilities": {
+      "kicker": "Core Technology",
+      "title": "培養から判定までを一つの流れに",
+      "culture": {
+        "title": "培養ベースの診断",
+        "label": "培養ベースの診断技術",
+        "description": "感染性病原体の培養・検出プロセスを改善・自動化し、標準化された微生物診断環境を構築します。"
+      },
+      "detection": {
+        "title": "分子ベースの検出",
+        "label": "分子ベースの検出",
+        "description": "感染性病原体を迅速かつ正確に特定するための分子ベース検出技術を開発しています。"
+      },
+      "resistance": {
+        "title": "薬剤耐性解析",
+        "label": "薬剤耐性解析",
+        "description": "感染症の薬剤耐性を効果的に確認し、治療上の意思決定を支援する解析技術を開発しています。"
+      },
+      "imaging": {
+        "title": "インテリジェント画像判定",
+        "label": "インテリジェント画像技術",
+        "description": "培養過程の成長や形態的特徴を画像で解析し、AIベースの自動判定および定量化技術を開発しています。"
+      },
+      "chain": "Culture · Molecular Detection · Drug Resistance · Intelligent Imaging",
+      "platformMessage": "MycoDxは個別の診断技術にとどまらず、検体から結果判定までをつなぐ感染症統合診断プラットフォームを構築します。"
+    },
+    "pipeline": {
+      "kicker": "製品パイプライン",
+      "title": "製品フローの概要",
+      "description": "MycoDxは、培地から自動接種、培養、AI判定までをつなぐモジュール型フローを開発しています。",
+      "note": "ホームではパイプラインの概要を簡潔に示し、製品ページでは各モジュールの公開可能な概要のみを掲載しています。",
+      "link": "製品詳細を見る"
+    },
+    "story": {
+      "kicker": "The Camellia Story",
+      "title": "見えないシグナルを明確な診断根拠へ",
+      "description": "MycoDxは感染症関連病原体の培養、検出、薬剤耐性解析、画像判定を一つの診断ワークフローに統合します。検査プロセスの標準化と自動化により、より迅速で信頼性の高い環境を構築していきます。",
+      "link": "MycoDx紹介"
+    },
+    "contact": {
+      "kicker": "Work with MycoDx",
+      "title": "Contact",
+      "description": "共同研究、臨床検証、プラットフォーム連携および事業パートナーシップに関するお問い合わせをお待ちしております。",
+      "prompt": "お問い合わせ内容を選び、簡単なメッセージをお送りください。内容に応じて担当者よりご連絡いたします。",
+      "address": "51139 慶尚南道 昌原市 義昌区 龍洞路83番安吉 7 ミレドリームビル 202号・206号",
+      "direct": {
+        "email": "メール",
+        "phone": "電話",
+        "office": "住所"
+      },
+      "mapTitle": "MycoDx所在地 Googleマップ",
+      "form": {
+        "name": "お名前",
+        "namePlaceholder": "お名前をご入力ください",
+        "organization": "所属（任意）",
+        "organizationPlaceholder": "会社名または機関名",
+        "inquiryType": "お問い合わせ種別",
+        "inquiryTypes": {
+          "research": "共同研究",
+          "product": "製品問い合わせ",
+          "validation": "臨床検証",
+          "partnership": "事業パートナーシップ",
+          "other": "その他"
+        },
+        "email": "メールアドレス",
+        "message": "お問い合わせ内容",
+        "messagePlaceholder": "お問い合わせ内容をご入力ください。",
+        "privacyConsent": "個人情報の取扱いを確認し、同意します。（必須）",
+        "privacyLink": "詳細を見る",
+        "submit": "送信する",
+        "sending": "送信中...",
+        "sent": "お問い合わせを送信しました。",
+        "failed": "送信に失敗しました。電子メールでお問い合わせください。"
+      }
+    }
+  },
+  "hero": {
+    "title": "見えないものを明確に",
+    "subtitle": "MycoDxは感染症の検出から培養、解析まで、診断の全工程を網羅する統合診断プラットフォームを開発しています。微生物培養技術をベースに、分子ベースの検出、薬剤耐性解析、インテリジェント画像解析を融合し、より迅速で正確な感染症診断環境を創造していきます。",
+    "point1": "培養ベースの診断技術",
+    "point2": "感染症統合解析",
+    "point3": "インテリジェント診断プラットフォーム"
+  },
+  "story": {
+    "title": "The Camellia Story",
+    "subtitle": "椿の節操と忍耐、見えないところで光を放つMycoDxの研究",
+    "description": "MycoDxは感染症関連病原体の培養、検出、薬剤耐性解析、画像判定を一つの診断ワークフローに統合します。検査プロセスの標準化と自動化により、より迅速で信頼性の高い環境を構築していきます。"
+  },
+  "tech": {
+    "title": "Core Technology",
+    "subtitle": "Culture · Molecular Detection · Drug Resistance · Intelligent Imaging",
+    "card1_title": "培養ベースの診断",
+    "card1_desc": "感染性病原体の培養・検出プロセスを改善・自動化し、標準化された微生物診断環境を構築します。",
+    "card2_title": "分子ベースの検出",
+    "card2_desc": "感染性病原体を迅速かつ正確に特定するための分子ベース検出技術を開発しています。",
+    "card3_title": "薬剤耐性解析",
+    "card3_desc": "感染症の薬剤耐性を効果的に確認し、治療上の意思決定を支援する解析技術を開発しています。",
+    "card4_title": "インテリジェント画像判定",
+    "card4_desc": "培養過程の成長や形態的特徴を画像で解析し、AIベースの自動判定および定量化技術を開発しています。",
+    "platformMessage": "MycoDxは個別の診断技術にとどまらず、検体から結果判定までをつなぐ感染症統合診断プラットフォームを構築します。"
+  },
+  "rd": {
+    "title": "R&D Center",
+    "subtitle": "微生物画像解析技術の高度化",
+    "card1_title": "認定R&D機関",
+    "card2_title": "研究フォーカス",
+    "card3_title": "研究インフラ"
+  },
+  "pipeline": {
+    "title": "開発パイプライン",
+    "subtitle": "検体から結果判定までをつなぐ統合診断プラットフォームの開発段階",
+    "step1": "Research",
+    "step1_description": "培養・分子ベース検出・画像解析コア技術の開発および最適化",
+    "step1_status": "進行中",
+    "step2": "Validation",
+    "step2_description": "感染症診断技術の性能検証および統合",
+    "step2_status": "進行中",
+    "step3": "Application & Deployment",
+    "step3_description": "統合診断プラットフォームの高度化および現場適用拡大",
+    "step3_status": "予定"
+  },
+  "validation": {
+    "title": "Scientific Validation",
+    "subtitle": "性能評価結果およびグローバル連動テスト学術成果"
+  },
+  "partnership": {
+    "title": "パートナーシップのお問い合わせ",
+    "description": "MycoDxと共に成長を遂げていくパートナーを募集しております。お問い合わせいただければ、担当部署より迅速にご連絡いたします。",
+    "button": "お問い合わせ"
+  },
+  "slogan": {
+    "main": "マイコディエックス",
+    "sub": "感染症診断の全工程をつなぐ統合診断プラットフォームを開発しています。"
+  },
+  "careers": {
+    "kicker": "採用 · タレントプール",
+    "title": "<line>新たな可能性を</line><line>ともにつくる仲間を募集します</line>",
+    "lead": "MycoDxは感染症診断を中心に、バイオ・体外診断・ヘルスケア技術を研究しています。各分野の専門性と新しい視点を持つ方とともに成長していきたいと考えています。",
+    "heroAlt": "研究結果をともに確認するMycoDxチーム",
+    "introLabel": "Why MycoDx",
+    "introTitle": "<line>採用時期に限らず</line><line>常時タレントプールを運営しています。</line>",
+    "introBody": "現在募集中のポジションがない場合でも、いつでもご応募いただけます。採用ニーズが発生した際に、専攻・経歴・研究経験・職務適性を確認し、適した方へ個別にご連絡します。",
+    "fieldsLabel": "応募分野",
+    "fieldsTitle": "募集分野",
+    "fieldsDescription": "研究開発から製品化、生産・品質、新技術と産業の融合まで、幅広い専門性を持つ方を募集しています。",
+    "fields": [
+      [
+        "バイオ・体外診断研究開発",
+        "感染症診断を中心としたバイオ・体外診断技術の研究および製品開発"
+      ],
+      [
+        "生産・品質",
+        "製品の生産、品質管理、安定供給を支える運営"
+      ],
+      [
+        "ヘルスケア融合技術",
+        "バイオ技術とデータ・ソフトウェアなど新しい技術との融合"
+      ],
+      [
+        "その他事業",
+        "事業開発、運営、その他MycoDxの成長に必要な分野"
+      ]
+    ],
+    "processLabel": "Talent Pool Journey",
+    "processTitle": "タレントプールの流れ",
+    "processDescription": "登録後、採用ニーズと職務適性に応じて以下の流れで確認を行います。",
+    "steps": [
+      [
+        "01",
+        "プロフィール登録",
+        "ご経験と関心分野をお知らせください。"
+      ],
+      [
+        "02",
+        "内容確認",
+        "お送りいただいた情報を確認します。"
+      ],
+      [
+        "03",
+        "ポジション照合",
+        "適した機会が生まれた際にご連絡します。"
+      ],
+      [
+        "04",
+        "選考のご案内",
+        "ポジションに応じた次のステップをご案内します。"
+      ]
+    ],
+    "notice": "タレントプールへの登録は、採用や選考の開始を保証するものではありません。",
+    "ctaEyebrow": "Stay connected",
+    "ctaTitle": "MycoDxとつくる\n次の可能性へ。",
+    "ctaBody": "必要書類をご準備のうえ、オンラインフォームからご応募ください。",
+    "ctaButton": "応募する"
+  },
+  "careersMeta": {
+    "title": "タレントプール",
+    "description": "MycoDxとともに感染症診断の未来をつくる仲間を募集しています。",
+    "applyTitle": "応募フォーム",
+    "applyDescription": "応募案内を確認し、MycoDxへ応募書類を提出します。"
+  },
+  "careersApply": {
+    "back": "タレントプール案内",
+    "title": "応募書類の作成",
+    "lead": "応募案内をご確認のうえ、応募書類と証明書類をご提出ください。",
+    "successConfirm": "確認",
+    "successTitle": "応募書類の送信を受け付けました。",
+    "successBody": "MycoDxのタレントプールへご応募いただき、ありがとうございます。",
+    "formTitle": "応募者情報",
+    "required": "* は必須項目です。提出情報は採用検討のため、応募日から1年間保管・利用されます。",
+    "area": "応募分野",
+    "areas": [
+      "バイオ・体外診断研究開発",
+      "生産・品質",
+      "ヘルスケア融合技術",
+      "その他事業"
+    ],
+    "name": "氏名",
+    "email": "メールアドレス",
+    "phone": "電話番号",
+    "education": "最終学歴",
+    "select": "選択してください",
+    "degrees": [
+      "学士",
+      "修士",
+      "博士",
+      "その他"
+    ],
+    "experience": "経歴区分",
+    "experiences": [
+      "新卒",
+      "経験者"
+    ],
+    "message": "主な経歴・応募内容",
+    "messagePlaceholder": "主な経歴、研究経験、関心のある職務を簡潔にご記入ください。",
+    "chars": "文字",
+    "files": "書類添付",
+    "fileHelp": "各項目で選択可能なファイル形式で添付してください。合計ファイルサイズは10MB以下とし、不要な機微情報を含む書類は提出しないでください。",
+    "fileSizeError": "添付ファイルの合計サイズは10MBを超えることができません。ファイルサイズを小さくして、もう一度お試しください。",
+    "download": "MycoDx応募書類をダウンロード",
+    "downloadMeta": "DOCX · 個人情報同意書を含む韓国語書式",
+    "application": "MycoDx応募書類",
+    "degree": "学位証明書",
+    "transcript": "成績証明書",
+    "papers": "論文・その他資料",
+    "consent": "個人情報の収集・利用およびタレントプールへの登録に同意します。提出情報は採用検討のため、応募日から1年間保管・利用されます。",
+    "submit": "応募書類を提出",
+    "sending": "送信中...",
+    "failed": "送信完了を確認できませんでした。入力内容と添付ファイルは保持されています。重複送信を避けるため、再送信前に jakim@mycodx.com へ受付状況をご確認ください。"
+  },
+  "footer": {
+    "privacy": "個人情報保護方針",
+    "rights": "© 2026 MycoDx. All rights reserved.",
+    "address": "51139 慶尚南道 昌原市 義昌区 龍洞路83番安吉 7 ミレドリームビル 202号・206号",
+    "email": "info@mycodx.com",
+    "phone": "+82-70-8657-1848"
+  },
+  "forms": {
+    "checkingAvailability": "受付状況を確認しています。",
+    "unavailable": "オンライン受付を準備中です。お急ぎの場合はメールでご連絡ください。",
+    "checkStatus": "送信状況を確認",
+    "accepted": "メールサーバーが送信を受け付けました。実際の受信は担当者による確認が必要です。",
+    "receipt": "受付番号：{{id}}",
+    "storageNotice": "応募内容と添付ファイルはVercelで処理し、Resendを通じて担当者に送信します。Vercelの非公開の一時データは7日後の次の削除処理で削除します。送信サービスの記録は別途管理し、担当者が受信した応募情報の保有期間は上記の同意内容に従います。",
+    "progress": {
+      "preparing": "送信を準備しています…",
+      "uploading": "書類アップロード中… {{percentage}}%",
+      "sending": "メールを送信しています…",
+      "checking": "送信状況を確認しています…"
+    },
+    "errors": {
+      "UNAVAILABLE": "現在オンライン送信を利用できません。入力内容は保持されています。後ほど再試行するかメールをご利用ください。",
+      "INVALID_FIELDS": "必須項目とメールアドレスをご確認ください。",
+      "CONSENT_REQUIRED": "個人情報の取り扱いへの同意が必要です。",
+      "INVALID_SUBMISSION": "入力内容を確認し、少し待って再試行してください。",
+      "FILE_COUNT": "添付できるファイルは最大10個です。",
+      "FILE_TYPE": "各ファイルの形式と内容をご確認ください。",
+      "FILE_SIZE": "空のファイルは送信できません。添付容量の合計は10MB以下です。",
+      "FILES_REQUIRED": "応募書類、学位証明書、成績証明書を添付してください。",
+      "RATE_LIMITED": "送信回数が多すぎます。後ほど再試行するかメールをご利用ください。",
+      "UPLOAD_FAILED": "アップロードに失敗しました。入力内容と選択したファイルは保持されています。再試行してください。",
+      "UPLOAD_INCOMPLETE": "一部のファイルがアップロードされていません。再試行してください。",
+      "SESSION_EXPIRED": "送信の有効時間が切れました。入力内容を確認して再試行してください。",
+      "DELIVERY_UNCERTAIN": "送信結果を確認できませんでした。重複防止のため自動再送は行いません。送信状況を再確認するか、担当者に受付状況をご確認ください。"
+    }
+  }
+}

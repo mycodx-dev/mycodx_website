@@ -1,0 +1,10 @@
+.git/
+node_modules/
+.vite/
+.DS_Store
+.env*
+.vercel/.env*
+dist/
+tests/
+docs/
+

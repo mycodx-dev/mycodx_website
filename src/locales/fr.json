@@ -1,0 +1,526 @@
+{
+  "menu": {
+    "HOME": "ACCUEIL",
+    "ABOUT": "À PROPOS",
+    "PRODUCT": "PRODUITS",
+    "MEMBERS": "MEMBRES",
+    "NEWS": "ACTUALITÉS",
+    "RESEARCH": "RECHERCHE"
+  },
+  "header": {
+    "primaryNav": "Navigation principale",
+    "mobileNav": "Navigation mobile",
+    "contact": "Contact",
+    "changeLanguage": "Changer de langue",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "navigation": {
+      "about": "À propos",
+      "product": "Produits",
+      "gallery": "Galerie",
+      "news": "Actualités",
+      "publications": "Publications",
+      "contact": "Contact",
+      "careers": "Carrières"
+    }
+  },
+  "researchNavigation": {
+    "aria": "Sections de recherche",
+    "breadcrumbAria": "Fil d'Ariane",
+    "introduction": "À propos de MycoDx",
+    "areas": "Domaines de recherche"
+  },
+  "research": {
+    "kicker": "Domaines de recherche",
+    "title": "Recherche de précision pour le diagnostic des maladies infectieuses",
+    "description": "MycoDx recherche des technologies de plateforme de diagnostic intégré des maladies infectieuses reliant culture, détection, analyse de la pharmacorésistance et interprétation d'images.",
+    "initiativesTitle": "Projets de recherche principaux",
+    "initiativesDescription": "Aperçu des projets de recherche et développement menés ou soutenus par l'équipe MycoDx, avec consolidation des doublons annuels.",
+    "total": "Total.",
+    "projectBadge": "Projet",
+    "period": "Période",
+    "principalInvestigator": "Chercheur principal",
+    "organization": "Organisme"
+  },
+  "gallery": {
+    "kicker": "Galerie",
+    "title": "Au cœur de nos recherches",
+    "description": "Un aperçu de l'environnement de laboratoire et des activités de recherche de MycoDx.",
+    "empty": "Aucune image de galerie disponible pour le moment."
+  },
+  "about": {
+    "kicker": "À propos de MycoDx",
+    "title": "Révéler les maladies infectieuses invisibles avec une précision intransigeante.",
+    "lead": "MycoDx est une startup d'innovation en diagnostic des maladies infectieuses, fondée par des experts aguerris de l'industrie biotechnologique.",
+    "heroImageAlt": "Un chercheur examinant une boîte de Pétri contenant un échantillon de culture microbienne",
+    "focusLabel": "Domaines de diagnostic clés de MycoDx",
+    "intro": {
+      "kicker": "Qui nous sommes",
+      "title": "Une entreprise de biotechnologie établissant une nouvelle référence en diagnostic de précision",
+      "paragraph1": "MycoDx développe une plateforme intégrée reliant la culture, la détection, l'analyse de la pharmacorésistance et l'interprétation d'images pour soutenir l'ensemble du processus diagnostique.",
+      "paragraph2": "Loin de se limiter à des technologies de test isolées, nous visons à établir un environnement diagnostique plus rapide et plus fiable grâce à la standardisation et l'automatisation.",
+      "paragraph3": "Du laboratoire de recherche aux applications cliniques, nous innovons sans relâche pour offrir des technologies diagnostiques dignes de confiance."
+    },
+    "focus": {
+      "culture": {
+        "title": "Diagnostic basé sur la culture",
+        "description": "Diagnostic basé sur la culture"
+      },
+      "ntm": {
+        "title": "Analyse intégrée des maladies infectieuses",
+        "description": "Analyse des maladies infectieuses"
+      },
+      "resistance": {
+        "title": "Analyse de la pharmacorésistance",
+        "description": "Analyse de la pharmacorésistance"
+      },
+      "imaging": {
+        "title": "Imagerie intelligente",
+        "description": "Imagerie intelligente"
+      }
+    },
+    "camellia": {
+      "kicker": "La Philosophie du Camélia",
+      "title": "Comme le camélia, fleurissant avec éclat et résilience au cœur de l'hiver.",
+      "description": "Afin de détecter avec précision des pathogènes microscopiques invisibles et complexes, nous relions la culture, la détection, l'analyse et l'imagerie pour résoudre les défis diagnostiques des professionnels de santé et des patients."
+    },
+    "history": {
+      "kicker": "Historique",
+      "title": "Historique de l'entreprise",
+      "label": "Chronologie de MycoDx",
+      "description": "Les étapes clés de la création de MycoDx, de ses infrastructures de recherche, certifications et collaborations.",
+      "aria": "Historique de la société MycoDx",
+      "items": [
+        {
+          "year": "2025.04",
+          "title": "Obtention de financements publics",
+          "description": "Obtention du projet de développement technologique de prévention et traitement des maladies infectieuses, et transfert du projet à la Fondation de coopération université-industrie de l'Université nationale de Changwon (2026.01)."
+        },
+        {
+          "year": "2026.01",
+          "title": "Création de la société",
+          "description": "Création de MycoDx Co., Ltd. et obtention du statut de PME."
+        },
+        {
+          "year": "2026.02",
+          "title": "Centre R&D d'entreprise",
+          "description": "Homologation officielle de la création du centre R&D d'entreprise."
+        },
+        {
+          "year": "2026.05",
+          "title": "Certification d'entreprise innovante",
+          "description": "Confirmation du statut de startup, reconnaissance comme startup fondée par des enseignants/chercheurs, et déclaration de commerce de dispositifs médicaux (2026.04)."
+        },
+        {
+          "year": "2026.06",
+          "title": "Accord d'entreprise participante au programme RISE",
+          "description": "Signature de la convention d'entreprise participante au système d'aide universitaire axé sur l'innovation régionale (RISE) de l'Université nationale de Changwon."
+        }
+      ]
+    },
+    "mission": {
+      "title": "Protéger la vie des patients grâce à la précision et la confiance.",
+      "description": "Tout traitement efficace commence par un diagnostic précis. S'appuyant sur une précision rigoureuse et des données cliniques objectives, MycoDx établit des normes diagnostiques fiables pour la santé mondiale."
+    },
+    "vision": {
+      "kicker": "Mission & Vision",
+      "title": "Un avenir plus sain, commençant par un diagnostic précis",
+      "statement": "Vers un leadership mondial dans les plateformes de diagnostic intégré des maladies infectieuses.",
+      "description": "En associant diagnostic par culture, détection moléculaire, analyse de la pharmacorésistance et imagerie intelligente, nous apportons des réponses plus rapides et précises là où le diagnostic est vital.",
+      "pillars": {
+        "validation": {
+          "title": "Perfectionnement technologique et validation",
+          "description": "Nous améliorons continuellement la qualité et la fiabilité de nos technologies grâce à une étroite collaboration clinique et de recherche avec des institutions de premier plan."
+        },
+        "scalability": {
+          "title": "Évolutivité de la plateforme intégrée",
+          "description": "Nous perfectionnons notre plateforme couvrant l'ensemble du processus diagnostique afin de l'adapter aux multiples flux de travail des laboratoires et services cliniques."
+        },
+        "global": {
+          "title": "Expansion sur le marché mondial",
+          "description": "En partenariat avec des acteurs industriels internationaux, nous déployons notre plateforme à l'échelle mondiale pour réduire les disparités d'accès aux soins."
+        }
+      }
+    }
+  },
+  "people": {
+    "kicker": "Équipe",
+    "title": "L'équipe MycoDx",
+    "description": "Nos membres développent une plateforme de diagnostic intégré des maladies infectieuses reliant culture, détection moléculaire, pharmacorésistance et imagerie.",
+    "representative": "President-directeur general",
+    "researchers": "Équipe de recherche"
+  },
+  "publication": {
+    "kicker": "PUBLICATIONS",
+    "title": "Recherche & publications",
+    "description": "Recherches scientifiques menées en collaboration avec les chercheurs de MycoDx.",
+    "yearNavigation": "Années des publications",
+    "mycodxAuthors": "Auteurs MycoDx",
+    "publicationInfo": "{{year}} · Volume {{volume}} · Article {{article}}",
+    "viewPublication": "Voir la publication",
+    "sectionNavigation": "Sections des publications",
+    "total": "Total.",
+    "yearUnknown": "Année non spécifiée",
+    "emptyPapers": "Aucun article enregistré pour le moment.",
+    "emptyPatents": "Les données de brevets seront mises à jour dès leur disponibilité.",
+    "country": "Pays",
+    "registrationNumber": "Numéro d'enregistrement"
+  },
+  "product": {
+    "kicker": "Produits",
+    "title": "Présentation des produits",
+    "description": "Une présentation synthétique de la plateforme intégrée TB DST en développement et de ses spécifications clés.",
+    "bundleName": "Plateforme intégrée TB-DST",
+    "bundleBadge": "Plateforme intégrée",
+    "bundleDescription": "Trois modules spécialisés réunis en une plateforme unique de test de sensibilité aux antituberculeux, couvrant milieu, inoculation, culture et lecture.",
+    "status": "Statut actuel",
+    "backToList": "Retour à la liste",
+    "specsTitle": "Spécifications principales",
+    "placeholderTitle": "Les informations sur les produits sont en cours de préparation.",
+    "placeholderDescription": "Nous n'affichons pas d'informations non vérifiées. Des détails précis seront publiés sur cette page dès leur validation."
+  },
+  "newsPage": {
+    "readMore": "En savoir plus",
+    "backToList": "Retour aux actualités",
+    "relatedLink": "Lien associé (nouvel onglet)",
+    "photos": "Photos",
+    "kicker": "Actualités",
+    "title": "Actualités MycoDx",
+    "description": "Communiqués officiels et informations de MycoDx.",
+    "empty": "Aucune actualité disponible pour le moment.",
+    "websiteLaunch": {
+      "date": "Juin 2026",
+      "title": "Le site officiel de MycoDx est désormais en ligne.",
+      "summary": "Lancement de notre site officiel pour présenter plus clairement nos orientations de recherche, notre équipe, nos résultats et l'actualité de l'entreprise."
+    }
+  },
+  "home": {
+    "titleLine1": "Rendre visible",
+    "titleLine2": "l'invisible",
+    "description": "MycoDx développe une plateforme de diagnostic intégré couvrant la détection, la culture et l'analyse des maladies infectieuses. Basés sur la culture microbienne, nous associons détection moléculaire, analyse de la pharmacorésistance et imagerie intelligente pour un diagnostic plus rapide et précis.",
+    "keywords": {
+      "label": "Mots-clés principaux de MycoDx",
+      "culture": "Diagnostic basé sur la culture",
+      "integrated": "Analyse intégrée des maladies infectieuses",
+      "intelligent": "Plateforme de diagnostic intelligente"
+    },
+    "cta": {
+      "label": "Actions principales",
+      "products": "Voir le pipeline produit",
+      "contact": "Nous contacter"
+    },
+    "indexLabel": "Découvrir MycoDx",
+    "indexIntro": "Une technologie diagnostique axée sur la recherche, reliant la précision du laboratoire aux réalités de la pratique clinique.",
+    "indexAria": "Menu principal de MycoDx",
+    "scroll": "Découvrir nos travaux",
+    "backToTop": "Retour en haut",
+    "slides": {
+      "previous": "Visuel précédent",
+      "next": "Visuel suivant"
+    },
+    "navigation": {
+      "research": "Diagnostic par culture · Analyse intégrée",
+      "people": "Chercheurs · Collaborateurs cliniques",
+      "publication": "Résultats de recherche · Validation",
+      "equipment": "Infos plateforme · Bientôt disponible",
+      "gallery": "Laboratoire · Moments de recherche",
+      "news": "Actualités · Annonces",
+      "contact": "Partenariat · Demande générale"
+    },
+    "visuals": {
+      "assay": "Chercheur réalisant un essai avec une micropipette monocanal et une plaque 96 puits",
+      "petriCulture": "Chercheur examinant un échantillon de culture microbienne dans une boîte de Pétri",
+      "collaboration": "Chercheurs examinant ensemble des données diagnostiques"
+    },
+    "focus": {
+      "kicker": "Notre axe prioritaire",
+      "title": "Diagnostic de précision pour les pathogènes les plus complexes",
+      "description": "Basé sur la culture microbienne, MycoDx associe détection moléculaire, analyse de la pharmacorésistance et imagerie intelligente pour rendre le diagnostic des maladies infectieuses plus rapide et précis.",
+      "link": "En savoir plus sur MycoDx"
+    },
+    "capabilities": {
+      "kicker": "Technologies clés",
+      "title": "De la culture à l'interprétation en un seul flux",
+      "culture": {
+        "title": "Diagnostic basé sur la culture",
+        "label": "Technologie de diagnostic par culture",
+        "description": "Nous améliorons et automatisons la culture et la détection des pathogènes infectieux pour un environnement de diagnostic microbiologique standardisé."
+      },
+      "detection": {
+        "title": "Détection moléculaire",
+        "label": "Détection moléculaire",
+        "description": "Nous développons des technologies de détection moléculaire pour identifier rapidement et précisément les pathogènes infectieux."
+      },
+      "resistance": {
+        "title": "Analyse de la pharmacorésistance",
+        "label": "Analyse de la pharmacorésistance",
+        "description": "Nous développons des technologies analytiques identifiant la résistance aux antimicrobiens pour guider les décisions thérapeutiques."
+      },
+      "imaging": {
+        "title": "Imagerie intelligente",
+        "label": "Technologie d'imagerie intelligente",
+        "description": "Nous analysons la croissance et les caractéristiques morphologiques en culture, en développant une interprétation et quantification assistées par IA."
+      },
+      "chain": "Culture · Détection moléculaire · Pharmacorésistance · Imagerie intelligente",
+      "platformMessage": "MycoDx va au-delà des technologies isolées pour bâtir une plateforme de diagnostic intégré des maladies infectieuses, du prélèvement à l'interprétation."
+    },
+    "pipeline": {
+      "kicker": "Pipeline produit",
+      "title": "Un aperçu compact du flux produit",
+      "description": "MycoDx développe un flux modulaire allant des milieux à l'inoculation automatisée, à l'incubation et à l'interprétation par IA.",
+      "note": "La page d'accueil présente le pipeline de manière concise ; la page produit fournit uniquement un aperçu public de chaque module.",
+      "link": "Voir les détails du produit"
+    },
+    "story": {
+      "kicker": "L'Histoire du Camélia",
+      "title": "Transformer des signaux invisibles en preuves diagnostiques claires",
+      "description": "MycoDx associe la culture des pathogènes infectieux, leur détection, l'analyse de pharmacorésistance et l'imagerie en un seul flux. Grâce à la standardisation et l'automatisation, nous garantissons des tests plus rapides et fiables.",
+      "link": "À propos de MycoDx"
+    },
+    "contact": {
+      "kicker": "Travailler avec MycoDx",
+      "title": "Contact",
+      "description": "Nous sommes ouverts aux opportunités de recherche conjointe, de validation clinique, d'intégration de plateforme et de partenariats commerciaux.",
+      "prompt": "Choisissez un sujet et envoyez un court message. Le contact MycoDx approprié vous répondra.",
+      "address": "Room 202, Mirae Building, 7 Yongdong-ro 83beonan-gil, Uichang-gu, Changwon-si, Gyeongsangnam-do 51139 République de Corée",
+      "direct": {
+        "email": "E-mail",
+        "phone": "Téléphone",
+        "office": "Bureau"
+      },
+      "mapTitle": "Carte Google Maps indiquant l'emplacement de MycoDx",
+      "form": {
+        "name": "Nom",
+        "namePlaceholder": "Votre nom",
+        "organization": "Organisation (facultatif)",
+        "organizationPlaceholder": "Entreprise ou institution",
+        "inquiryType": "Type de demande",
+        "inquiryTypes": {
+          "research": "Recherche conjointe",
+          "product": "Demande produit",
+          "validation": "Validation clinique",
+          "partnership": "Partenariat commercial",
+          "other": "Autre"
+        },
+        "email": "E-mail",
+        "message": "Message",
+        "messagePlaceholder": "Décrivez-nous votre projet de collaboration.",
+        "privacyConsent": "J’ai lu et j’accepte l’avis de confidentialité. (Obligatoire)",
+        "privacyLink": "Voir les détails",
+        "submit": "Envoyer la demande",
+        "sending": "Envoi en cours...",
+        "sent": "Votre message a été envoyé avec succès.",
+        "failed": "L'envoi a échoué. Veuillez nous contacter directement par e-mail."
+      }
+    }
+  },
+  "hero": {
+    "title": "Rendre l'invisible visible",
+    "subtitle": "MycoDx développe une plateforme de diagnostic intégré couvrant la détection, la culture et l'analyse des maladies infectieuses. Basés sur la culture microbienne, nous associons détection moléculaire, analyse de la pharmacorésistance et imagerie intelligente pour un diagnostic plus rapide et précis.",
+    "point1": "Technologie de diagnostic par culture",
+    "point2": "Analyse intégrée des maladies infectieuses",
+    "point3": "Plateforme de diagnostic intelligente"
+  },
+  "story": {
+    "title": "L'Histoire du Camélia",
+    "subtitle": "Intégrité et patience du camélia : la recherche de MycoDx brille dans l'ombre",
+    "description": "MycoDx associe la culture des pathogènes infectieux, leur détection, l'analyse de pharmacorésistance et l'imagerie en un seul flux. Grâce à la standardisation et l'automatisation, nous garantissons des tests plus rapides et fiables."
+  },
+  "tech": {
+    "title": "Technologies clés",
+    "subtitle": "Culture · Détection moléculaire · Pharmacorésistance · Imagerie intelligente",
+    "card1_title": "Diagnostic basé sur la culture",
+    "card1_desc": "Nous améliorons et automatisons la culture et la détection des pathogènes infectieux pour un environnement de diagnostic microbiologique standardisé.",
+    "card2_title": "Détection moléculaire",
+    "card2_desc": "Nous développons des technologies de détection moléculaire pour identifier rapidement et précisément les pathogènes infectieux.",
+    "card3_title": "Analyse de la pharmacorésistance",
+    "card3_desc": "Nous développons des technologies analytiques identifiant la résistance aux antimicrobiens pour guider les décisions thérapeutiques.",
+    "card4_title": "Imagerie intelligente",
+    "card4_desc": "Nous analysons la croissance et les caractéristiques morphologiques en culture, en développant une interprétation et quantification assistées par IA.",
+    "platformMessage": "MycoDx va au-delà des technologies isolées pour bâtir une plateforme de diagnostic intégré des maladies infectieuses, du prélèvement à l'interprétation."
+  },
+  "rd": {
+    "title": "Centre R&D",
+    "subtitle": "Perfectionnement des technologies d'analyse d'images microbiologiques",
+    "card1_title": "Centre R&D certifié",
+    "card2_title": "Axes de recherche",
+    "card3_title": "Infrastructure de recherche"
+  },
+  "pipeline": {
+    "title": "Pipeline de développement",
+    "subtitle": "Étapes de développement de la plateforme de diagnostic intégré, du prélèvement à l'interprétation",
+    "step1": "Recherche",
+    "step1_description": "Développement et optimisation des technologies clés de culture, détection moléculaire et imagerie",
+    "step1_status": "En cours",
+    "step2": "Validation",
+    "step2_description": "Validation des performances et intégration des technologies diagnostiques des maladies infectieuses",
+    "step2_status": "En cours",
+    "step3": "Application & Déploiement",
+    "step3_description": "Perfectionnement de la plateforme intégrée et déploiement sur le terrain",
+    "step3_status": "À venir"
+  },
+  "validation": {
+    "title": "Validation scientifique",
+    "subtitle": "Résultats d'évaluation des performances et travaux scientifiques de test d'interopérabilité"
+  },
+  "partnership": {
+    "title": "Demandes de partenariat",
+    "description": "Nous invitons les partenaires à se développer aux côtés de MycoDx. Contactez-nous et notre équipe vous répondra rapidement.",
+    "button": "Contactez-nous"
+  },
+  "slogan": {
+    "main": "MycoDx",
+    "sub": "Développement d'une plateforme de diagnostic intégré couvrant l'ensemble du processus diagnostique des maladies infectieuses."
+  },
+  "careers": {
+    "kicker": "Carrières · Vivier de talents",
+    "title": "<line>Créons ensemble</line><line>de nouvelles possibilités</line>",
+    "lead": "MycoDx mène des recherches en biotechnologie, diagnostic in vitro et technologies de santé, centrées sur le diagnostic des maladies infectieuses. Nous souhaitons évoluer avec des talents qui apportent expertise et regard neuf.",
+    "heroAlt": "L’équipe MycoDx examine ensemble des résultats de recherche",
+    "introLabel": "Pourquoi MycoDx",
+    "introTitle": "<line>Notre vivier de talents reste ouvert</line><line>au-delà des périodes de recrutement.</line>",
+    "introBody": "Vous pouvez postuler même lorsqu’aucun poste n’est actuellement ouvert. Lorsqu’un besoin apparaît, nous examinons la formation, l’expérience, le parcours de recherche et l’adéquation au poste, puis contactons individuellement les profils correspondants.",
+    "fieldsLabel": "Domaines de candidature",
+    "fieldsTitle": "Domaines d’opportunité",
+    "fieldsDescription": "Nous recherchons des profils variés, de la R&D et l’industrialisation à la production, la qualité et la convergence de nouvelles technologies.",
+    "fields": [
+      [
+        "R&D en biotechnologie et diagnostic in vitro",
+        "Recherche et développement de produits en biotechnologie et diagnostic in vitro, centrés sur les maladies infectieuses"
+      ],
+      [
+        "Production & Qualité",
+        "Fabrication, gestion de la qualité et opérations assurant un approvisionnement fiable"
+      ],
+      [
+        "Technologies convergentes en santé",
+        "Convergence de la biotechnologie avec les données, les logiciels et les technologies émergentes"
+      ],
+      [
+        "Autres fonctions",
+        "Développement commercial, opérations et autres fonctions contribuant à la croissance de MycoDx"
+      ]
+    ],
+    "processLabel": "Parcours du vivier",
+    "processTitle": "Comment fonctionne le vivier",
+    "processDescription": "Après l’enregistrement, les candidatures sont examinées selon les besoins de recrutement et l’adéquation aux postes concernés.",
+    "steps": [
+      [
+        "01",
+        "Dépôt du profil",
+        "Présentez-nous votre expérience et vos intérêts."
+      ],
+      [
+        "02",
+        "Étude du profil",
+        "Nous examinons les informations transmises."
+      ],
+      [
+        "03",
+        "Mise en relation",
+        "Nous vous contactons lorsqu’une opportunité correspond."
+      ],
+      [
+        "04",
+        "Processus de recrutement",
+        "Nous vous présentons les prochaines étapes."
+      ]
+    ],
+    "notice": "L’inscription au vivier ne garantit ni un poste ouvert ni le lancement d’un recrutement.",
+    "ctaEyebrow": "Restons en contact",
+    "ctaTitle": "Imaginons la suite\navec MycoDx.",
+    "ctaBody": "Préparez vos documents et envoyez votre candidature via notre formulaire en ligne.",
+    "ctaButton": "Postuler"
+  },
+  "careersMeta": {
+    "title": "Vivier de talents",
+    "description": "Rejoignez le vivier de talents MycoDx et contribuez au diagnostic des maladies infectieuses de demain.",
+    "applyTitle": "Candidature",
+    "applyDescription": "Consultez les informations et envoyez votre candidature à MycoDx."
+  },
+  "careersApply": {
+    "back": "Présentation du vivier de talents",
+    "title": "Candidature",
+    "lead": "Consultez les informations, puis envoyez le formulaire de candidature et les justificatifs demandés.",
+    "successConfirm": "Terminer",
+    "successTitle": "Votre candidature a été transmise pour envoi.",
+    "successBody": "Merci d’avoir rejoint le vivier de talents MycoDx.",
+    "formTitle": "Informations du candidat",
+    "required": "* indique un champ obligatoire. Les informations seront conservées et utilisées pendant un an à compter de la date de candidature.",
+    "area": "Domaine de candidature",
+    "areas": [
+      "R&D en biotechnologie et diagnostic in vitro",
+      "Production & Qualité",
+      "Technologies convergentes en santé",
+      "Autres fonctions"
+    ],
+    "name": "Nom complet",
+    "email": "E-mail",
+    "phone": "Téléphone",
+    "education": "Niveau d’études",
+    "select": "Veuillez sélectionner",
+    "degrees": [
+      "Licence",
+      "Master",
+      "Doctorat",
+      "Autre"
+    ],
+    "experience": "Niveau d’expérience",
+    "experiences": [
+      "Débutant",
+      "Expérimenté"
+    ],
+    "message": "Expérience principale et motivation",
+    "messagePlaceholder": "Décrivez brièvement votre expérience, vos travaux de recherche et les fonctions qui vous intéressent.",
+    "chars": "caractères",
+    "files": "Pièces jointes",
+    "fileHelp": "Joignez des fichiers dans les formats proposés pour chaque champ. La taille totale ne doit pas dépasser 10 Mo. N’envoyez pas de documents inutiles contenant des données sensibles.",
+    "fileSizeError": "La taille totale des pièces jointes ne peut pas dépasser 10 Mo. Réduisez la taille des fichiers, puis réessayez.",
+    "download": "Télécharger le formulaire MycoDx",
+    "downloadMeta": "DOCX · formulaire coréen avec consentement",
+    "application": "Formulaire de candidature MycoDx",
+    "degree": "Diplôme",
+    "transcript": "Relevé de notes",
+    "papers": "Publications et autres documents",
+    "consent": "J’accepte la collecte et l’utilisation de mes données personnelles ainsi que mon inscription au vivier de talents. Les informations seront conservées et utilisées pendant un an à compter de la date de candidature.",
+    "submit": "Envoyer la candidature",
+    "sending": "Envoi en cours...",
+    "failed": "Nous n’avons pas pu confirmer l’envoi. Vos informations et fichiers sont conservés. Avant de réessayer, vérifiez la réception auprès de jakim@mycodx.com pour éviter un doublon."
+  },
+  "footer": {
+    "privacy": "Confidentialité",
+    "rights": "© 2026 MycoDx. Tous droits réservés.",
+    "address": "Room 202, Mirae Building, 7 Yongdong-ro 83beonan-gil, Uichang-gu, Changwon-si, Gyeongsangnam-do 51139 République de Corée",
+    "email": "info@mycodx.com",
+    "phone": "+82-70-8657-1848"
+  },
+  "forms": {
+    "checkingAvailability": "Vérification de la disponibilité du formulaire.",
+    "unavailable": "Les formulaires en ligne sont en préparation. Pour toute demande urgente, contactez-nous par e-mail.",
+    "checkStatus": "Vérifier l’envoi",
+    "accepted": "Le serveur de messagerie a accepté le message. La réception effective doit être confirmée par le destinataire.",
+    "receipt": "Référence : {{id}}",
+    "storageNotice": "Les candidatures et pièces jointes sont traitées par Vercel et envoyées à notre équipe via Resend. Les données temporaires privées de Vercel sont supprimées au prochain nettoyage après sept jours. Les données du service d’envoi sont gérées séparément ; la conservation par notre équipe suit le consentement ci-dessus.",
+    "progress": {
+      "preparing": "Préparation de l’envoi…",
+      "uploading": "Envoi des documents… {{percentage}} %",
+      "sending": "Envoi du message…",
+      "checking": "Vérification de l’envoi…"
+    },
+    "errors": {
+      "UNAVAILABLE": "L’envoi en ligne est indisponible. Vos informations sont conservées dans le formulaire. Réessayez plus tard ou contactez-nous par e-mail.",
+      "INVALID_FIELDS": "Vérifiez les champs obligatoires et l’adresse e-mail.",
+      "CONSENT_REQUIRED": "Veuillez accepter le traitement des données personnelles.",
+      "INVALID_SUBMISSION": "Vérifiez les informations et réessayez dans un instant.",
+      "FILE_COUNT": "Vous pouvez joindre au maximum 10 fichiers.",
+      "FILE_TYPE": "Vérifiez que chaque fichier est valide et dans un format accepté.",
+      "FILE_SIZE": "Les fichiers ne doivent pas être vides. Le total des pièces jointes ne doit pas dépasser 10 Mo.",
+      "FILES_REQUIRED": "Joignez le dossier de candidature, le diplôme et le relevé de notes.",
+      "RATE_LIMITED": "Trop de tentatives. Réessayez plus tard ou contactez-nous par e-mail.",
+      "UPLOAD_FAILED": "Le transfert a échoué. Vos informations et fichiers sélectionnés sont conservés. Réessayez.",
+      "UPLOAD_INCOMPLETE": "Le transfert de certains fichiers est incomplet. Réessayez.",
+      "SESSION_EXPIRED": "La session a expiré. Vérifiez vos informations et réessayez.",
+      "DELIVERY_UNCERTAIN": "Le résultat de l’envoi n’a pas pu être confirmé. Aucun nouvel envoi automatique ne sera effectué afin d’éviter les doublons. Vérifiez à nouveau le statut ou contactez notre équipe."
+    }
+  }
+}
