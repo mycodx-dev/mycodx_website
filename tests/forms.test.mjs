@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict'
 import { randomUUID } from 'node:crypto'
 import { test } from 'node:test'
+import { createRecruitmentService } from '../server/recruitment.ts'
+import { recruitDatabaseFixture } from './recruit-fixture.mjs'
 import { getConfig } from '../server/config.ts'
 import { createFormsHandler, submissionPath } from '../server/forms.ts'
 import { buildMail, sendSubmission } from '../server/mail.ts'
@@ -11,11 +13,12 @@ import { MAX_TOTAL_FILE_SIZE } from '../shared/forms.ts'
 const NOW = Date.UTC(2026, 9, 29, 12)
 const origin = 'https://www.example.test'
 const configuredEnv = {
+  RECRUIT_FORMS_ENABLED: 'true', SUPABASE_URL: 'https://test-project.supabase.co', SUPABASE_SECRET_KEY: 'sb_secret_test_only',
   MAIL_FORMS_ENABLED: 'true', FORM_ALLOWED_ORIGINS: origin,
   FORM_SIGNING_SECRET: 'test-only-secret-that-is-longer-than-thirty-two-characters',
   CRON_SECRET: 'test-only-cron-secret-that-is-longer-than-thirty-two-characters',
   BLOB_READ_WRITE_TOKEN: 'test-only-blob-token',
-  MAIL_FROM: 'website@example.test', RESEND_API_KEY: 're_test_only_not_a_real_key',
+  MAIL_PROVIDER: 'resend', RESEND_FROM: 'website@example.test', RESEND_API_KEY: 're_test_only_not_a_real_key',
   CONTACT_TO: 'contact@example.test', CAREERS_TO: 'careers@example.test',
 }
 const config = getConfig(configuredEnv)
@@ -52,14 +55,16 @@ function fixture(options = {}) {
     },
     async uploadToken(file) { return `limited-token:${file.pathname}` },
   }
-  const newHandler = () => createFormsHandler({
-    config: options.config ?? config, store, now: () => NOW,
-    sendMail: async message => {
+  const recruit = recruitDatabaseFixture(NOW, options)
+  const newHandler = (activeConfig = options.config ?? config) => {
+    const sendMail = async message => {
       sent.push(message)
       if (options.failMail) throw new Error('Ambiguous provider timeout')
       return { messageId: 'test-message-id' }
-    },
-  })
+    }
+    const dependencies = { config: activeConfig, store, now: () => NOW, sendMail }
+    return createFormsHandler({ ...dependencies, recruitment: createRecruitmentService({ ...dependencies, database: recruit.database }) })
+  }
   let handler = newHandler()
   async function post(body, headers = {}) {
     return handler(new Request(`${origin}/api/forms`, { method: 'POST', headers: {
@@ -67,7 +72,7 @@ function fixture(options = {}) {
     }, body: JSON.stringify(body) }))
   }
   async function start(submission = input()) {
-    const response = await post({ action: 'start', submission })
+    const response = await post({ action: 'start', submission, idempotencyKey: randomUUID() })
     assert.equal(response.status, 201)
     return response.json()
   }
@@ -78,16 +83,16 @@ function fixture(options = {}) {
       files.set(file.pathname, bytes)
     }
   }
-  return { json, files, sent, handler, post, start, upload, restart: () => { handler = newHandler() } }
+  return { json, files, sent, handler, post, start, upload, recruit, options, restart: nextConfig => { handler = newHandler(nextConfig) } }
 }
 
 test('configuration defaults closed and never exposes secrets to the client', async () => {
   const f = fixture({ config: getConfig({}) })
   const response = await f.handler(new Request(`${origin}/api/forms`))
-  assert.deepEqual(await response.json(), { enabled: false, maxTotalBytes: MAX_TOTAL_FILE_SIZE, maxFiles: 10 })
+  assert.deepEqual(await response.json(), { enabled: false, careersEnabled: false, maxTotalBytes: MAX_TOTAL_FILE_SIZE, maxFiles: 10 })
   assert.equal(response.headers.get('cache-control'), 'no-store')
   assert.equal(f.sent.length, 0)
-  assert.equal(getConfig({ ...configuredEnv, MAIL_FROM: 'bad\r\nBcc:someone@example.test' }).enabled, false)
+  assert.equal(getConfig({ ...configuredEnv, RESEND_FROM: 'bad\r\nBcc:someone@example.test' }).enabled, false)
   assert.equal(getConfig({ ...configuredEnv, RESEND_API_KEY: '' }).enabled, false)
   assert.equal(getConfig({ ...configuredEnv, VERCEL_ENV: 'preview' }).enabled, false)
   assert.equal(getConfig({ ...configuredEnv, VERCEL_ENV: 'preview', MAIL_TEST_RECIPIENT: 'tester@example.test' }).enabled, true)
@@ -108,7 +113,7 @@ test('requires consent, rejects honeypot and header injection', async () => {
     { ...input(), consent: false }, { ...input(), website: 'spam' },
     { ...input(), fields: { ...input().fields, email: 'a@example.test\r\nBcc: x@example.test' } },
     { ...input(), fields: { ...input().fields, name: 'Name\nInjected' } },
-  ]) assert.equal((await f.post({ action: 'start', submission })).status, 400)
+  ]) assert.equal((await f.post({ action: 'start', submission, idempotencyKey: randomUUID() })).status, 400)
   assert.equal(f.json.size, 0)
 })
 
@@ -135,7 +140,7 @@ test('attachment bytes larger than 4.5 MB stay out of the API request and reach 
   assert.ok(session.files.every(file => !file.pathname.includes('same.pdf')))
   f.upload(session)
   const result = await (await f.post({ action: 'submit', token: session.token })).json()
-  assert.equal(result.status, 'sent')
+  assert.equal(result.status, 'submitted')
   assert.equal(f.sent[0].attachments[0].content.byteLength, 6 * 1024 * 1024)
   for (const [index, attachment] of f.sent[0].attachments.entries()) {
     assert.deepEqual(attachment.content, f.files.get(session.files[index].pathname))
@@ -150,7 +155,7 @@ test('incomplete uploads never dispatch an email; completion allows the same ses
   assert.equal(f.sent.length, 0)
   assert.equal(f.json.has(`${submissionPath(session.id, NOW)}dispatch.json`), false)
   f.upload(session)
-  assert.equal((await (await f.post({ action: 'submit', token: session.token })).json()).status, 'sent')
+  assert.equal((await (await f.post({ action: 'submit', token: session.token })).json()).status, 'submitted')
 })
 
 test('file signature mismatch is rejected before sending and uploaded paths cannot be supplied by a client', async () => {
@@ -177,13 +182,15 @@ test('simultaneous submissions, retries and response loss produce only one mail'
   assert.equal((await (await f.post({ action: 'status', token: session.token })).json()).status, 'sent')
 })
 
-test('provider timeout and receipt-write failure are uncertain and never automatically resend', async () => {
+test('provider timeout and receipt-write failure never resend, including after a provider switch', async () => {
+  const smtpConfig = getConfig({ ...configuredEnv, MAIL_PROVIDER: 'smtp', SMTP_USER: 'sender@example.test', SMTP_PASS: 'test-only-password' })
   for (const options of [{ failMail: true }, { failReceipt: true }]) {
     const f = fixture(options)
     const session = await f.start()
     for (let i = 0; i < 2; i++) {
       const response = await f.post({ action: 'submit', token: session.token })
       assert.equal((await response.json()).status, 'uncertain')
+      f.restart(smtpConfig)
     }
     assert.equal(f.sent.length, 1)
   }
@@ -214,10 +221,12 @@ test('mail recipients are server-controlled, Reply-To is the applicant and same 
   }, config)
   assert.deepEqual(mail.to, ['careers@example.test'])
   assert.equal(mail.from, 'MycoDx 홈페이지 <website@example.test>')
-  assert.equal(mail.reply_to, 'applicant@example.test')
+  assert.equal(mail.replyTo, 'applicant@example.test')
+  assert.deepEqual(mail.envelope, { from: 'website@example.test', to: ['careers@example.test'] })
   assert.notEqual(mail.attachments[0].filename, mail.attachments[1].filename)
   assert.deepEqual(mail.attachments[0].content, mail.attachments[1].content)
-  assert.deepEqual(Buffer.from(mail.attachments[0].content, 'base64'), Buffer.from('%PDF-test'))
+  assert.ok(Buffer.isBuffer(mail.attachments[0].content))
+  assert.deepEqual(mail.attachments[0].content, Buffer.from('%PDF-test'))
   assert.ok(mail.attachments.every(file => !('path' in file)))
 })
 
@@ -246,10 +255,112 @@ test('Resend receives base64 attachments, fixed recipients and a stable idempote
     return Response.json({ id: 'resend-test-receipt' })
   }
   for (let i = 0; i < 2; i++) {
-    assert.deepEqual(await sendSubmission(submission, { ...config, testTo: 'tester@example.test' }, fetcher), { messageId: 'resend-test-receipt' })
+    assert.deepEqual(await sendSubmission(submission, { ...config, testTo: 'tester@example.test' }, { fetcher }), { messageId: 'resend-test-receipt' })
   }
   assert.equal(requests[0], requests[1])
   for (const response of [Response.json({ message: 'Rejected' }, { status: 403 }), Response.json({})]) {
-    await assert.rejects(sendSubmission(submission, config, async () => response))
+    await assert.rejects(sendSubmission(submission, config, { fetcher: async () => response }))
   }
+})
+
+test('lost careers start response reuses the DB application and immutable upload paths', async () => {
+  const f = fixture({ loseBegin: true })
+  const body = { action: 'start', submission: input('careers'), idempotencyKey: randomUUID() }
+  assert.equal((await f.post(body)).status, 503)
+  const first = await (await f.post(body)).json()
+  f.upload(first)
+  const second = await (await f.post(body)).json()
+  assert.equal(second.id, first.id)
+  assert.equal(second.token, first.token)
+  assert.deepEqual(second.files.map(x => x.pathname), first.files.map(x => x.pathname))
+  assert.ok(second.files.every(x => x.uploaded && !x.uploadToken))
+  assert.equal(f.recruit.applications.size, 1)
+  const changed = structuredClone(body)
+  changed.submission.fields.phone = '010-9999-9999'
+  assert.equal((await f.post(changed)).status, 409)
+  assert.equal(f.sent.length, 0)
+  assert.equal(f.recruit.calls[0].args.p_idempotency_key_hash.length, 64)
+})
+
+test('partial Supabase upload leaves staging with no email, and a retry completes the same application', async () => {
+  const f = fixture({ failFile: 1 })
+  const session = await f.start(input('careers'))
+  f.upload(session)
+  const submit = () => f.post({ action: 'submit', token: session.token })
+  assert.equal((await submit()).status, 503)
+  assert.equal(f.recruit.objects.size, 1)
+  assert.equal(f.recruit.applications.get(session.id).stage, 'staging')
+  assert.equal(f.recruit.notifications.size, 0)
+  assert.equal(f.sent.length, 0)
+  delete f.options.failFile
+  assert.equal((await (await submit()).json()).status, 'submitted')
+  assert.equal(f.recruit.applications.size, 1)
+  assert.equal(f.recruit.objects.size, 3)
+  assert.equal(f.recruit.notifications.get(session.id).status, 'accepted')
+})
+
+test('concurrent careers submits finalize once and claim only one notification, including after restart', async () => {
+  const f = fixture({ loseFinalize: true })
+  const session = await f.start(input('careers'))
+  f.upload(session)
+  const responses = await Promise.all([1, 2, 3].map(() => f.post({ action: 'submit', token: session.token })))
+  for (const response of responses) assert.equal((await response.json()).status, 'submitted')
+  f.restart()
+  assert.equal((await (await f.post({ action: 'submit', token: session.token })).json()).status, 'submitted')
+  assert.equal(f.sent.length, 1)
+  assert.equal(f.recruit.notifications.get(session.id).attempts, 1)
+})
+
+test('mail ambiguity, claim loss, and receipt failures never turn a saved application into a failed receipt or resend', async () => {
+  for (const options of [{ failMail: true }, { loseClaim: true }, { failFinish: true }, { loseFinish: true }]) {
+    const f = fixture(options)
+    const session = await f.start(input('careers'))
+    f.upload(session)
+    for (let i = 0; i < 2; i++) {
+      assert.equal((await (await f.post({ action: 'submit', token: session.token })).json()).status, 'submitted')
+    }
+    assert.equal(f.recruit.applications.get(session.id).stage, 'submitted')
+    assert.ok(f.sent.length <= 1)
+    assert.equal(f.recruit.notifications.get(session.id).attempts, 1)
+    if (options.failMail) assert.equal(f.recruit.notifications.get(session.id).status, 'uncertain')
+    if (options.loseFinish === false) assert.equal(f.recruit.notifications.get(session.id).status, 'accepted')
+  }
+})
+
+test('careers storage is available without mail credentials and freezes the notification recipient', async () => {
+  const saveOnly = getConfig({ ...configuredEnv, MAIL_FORMS_ENABLED: 'false', MAIL_TEST_RECIPIENT: 'test@example.test', RESEND_API_KEY: '' })
+  const f = fixture({ config: saveOnly })
+  const availability = await (await f.handler(new Request(`${origin}/api/forms`))).json()
+  assert.equal(availability.enabled, false)
+  assert.equal(availability.careersEnabled, true)
+  const session = await f.start(input('careers'))
+  f.upload(session)
+  assert.equal((await (await f.post({ action: 'submit', token: session.token })).json()).status, 'submitted')
+  assert.equal(f.recruit.notifications.get(session.id).status, 'pending')
+  assert.equal(f.sent.length, 0)
+  f.restart(config) // test recipient removed: never silently send to the production mailbox
+  assert.equal((await (await f.post({ action: 'submit', token: session.token })).json()).status, 'submitted')
+  assert.equal(f.recruit.notifications.get(session.id).status, 'failed')
+  assert.equal(f.recruit.notifications.get(session.id).errorCode, 'CONFIGURATION')
+  assert.equal(f.sent.length, 0)
+})
+
+test('disabled or invalid Supabase configuration never falls back to mail-only careers submission', async () => {
+  for (const overrides of [{ RECRUIT_FORMS_ENABLED: 'false' }, { SUPABASE_SECRET_KEY: '' }, { SUPABASE_URL: 'https://attacker.test' }]) {
+    const f = fixture({ config: getConfig({ ...configuredEnv, ...overrides }) })
+    assert.equal((await f.post({ action: 'start', submission: input('careers'), idempotencyKey: randomUUID() })).status, 503)
+    assert.equal(f.sent.length, 0)
+    assert.equal(f.recruit.applications.size, 0)
+  }
+})
+
+test('application ID alone cannot query status; successful status exposes no fields or file paths', async () => {
+  const f = fixture()
+  const session = await f.start(input('careers'))
+  assert.equal((await f.post({ action: 'status', id: session.id })).status, 403)
+  assert.equal((await f.post({ action: 'status', token: session.token + 'tampered' })).status, 403)
+  assert.deepEqual(await (await f.post({ action: 'status', token: session.token })).json(), { id: session.id, status: 'ready' })
+  f.upload(session)
+  await f.post({ action: 'submit', token: session.token })
+  assert.deepEqual(await (await f.post({ action: 'status', token: session.token })).json(), { id: session.id, status: 'submitted' })
 })

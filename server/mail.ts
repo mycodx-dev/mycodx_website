@@ -1,5 +1,8 @@
 import type { FormsConfig } from './config.ts'
 import type { FormKind, FileGroup } from '../shared/forms.ts'
+import { sendWithResend } from './mail/resend.ts'
+import { sendWithSmtp } from './mail/smtp.ts'
+import type { SmtpTransportFactory } from './mail/smtp.ts'
 
 export interface OutgoingSubmission {
   id: string
@@ -23,12 +26,16 @@ export function buildMail(submission: OutgoingSubmission, config: FormsConfig) {
   const target = kind === 'careers' ? config.careersTo : config.contactTo
   const attachments = submission.attachments.map((file, index) => ({
     filename: `${index + 1}_${groups[file.group]}_${file.name}`,
-    content: Buffer.from(file.content).toString('base64'),
+    content: Buffer.from(file.content),
+    contentType: file.contentType,
   }))
   return {
     from: `MycoDx 홈페이지 <${config.mailFrom}>`,
     to: [config.testTo || target],
-    reply_to: fields.email,
+    replyTo: fields.email,
+    envelope: { from: config.mailFrom, to: [config.testTo || target] },
+    messageId: `<mycodx-form.${id}@${config.mailFrom.split('@')[1]}>`,
+    date: new Date(submission.createdAt),
     subject: `${config.testTo ? '[TEST] ' : ''}[MycoDx ${kind === 'careers' ? '채용' : '문의'}] ${fields.name} (${id.slice(0, 8)})`,
     headers: { 'X-Entity-Ref-ID': id },
     text: [
@@ -42,25 +49,24 @@ export function buildMail(submission: OutgoingSubmission, config: FormsConfig) {
       '', '이 메일에 답장하면 제출자가 입력한 회신 이메일로 발송됩니다.',
     ].join('\n'),
     attachments,
+    disableFileAccess: true,
+    disableUrlAccess: true,
   }
 }
 
-export async function sendSubmission(submission: OutgoingSubmission, config: FormsConfig, fetcher: typeof fetch = fetch) {
-  const response = await fetcher('https://api.resend.com/emails', {
-    method: 'POST', redirect: 'error', signal: AbortSignal.timeout(60_000),
-    headers: {
-      Authorization: `Bearer ${config.resendApiKey}`,
-      'Content-Type': 'application/json',
-      'Idempotency-Key': `mycodx-form/${submission.id}`,
-    },
-    // Send verified bytes only: no user-supplied URLs or local filesystem paths.
-    body: JSON.stringify(buildMail(submission, config)),
-  })
-  if (!response.ok) {
-    await response.body?.cancel()
-    throw new Error('Mail provider did not accept the request')
-  }
-  const result = await response.json() as { id?: unknown }
-  if (typeof result.id !== 'string' || !result.id) throw new Error('Mail provider receipt missing')
-  return { messageId: result.id }
+export type SubmissionMail = ReturnType<typeof buildMail>
+
+interface MailDependencies {
+  fetcher?: typeof fetch
+  createSmtpTransport?: SmtpTransportFactory
+}
+
+export async function sendSubmission(submission: OutgoingSubmission, config: FormsConfig, dependencies: MailDependencies = {}) {
+  if (!config.enabled) throw new Error('Mail sending is disabled')
+  const mail = buildMail(submission, config)
+  // One explicitly selected provider only. An ambiguous failure must never
+  // fall back to another provider and create a second delivery.
+  if (config.mailProvider === 'smtp') return sendWithSmtp(mail, config, dependencies.createSmtpTransport)
+  if (config.mailProvider === 'resend') return sendWithResend(submission.id, mail, config, dependencies.fetcher)
+  throw new Error('Mail provider is not selected')
 }

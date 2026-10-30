@@ -1,6 +1,6 @@
 # 과거 FormSubmit 수신 검증 이력
 
-> 아래 내용은 이전 구현의 기록입니다. 현재는 Vercel API, 비공개 Blob, Resend API로 교체했으며,
+> 아래 내용은 이전 구현의 기록입니다. 현재는 Vercel API, 비공개 Blob과 선택 가능한 SMTP / Resend 발송으로 교체했으며,
 > 과거 콜백 파일과 테스트 명령은 더 이상 사용하지 않습니다. 현재 설정·검증 절차는
 > [Vercel 메일 설정](vercel-mail-setup.md)을 따릅니다.
 

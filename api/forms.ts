@@ -3,6 +3,8 @@ import { getConfig } from '../server/config.ts'
 import { createBlobStore, cleanupBlobs } from '../server/storage.ts'
 import { sendSubmission } from '../server/mail.ts'
 import { createFormsHandler } from '../server/forms.ts'
+import { createRecruitDatabase } from '../server/supabase.ts'
+import { createRecruitmentService } from '../server/recruitment.ts'
 
 export default {
   async fetch(request: Request) {
@@ -23,10 +25,12 @@ export default {
         return Response.json({ error: 'UNAVAILABLE' }, { status: 503, headers: { 'Cache-Control': 'no-store' } })
       }
     }
-    const handler = createFormsHandler({
+    const dependencies = {
       config, store: createBlobStore(config.blobToken),
-      sendMail: submission => sendSubmission(submission, config),
-    })
+      sendMail: (submission: Parameters<typeof sendSubmission>[0]) => sendSubmission(submission, config),
+    }
+    const handler = createFormsHandler({ ...dependencies, recruitment: config.recruitEnabled
+      ? createRecruitmentService({ ...dependencies, database: createRecruitDatabase(config) }) : undefined })
     return handler(request)
   },
 }

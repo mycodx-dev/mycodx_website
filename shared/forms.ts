@@ -32,6 +32,7 @@ export interface UploadTicket extends FileInfo {
   pathname: string
   contentType: string
   uploadToken: string
+  uploaded?: boolean
 }
 
 export interface SubmissionSession {
@@ -39,9 +40,10 @@ export interface SubmissionSession {
   token: string
   expiresAt: number
   files: UploadTicket[]
+  status?: 'ready' | 'submitted'
 }
 
-export type SubmissionState = 'ready' | 'sending' | 'sent' | 'uncertain'
+export type SubmissionState = 'ready' | 'sending' | 'sent' | 'uncertain' | 'submitted'
 
 export function fileExtension(name: string) {
   return name.split('.').pop()?.toLowerCase() ?? ''

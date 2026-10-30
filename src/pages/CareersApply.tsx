@@ -20,7 +20,7 @@ export default function CareersApply() {
   const formRef = useRef<HTMLFormElement>(null)
   const submissionPending = useRef(false)
   const [startedAt] = useState(() => Date.now())
-  const available = useFormAvailability()
+  const available = useFormAvailability('careers')
 
   const [messageLength, setMessageLength] = useState(0)
   const [fileError, setFileError] = useState('')
@@ -28,7 +28,6 @@ export default function CareersApply() {
   const [progress, setProgress] = useState<SubmissionProgress>('preparing')
   const [percentage, setPercentage] = useState(0)
   const [errorCode, setErrorCode] = useState('')
-  const [receiptId, setReceiptId] = useState('')
   const content = {
     back: t('careersApply.back'), title: t('careersApply.title'), lead: t('careersApply.lead'),
     successTitle: t('careersApply.successTitle'), successBody: t('careersApply.successBody'), formTitle: t('careersApply.formTitle'), required: t('careersApply.required'),
@@ -64,22 +63,19 @@ export default function CareersApply() {
     submissionPending.current = true
     setSubmissionStatus('sending')
     setErrorCode('')
-    setReceiptId('')
     try {
-      const id = await submitForm({
+      await submitForm({
         kind: 'careers', language: i18n.language.split('-')[0], startedAt,
         consent: data.has('개인정보 수집 및 인재풀 등록 동의'), website: value('_honey'),
         fields: { name: value('성명'), email: value('email'), phone: value('연락처'),
           area: value('지원 분야'), education: value('최종 학력'), experience: value('경력 구분'), message: value('주요 경력 및 지원 내용') },
       }, selected, (stage, percent) => { setProgress(stage); if (percent !== undefined) setPercentage(percent) })
-      setReceiptId(id)
       form.reset()
       setMessageLength(0)
       setFileError('')
       setSubmissionStatus('sent')
     } catch (error) {
       setErrorCode(error instanceof SubmissionError ? error.code : 'UNAVAILABLE')
-      setReceiptId(error instanceof SubmissionError ? error.receiptId ?? '' : '')
       setSubmissionStatus('failed')
     } finally { submissionPending.current = false }
   }
@@ -144,10 +140,10 @@ export default function CareersApply() {
           </fieldset>
           <div className="careers-form__footer">
             {available !== true && <p role="status">{t(available === null ? 'forms.checkingAvailability' : 'forms.unavailable')} <a href="mailto:jakim@mycodx.com">jakim@mycodx.com</a></p>}
-            {submissionStatus === 'failed' && <p className="is-error" role="alert">{t(`forms.errors.${errorCode}`, { defaultValue: content.failed })} {receiptId && t('forms.receipt', { id: receiptId })} <a href="mailto:jakim@mycodx.com">jakim@mycodx.com</a></p>}
+            {submissionStatus === 'failed' && <p className="is-error" role="alert">{t(`forms.errors.${errorCode}`, { defaultValue: content.failed })} <a href="mailto:jakim@mycodx.com">jakim@mycodx.com</a></p>}
             {submissionStatus === 'sending' && <p role="status">{t(`forms.progress.${progress}`, { percentage })}</p>}
             <button type="submit" disabled={!available || Boolean(fileError) || submissionStatus === 'sending'}>
-              {submissionStatus === 'sending' ? content.sending : errorCode === 'DELIVERY_UNCERTAIN' ? t('forms.checkStatus') : content.submit}
+              {submissionStatus === 'sending' ? content.sending : errorCode === 'RECRUIT_UNCERTAIN' ? t('forms.checkStatus') : content.submit}
             </button>
           </div>
         </form>
@@ -155,7 +151,7 @@ export default function CareersApply() {
       {submissionStatus === 'sent' && (
         <ApplicationSuccessDialog
           title={content.successTitle}
-          description={`${t('forms.accepted')} ${t('forms.receipt', { id: receiptId })}`}
+          description={t('forms.recruitAccepted')}
           confirmLabel={t('careersApply.successConfirm')}
           onClose={() => setSubmissionStatus('idle')}
         />

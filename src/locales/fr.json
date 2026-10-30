@@ -500,14 +500,19 @@
     "checkStatus": "Vérifier l’envoi",
     "accepted": "Le serveur de messagerie a accepté le message. La réception effective doit être confirmée par le destinataire.",
     "receipt": "Référence : {{id}}",
-    "storageNotice": "Les candidatures et pièces jointes sont traitées par Vercel et envoyées à notre équipe via Resend. Les données temporaires privées de Vercel sont supprimées au prochain nettoyage après sept jours. Les données du service d’envoi sont gérées séparément ; la conservation par notre équipe suit le consentement ci-dessus.",
+    "storageNotice": "Les candidatures et pièces jointes sont traitées par Vercel puis conservées dans un stockage privé Supabase pendant un an à compter de leur réception. Notre équipe est informée via ECOUNT Webmail ou Resend. Les données temporaires Vercel sont supprimées au prochain nettoyage après sept jours. Les e-mails reçus et les sauvegardes suivent des politiques de conservation et de suppression distinctes.",
+    "recruitAccepted": "Votre candidature et vos pièces jointes ont été enregistrées. Votre candidature est reçue.",
     "progress": {
+      "saving": "Enregistrement de votre candidature.",
       "preparing": "Préparation de l’envoi…",
       "uploading": "Envoi des documents… {{percentage}} %",
       "sending": "Envoi du message…",
       "checking": "Vérification de l’envoi…"
     },
     "errors": {
+      "RECRUIT_UNCERTAIN": "La réception n’a pas pu être confirmée. Réessayez avec les mêmes informations pour vérifier ou reprendre l’enregistrement existant. Contactez notre équipe si le résultat reste indisponible.",
+      "IDEMPOTENCY_CONFLICT": "Les informations diffèrent de votre tentative précédente. Réessayez avec les informations initiales ou contactez notre équipe.",
+      "FILE_CONFLICT": "Le fichier diffère de la copie déjà téléversée. Vérifiez-le ou contactez notre équipe.",
       "UNAVAILABLE": "L’envoi en ligne est indisponible. Vos informations sont conservées dans le formulaire. Réessayez plus tard ou contactez-nous par e-mail.",
       "INVALID_FIELDS": "Vérifiez les champs obligatoires et l’adresse e-mail.",
       "CONSENT_REQUIRED": "Veuillez accepter le traitement des données personnelles.",

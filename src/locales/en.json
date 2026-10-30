@@ -500,14 +500,19 @@
     "checkStatus": "Check delivery status",
     "accepted": "The mail server accepted the message for delivery. The recipient must confirm actual receipt.",
     "receipt": "Reference: {{id}}",
-    "storageNotice": "Application details and attachments are processed on Vercel and sent to our team through Resend. Private temporary Vercel data is removed by the next cleanup after seven days. Sending-service records are managed separately; the consent above governs retention by our team.",
+    "storageNotice": "Applications and attachments are processed by Vercel and stored privately in Supabase for one year from receipt. Staff are notified via ECOUNT Webmail or Resend. Temporary Vercel data is deleted at the next cleanup after seven days. Received emails and backups follow separate retention and deletion policies.",
+    "recruitAccepted": "Your application and attachments have been saved. Your application is received.",
     "progress": {
+      "saving": "Saving your application.",
       "preparing": "Preparing your submission…",
       "uploading": "Uploading documents… {{percentage}}%",
       "sending": "Sending your message…",
       "checking": "Checking delivery status…"
     },
     "errors": {
+      "RECRUIT_UNCERTAIN": "We could not confirm receipt. Retry with the same information to check or resume the existing submission. Contact our team if the result remains unavailable.",
+      "IDEMPOTENCY_CONFLICT": "The information differs from your earlier submission attempt. Retry with the original information or contact our team.",
+      "FILE_CONFLICT": "The file differs from the previously uploaded copy. Check the file or contact our team.",
       "UNAVAILABLE": "Online delivery is currently unavailable. Your entries are preserved. Please try later or email us.",
       "INVALID_FIELDS": "Check the required fields and email address.",
       "CONSENT_REQUIRED": "Please agree to the privacy notice.",

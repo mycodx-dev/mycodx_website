@@ -1,16 +1,20 @@
-# MycoDx Website — Vercel · Resend
+# MycoDx Website — Vercel · SMTP · Resend
 
 React + TypeScript + Vite 홈페이지입니다. 기존 문의·채용 폼의 화면을 유지하고,
-Vercel Functions + 비공개 Vercel Blob + Resend API로 전송합니다. 이카운트는 기존 수신 메일함으로 사용합니다.
+Vercel Functions + 비공개 Vercel Blob으로 처리하고, 이카운트 SMTP 또는 Resend API로 알립니다.
+채용지원서는 Supabase DB와 비공개 Storage에 저장한 후 접수 완료로 처리합니다.
+두 방식 모두 준비되어 있으며 `MAIL_PROVIDER`로 하나를 선택합니다. 아직 발송 방식은 확정하지 않았습니다.
 
 - 문의: `info@mycodx.com`, 채용: `jakim@mycodx.com`
 - 채용 첨부는 브라우저에서 비공개 Blob으로 직접 업로드합니다(총 10 MiB, 최대 10개).
-- 서버가 모든 파일을 검증한 뒤 Resend API로 원본을 첨부합니다.
-- Resend의 접수 ID를 확인한 경우에만 전송 요청 완료를 표시합니다. 실제 수신 확인은 별도입니다.
-- 설정 누락 또는 `MAIL_FORMS_ENABLED=false`이면 접수를 비활성화하고 직접 이메일을 안내합니다.
-- Vercel 프로젝트와 서울 리전의 테스트용·운영용 비공개 Blob을 연결했습니다. Resend 도메인 인증·API 키 등록과 실제 수신 검증이 남아 있습니다.
+- 서버가 모든 파일을 검증한 뒤 선택한 방식으로 원본을 첨부합니다.
+- 문의는 SMTP 서버의 최종 접수 응답 또는 Resend의 접수 ID를 확인한 경우 전송 요청 완료를 표시합니다. 실제 수신 확인은 별도입니다.
+- 채용은 DB 확정과 알림 대기 기록을 한 트랜잭션으로 저장합니다. 메일 실패와 무관하게 저장된 지원서는 접수 완료이며, 지원자에게 접수번호를 표시하지 않습니다.
+- `MAIL_FORMS_ENABLED`는 문의·메일 발송, `RECRUIT_FORMS_ENABLED`는 채용 DB 접수를 제어합니다. 기본값은 모두 비활성화입니다.
+- Vercel 프로젝트와 서울 리전의 테스트용·운영용 비공개 Blob을 연결했습니다. 방식 선택 후 해당 인증정보 등록과 실제 수신 검증이 남아 있습니다.
 
 배포 절차와 환경변수는 [Vercel 설정 안내](docs/vercel-mail-setup.md)를 참고하세요.
+Supabase 연동과 현재 Vercel 주소에서의 테스트 절차는 [채용 저장 API 안내](docs/recruit-storage-setup.md)를 먼저 확인하세요. 관리자 화면, Supabase 만료 데이터 삭제, 백업 실행은 후속 단계입니다.
 
 ## 새 저장소에 가져갈 파일
 
@@ -29,7 +33,7 @@ ZIP 파일 자체를 저장소에 올리는 방식이 아닙니다.
 | `vercel.json`, `.nvmrc` | Vercel 배포 설정, Node.js 24 |
 | `.gitignore` | 의존성·빌드 결과·환경변수 파일 제외 |
 | `.pages.yml`, `CMS_GUIDE.md` | Pages CMS 콘텐츠 편집 설정 및 안내 |
-| `api/`, `server/`, `shared/` | 접수 API, Resend 발송, 비공개 업로드·검증 |
+| `api/`, `server/`, `shared/` | 접수 API, SMTP·Resend 발송, 비공개 업로드·검증 |
 | `docs/`, `tests/` | 배포 안내, 메일 전송 이력과 회귀 테스트 |
 
 `.pages.yml`, `.gitignore`, `.nvmrc`는 숨김 파일이므로 함께 옮겨야 합니다.
@@ -85,7 +89,10 @@ GitHub Pages에서 쓰던 `404.html` 복사 작업은 필요하지 않습니다.
 
 먼저 Vercel에서 제공하는 주소로 `/`, `/news`, `/careers`, `/careers/apply`, `/privacy`를 직접 열어 확인합니다.
 이미지 표시, 언어 전환, 지원서 DOCX와 PDF 다운로드, 이메일 주소 복사도 확인합니다.
-실제 Vercel 배포 검증과 도메인 연결은 아직 수행하지 않았습니다.
+2026-10-30 사용자가 첫 배포를 완료했으며 [Vercel 대표 주소](https://mycodx-website.vercel.app)에서
+홈페이지·채용 직접 접속·지원서 DOCX 다운로드의 HTTP 200 응답을 확인했습니다.
+`/api/forms`도 HTTP 200으로 실행되며 메일 접수는 아직 비활성 상태입니다.
+브라우저 화면 검증, 실제 메일 수신 및 기존 운영 도메인 연결은 남아 있습니다.
 
 ## 개발 및 검사
 
@@ -107,9 +114,19 @@ npm run preview
 
 ## 메일 전송 방식
 
+| 선택 | `MAIL_PROVIDER` | 발신 주소 | 추가 설정 |
+| --- | --- | --- | --- |
+| 이카운트 SMTP | `smtp` | `info@mycodx.com` (`SMTP_USER`) | 웹메일 외부연동 허용, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` |
+| Resend | `resend` | `website@send.mycodx.com` (`RESEND_FROM`) | 발신 도메인 인증, `RESEND_API_KEY` |
+
+`.env.example`은 `MAIL_PROVIDER`를 비워 두고 `MAIL_FORMS_ENABLED=false`로 시작합니다.
+선택한 방식의 인증정보만 필요합니다. 두 방식의 인증정보를 모두 등록해도 하나로만 발송하며,
+실패 시 다른 방식으로 자동 전환하지 않습니다. 문의·채용 수신처와 제출자 `Reply-To`는 공통입니다.
+선택·활성화는 서버 환경변수 변경 후 재배포로 적용합니다. 비밀번호나 API 키를 브라우저 변수로 만들지 않습니다.
+
 1. `/api/forms`가 제출값·동의·파일 목록을 검증하고 1시간 유효한 제출 토큰과 파일별 업로드 권한을 발급합니다.
 2. 채용 파일은 Vercel 함수를 거치지 않고 비공개 Blob에 직접 업로드합니다.
-3. `/api/forms`에 제출 토큰만 보내면 서버가 파일 크기·확장자·시그니처를 확인하고 Resend API로 발송합니다.
+3. `/api/forms`에 제출 토큰만 보내면 서버가 파일 크기·확장자·시그니처를 확인하고 선택한 SMTP 또는 Resend로 발송합니다.
 4. 제출별 불변 발송 잠금과 상태 파일을 Blob에 기록합니다. 중복 요청과 응답 유실에 따른 자동 재발송을 막습니다.
 5. 전송 결과가 불확실하면 성공으로 표시하거나 자동 재발송하지 않습니다. 담당자의 메일함 확인이 필요합니다.
 6. 임시 서류와 전송 기록은 업로드 후 7일이 지난 다음 일일 정리 작업에서 삭제합니다. 정확히 7일째 삭제되는 것은 아니며, 다음 작업까지 대기 시간이 추가됩니다. 발송된 메일의 보유기간은 별도입니다.
@@ -143,6 +160,8 @@ Pages CMS를 계속 쓰려면 새 저장소에도 Pages CMS 접근 권한을 부
 `npm test`는 외부 서비스 대신 메모리 저장소와 메일 대역을 사용해 검증합니다.
 6 MiB 첨부 전달, 복수 첨부 보존, 동의·입력·파일 검증, 업로드 누락,
 동시 제출, 발송 결과 불확실성, 저장 실패, 토큰 변조·만료, 요청 제한과 Resend 요청의 첨부·중복 방지 키를 확인합니다.
+SMTP의 TLS 설정·최종 접수 응답·고정 수신처·첨부 원본, 실제 Nodemailer의 로컬 MIME 생성,
+방식 선택과 방식 변경 후 중복 발송 차단도 확인합니다. SMTP 네트워크 접속이나 실제 메일 발송은 하지 않습니다.
 `npm run build`는 프런트엔드와 서버 TypeScript를 함께 검사합니다.
 운영 수신함 및 실제 Blob 연결 검증은 [배포 안내](docs/vercel-mail-setup.md)에 따라 별도로 수행합니다.
 브라우저 화면 검증과 의존성 보안 진단의 남은 항목도 같은 안내에 기록했습니다.

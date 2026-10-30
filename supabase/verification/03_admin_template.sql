@@ -1,0 +1,21 @@
+-- MANUAL TEMPLATE, not part of migration. Run as postgres AFTER creating an
+-- email/password user in Supabase Auth. Replace the UUID only; never include a password.
+-- No administrator is granted by the migration itself.
+--
+-- begin;
+-- insert into public.recruit_admins(user_id,active)
+-- values ('REPLACE_WITH_AUTH_USER_UUID'::uuid,true)
+-- on conflict(user_id) do nothing;
+-- commit;
+--
+-- Revoke access immediately for subsequent API requests:
+-- update public.recruit_admins set active = false
+-- where user_id = 'REPLACE_WITH_AUTH_USER_UUID'::uuid;
+--
+-- Existing signed URLs remain valid until expiry (maximum 60 seconds).
+-- Re-enabling an account is an explicit operator action, never an automatic sync.
+-- Initial registration is safe to repeat: an inactive existing account stays inactive.
+-- To intentionally re-enable, separately run UPDATE ... SET active = true for that UUID.
+
+-- Read-only inspection: expected number of approved active administrators.
+select count(*) as active_admins from public.recruit_admins where active;

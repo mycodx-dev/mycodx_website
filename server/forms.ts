@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto'
 import { FILE_TYPES, MAX_FILES, MAX_TOTAL_FILE_SIZE, fileExtension } from '../shared/forms.ts'
-import type { SubmissionInput, SubmissionSession, SubmissionState, UploadTicket } from '../shared/forms.ts'
+import type { SubmissionSession, SubmissionState } from '../shared/forms.ts'
 import { checkOrigin } from './config.ts'
 import type { FormsConfig } from './config.ts'
 import { FormError, readJson, validateSubmission, verifyFileBytes } from './validation.ts'
@@ -8,12 +8,10 @@ import { digest, SESSION_TTL, signSession, verifySession } from './tokens.ts'
 import { STORAGE_PREFIX } from './storage.ts'
 import type { FormsStore } from './storage.ts'
 import type { OutgoingSubmission } from './mail.ts'
-
-interface Manifest extends SubmissionInput {
-  id: string
-  createdAt: number
-  files: Omit<UploadTicket, 'uploadToken'>[]
-}
+import type { RecruitmentService } from './recruitment.ts'
+import type { Manifest } from './submissions.ts'
+import { submissionPath } from './submissions.ts'
+export { submissionPath } from './submissions.ts'
 
 interface Dependencies {
   config: FormsConfig
@@ -21,10 +19,7 @@ interface Dependencies {
   sendMail(submission: OutgoingSubmission): Promise<{ messageId: string }>
   now?: () => number
   uuid?: () => string
-}
-
-export function submissionPath(id: string, issuedAt: number) {
-  return `${STORAGE_PREFIX}submissions/${new Date(issuedAt).toISOString().slice(0, 10)}/${id}/`
+  recruitment?: RecruitmentService
 }
 
 async function takeRateSlot(store: FormsStore, scope: string, limit: number, now: number) {
@@ -56,20 +51,22 @@ export function createFormsHandler(deps: Dependencies) {
 
   return async (request: Request): Promise<Response> => {
     try {
-      if (request.method === 'GET') return response({ enabled: config.enabled, maxTotalBytes: MAX_TOTAL_FILE_SIZE, maxFiles: MAX_FILES })
+      if (request.method === 'GET') return response({ enabled: config.enabled, careersEnabled: config.recruitEnabled && Boolean(deps.recruitment), maxTotalBytes: MAX_TOTAL_FILE_SIZE, maxFiles: MAX_FILES })
       if (request.method !== 'POST') return response({ error: 'METHOD_NOT_ALLOWED' }, 405)
       checkOrigin(request, config)
-      if (!config.enabled) throw new FormError('UNAVAILABLE', 503)
+      if (!config.enabled && !config.recruitEnabled) throw new FormError('UNAVAILABLE', 503)
       const body = await readJson(request) as Record<string, unknown>
       if (!body || typeof body !== 'object' || Array.isArray(body)) throw new FormError('INVALID_FIELDS')
 
       if (body.action === 'start') {
         const input = validateSubmission(body.submission, now())
+        if (input.kind === 'careers' ? !config.recruitEnabled || !deps.recruitment : !config.enabled) throw new FormError('UNAVAILABLE', 503)
         // On Vercel these proxy headers are supplied by the platform. On the local dev
         // server all callers share one bucket; never accept a caller-selected rate key.
         const ip = process.env.VERCEL ? request.headers.get('x-real-ip') || request.headers.get('x-forwarded-for') || 'unknown' : 'local'
         await takeRateSlot(store, digest(ip, config.signingSecret), 5, now())
         await takeRateSlot(store, 'global', 100, now())
+        if (input.kind === 'careers') return response(await deps.recruitment!.start(input, body.idempotencyKey), 201)
         const id = uuid()
         const createdAt = now()
         const expiresAt = createdAt + SESSION_TTL
@@ -88,16 +85,22 @@ export function createFormsHandler(deps: Dependencies) {
       }
 
       if (body.action !== 'submit' && body.action !== 'status') throw new FormError('INVALID_FIELDS')
-      const session = verifySession(body.token, config.signingSecret, now(), body.action === 'status')
+      const session = verifySession(body.token, config.signingSecret, now(), true)
       const path = submissionPath(session.id, session.issuedAt)
       const manifest = await store.readJson<Manifest>(`${path}manifest.json`)
       if (!manifest) throw new FormError('SESSION_EXPIRED', 410)
+      if (manifest.kind === 'careers') {
+        if (!config.recruitEnabled || !deps.recruitment) throw new FormError('UNAVAILABLE', 503)
+        return response(await deps.recruitment.handle(body.action, manifest))
+      }
+      if (!config.enabled) throw new FormError('UNAVAILABLE', 503)
+      verifySession(body.token, config.signingSecret, now(), body.action === 'status')
       const current = await state(path)
       if (body.action === 'status') return response({ id: session.id, status: current })
       if (current !== 'ready') return response({ id: session.id, status: current }, current === 'sent' ? 200 : 202)
 
       // Read only server-issued paths from the immutable manifest, never client URLs.
-      // Buffering is bounded to 10 MiB in total and permits validation before sending to Resend.
+      // The combined original file size is capped at 10 MiB and validated before sending.
       const attachments: OutgoingSubmission['attachments'] = []
       for (const file of manifest.files) {
         const content = await store.readFile(file.pathname, file.size)
