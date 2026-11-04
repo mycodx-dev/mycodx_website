@@ -2,7 +2,7 @@
 
 문의·채용 버튼 비활성화 원인과 SMTP/Resend별 실제 메일 테스트 설정은 [메일 테스트 점검표](mail-test-checklist.md)를 참고하세요.
 
-이번 변경은 로컬 코드 구현입니다. 기존 SQL 마이그레이션을 다시 실행하지 않습니다. 실제 Supabase 데이터, Vercel 환경변수·배포, 원본 GitHub Pages, `mycodx.com` DNS는 이 작업에서 변경하지 않습니다. 관리자 로그인·화면은 다음 단계입니다.
+이번 변경은 로컬 코드 구현입니다. 기존 SQL 마이그레이션을 다시 실행하지 않습니다. 실제 Supabase 데이터, Vercel 환경변수·배포, 원본 GitHub Pages, `mycodx.com` DNS는 이 작업에서 변경하지 않습니다. 관리자 로그인·화면의 설정은 [관리자 페이지 안내](recruit-admin-setup.md)를 참고하세요.
 
 ## 대상 주소와 환경
 
@@ -17,7 +17,7 @@
 | `RECRUIT_FORMS_ENABLED` | 채용 DB 저장 기능. 기본 `false`; 검증용 배포에서만 `true`로 활성화 |
 | `SUPABASE_URL` | 기존 등록 이름 그대로 사용. `https://<project-ref>.supabase.co` 형식 |
 | `SUPABASE_SECRET_KEY` | 기존 등록 이름 그대로 사용. `sb_secret_…` 서버 키만 지원; `VITE_` 접두어 금지 |
-| `SUPABASE_PUBLISHABLE_KEY` | 이번 저장 API에서는 사용하지 않음. 후속 관리자 Auth 단계용 |
+| `SUPABASE_PUBLISHABLE_KEY` | 저장 API에서는 사용하지 않음. `/admin` 로그인용 서버 Auth 요청에서 사용 |
 | `BLOB_READ_WRITE_TOKEN` | 기존 비공개 Vercel Blob 토큰 |
 | `FORM_SIGNING_SECRET` | 기존 32자 이상 서명 비밀. 제출 중 교체하면 이전 토큰을 확인할 수 없음 |
 | `FORM_ALLOWED_ORIGINS` | 테스트하는 Vercel 주소를 정확히 포함. 와일드카드 사용 안 함. `VERCEL_URL`은 자동 추가 |
@@ -81,7 +81,7 @@ Vercel 함수의 요청·응답 크기 제한을 피하도록 파일은 직접 B
 
 ## 후속 단계와 운영 전 조건
 
-- 관리자 Auth/API/UI, 승인 관리자 확인, 다운로드 URL과 감사 로그 연결은 다음 단계입니다.
+- 관리자 Auth/API/UI, 승인 관리자 확인, 다운로드 URL과 감사 로그 연결은 구현되어 있습니다. [관리자 설정](recruit-admin-setup.md)에 따라 승인 계정과 실제 배포에서 검증해야 합니다.
 - 24시간 지난 staging, 고아 Storage 파일, 보관기간 지난 지원서의 **Supabase 물리 삭제 작업은 아직 구현하지 않았습니다**. 현재 daily cron은 기존 Blob 임시 자료 정리만 수행합니다.
 - 알림 pending 재처리와 오래된 sending 감시를 자동 실행하는 작업은 아직 없습니다. 현재 코드에서 같은 확정 세션을 재호출하면 pending 선점을 시도할 수 있지만, 브라우저의 상태 조회 자체는 메일을 보내지 않습니다.
 - DB와 Storage 원본의 별도 암호화 백업, 삭제 이력, 보관기간 제한, 실제 복구 검증이 필요합니다. Supabase DB 백업에는 Storage 파일 원본이 포함되지 않습니다. 백업·복구 스케줄러는 이번에 실행하거나 구현하지 않았습니다.

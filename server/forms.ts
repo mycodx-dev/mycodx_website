@@ -5,8 +5,8 @@ import { checkOrigin } from './config.ts'
 import type { FormsConfig } from './config.ts'
 import { FormError, readJson, validateSubmission, verifyFileBytes } from './validation.ts'
 import { digest, SESSION_TTL, signSession, verifySession } from './tokens.ts'
-import { STORAGE_PREFIX } from './storage.ts'
 import type { FormsStore } from './storage.ts'
+import { takeRateSlot } from './rateLimit.ts'
 import type { OutgoingSubmission } from './mail.ts'
 import type { RecruitmentService } from './recruitment.ts'
 import type { Manifest } from './submissions.ts'
@@ -21,14 +21,6 @@ interface Dependencies {
   now?: () => number
   uuid?: () => string
   recruitment?: RecruitmentService
-}
-
-async function takeRateSlot(store: FormsStore, scope: string, limit: number, now: number) {
-  const hour = Math.floor(now / 3_600_000)
-  for (let slot = 0; slot < limit; slot++) {
-    if (await store.createJson(`${STORAGE_PREFIX}rate/${hour}/${scope}/${slot}.json`, { createdAt: now })) return
-  }
-  throw new FormError('RATE_LIMITED', 429)
 }
 
 function response(data: unknown, status = 200) {

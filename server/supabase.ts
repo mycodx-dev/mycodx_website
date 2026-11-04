@@ -10,15 +10,17 @@ export const sha256 = (bytes: Uint8Array | string) => createHash('sha256').updat
 const RPC_NAMES = [
   'recruit_begin_application', 'recruit_submission_status', 'recruit_verify_file',
   'recruit_finalize_application', 'recruit_claim_notification', 'recruit_finish_notification',
+  'recruit_is_admin', 'recruit_admin_list', 'recruit_admin_detail',
+  'recruit_set_review_status', 'recruit_prepare_download', 'recruit_record_download',
 ] as const
-const VOID_RPC_NAMES = new Set<string>(['recruit_verify_file', 'recruit_finish_notification'])
+const VOID_RPC_NAMES = new Set<string>(['recruit_verify_file', 'recruit_finish_notification', 'recruit_record_download'])
 
 export interface RecruitDatabase {
   rpc<T>(name: string, args: Record<string, unknown>, signal?: AbortSignal): Promise<T>
   persistFile(file: RecruitFile, bytes: Uint8Array, signal?: AbortSignal): Promise<string>
 }
 
-async function boundedBytes(response: Response, limit: number) {
+export async function boundedBytes(response: Response, limit: number) {
   if (!response.body) throw new FormError('UNAVAILABLE', 503)
   const reader = response.body.getReader()
   const chunks: Uint8Array[] = []
@@ -57,7 +59,7 @@ export function createRecruitDatabase(config: FormsConfig, fetcher: typeof fetch
         }, signal)
         // PostgREST returns 204 with a null body for RETURNS void functions.
         // Handle the HTTP result before interpreting an absent body as a failure.
-        const bytes = response.body ? await boundedBytes(response, 32 * 1024) : Buffer.alloc(0)
+        const bytes = response.body ? await boundedBytes(response, operation === 'recruit_admin_list' ? 128 * 1024 : 32 * 1024) : Buffer.alloc(0)
         if (!response.ok) {
           // Only exact, known SQL errors may leave the server. Never forward row details.
           let message: unknown
@@ -69,6 +71,9 @@ export function createRecruitDatabase(config: FormsConfig, fetcher: typeof fetch
           } catch { /* generic error below */ }
           if (message === 'IDEMPOTENCY_CONFLICT') throw new FormError('IDEMPOTENCY_CONFLICT', 409)
           if (message === 'APPLICATION_EXPIRED') throw new FormError('SESSION_EXPIRED', 410)
+          if (message === 'ADMIN_REQUIRED') throw new FormError('ADMIN_FORBIDDEN', 403)
+          if (message === 'APPLICATION_NOT_AVAILABLE' || message === 'FILE_NOT_AVAILABLE') throw new FormError('NOT_FOUND', 404)
+          if (message === 'VERSION_CONFLICT') throw new FormError('VERSION_CONFLICT', 409)
           throw new ServiceOperationError('supabase', operation, undefined, response.status, providerCode)
         }
         if (!bytes.length) {

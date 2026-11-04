@@ -1,4 +1,5 @@
 import { Navigate, Routes, Route } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
 import About from '../pages/About'
 import Home from '../pages/Home'
 import News from '../pages/News'
@@ -11,9 +12,12 @@ import Careers from '../pages/Careers'
 import CareersApply from '../pages/CareersApply'
 import NotFound from '../pages/NotFound'
 
+const Admin = lazy(() => import('../pages/Admin'))
+
 export default function AppRoutes() {
   return (
     <Routes>
+      <Route path="/admin" element={<Suspense fallback={<p role="status">관리자 화면을 불러오는 중입니다.</p>}><Admin /></Suspense>} />
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/product" element={<Product />} />

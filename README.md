@@ -14,7 +14,7 @@ Vercel Functions + 비공개 Vercel Blob으로 처리하고, 이카운트 SMTP �
 - Vercel 프로젝트와 서울 리전의 테스트용·운영용 비공개 Blob을 연결했습니다. 방식 선택 후 해당 인증정보 등록과 실제 수신 검증이 남아 있습니다.
 
 배포 절차와 환경변수는 [Vercel 설정 안내](docs/vercel-mail-setup.md)를 참고하세요.
-Supabase 연동과 현재 Vercel 주소에서의 테스트 절차는 [채용 저장 API 안내](docs/recruit-storage-setup.md)를 먼저 확인하세요. 관리자 화면, Supabase 만료 데이터 삭제, 백업 실행은 후속 단계입니다.
+Supabase 연동과 현재 Vercel 주소에서의 테스트 절차는 [채용 저장 API 안내](docs/recruit-storage-setup.md)를 먼저 확인하세요. `/admin` 관리자 로그인·지원자 조회·파일 다운로드·확인 상태 관리의 계정 및 환경변수 설정은 [관리자 페이지 안내](docs/recruit-admin-setup.md)에 정리되어 있습니다. Supabase 만료 데이터 삭제와 백업 실행은 후속 단계입니다.
 
 ## 새 저장소에 가져갈 파일
 

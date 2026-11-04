@@ -18,6 +18,10 @@ export default function Layout({ children }: LayoutProps) {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }, [location.pathname, location.hash])
 
+  if (location.pathname === '/admin' || location.pathname === '/admin/') {
+    return <><PageMeta />{children}</>
+  }
+
   return (
     <div className={isHome ? 'site-shell site-shell--home' : 'site-shell'}>
       <PageMeta />

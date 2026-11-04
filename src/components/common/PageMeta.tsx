@@ -48,7 +48,11 @@ export default function PageMeta() {
     let description = t('home.description').replace(/\s+/g, ' ').trim()
     let noIndex = false
 
-    if (product) {
+    if (path === '/admin' || path === '/admin/') {
+      pageTitle = `채용 관리 | ${SITE_NAME}`
+      description = '승인된 관리자를 위한 채용 관리 페이지'
+      noIndex = true
+    } else if (product) {
       pageTitle = `${localize(product.title, language)} | ${SITE_NAME}`
       description = localize(product.listSummary ?? product.summary, language)
     } else if (news) {

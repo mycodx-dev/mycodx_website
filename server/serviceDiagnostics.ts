@@ -4,7 +4,9 @@ type Service = 'blob' | 'supabase'
 type Operation = 'read_json' | 'create_json' | 'read_file' | 'upload_token' |
   'recruit_begin_application' | 'recruit_submission_status' | 'recruit_verify_file' |
   'recruit_finalize_application' | 'recruit_claim_notification' | 'recruit_finish_notification' |
-  'storage_upload' | 'storage_download'
+  'storage_upload' | 'storage_download' | 'storage_sign' | 'auth_login' | 'auth_user' | 'auth_logout' |
+  'recruit_is_admin' | 'recruit_admin_list' | 'recruit_admin_detail' |
+  'recruit_set_review_status' | 'recruit_prepare_download' | 'recruit_record_download'
 
 // Fixed codes only: never copy messages, URLs, request bodies, paths or stacks.
 const NETWORK_CODES = new Set([
