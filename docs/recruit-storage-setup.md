@@ -1,5 +1,7 @@
 # 채용 저장 API — Vercel 주소에서 검증
 
+문의·채용 버튼 비활성화 원인과 SMTP/Resend별 실제 메일 테스트 설정은 [메일 테스트 점검표](mail-test-checklist.md)를 참고하세요.
+
 이번 변경은 로컬 코드 구현입니다. 기존 SQL 마이그레이션을 다시 실행하지 않습니다. 실제 Supabase 데이터, Vercel 환경변수·배포, 원본 GitHub Pages, `mycodx.com` DNS는 이 작업에서 변경하지 않습니다. 관리자 로그인·화면은 다음 단계입니다.
 
 ## 대상 주소와 환경
@@ -21,7 +23,7 @@
 | `FORM_ALLOWED_ORIGINS` | 테스트하는 Vercel 주소를 정확히 포함. 와일드카드 사용 안 함. `VERCEL_URL`은 자동 추가 |
 | `CRON_SECRET` | 기존 32자 이상 Blob 정리 인증 값 |
 | `CAREERS_TO` | 실제 채용 수신 주소. 기본 `jakim@mycodx.com` |
-| `MAIL_TEST_RECIPIENT` | 테스트 수신 주소 `hyemlee@mycodx.com`. Preview는 필수이며 Production 환경의 테스트에도 설정 |
+| `MAIL_TEST_RECIPIENT` | 테스트 수신 주소 `mycodx206@gmail.com`. Preview는 필수이며 Production 환경의 테스트에도 설정 |
 | `MAIL_FORMS_ENABLED` | `false`이면 DB 저장만, `true`와 유효한 발송 설정이 있으면 기존 SMTP/Resend 알림도 실행 |
 | `MAIL_PROVIDER` | `smtp` 또는 `resend` 하나만 선택. 자동 전환 없음 |
 | SMTP 선택 시 | 기존 `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` |
@@ -69,7 +71,7 @@ Vercel 함수의 요청·응답 크기 제한을 피하도록 파일은 직접 B
 ## 배포 후 검증 순서
 
 1. 실제 대상 환경에 Supabase URL/Secret Key, Blob 토큰, Origin, 서명/정리 비밀이 등록되어 있는지 확인합니다. SQL과 버킷은 기존 적용본을 그대로 사용합니다.
-2. `RECRUIT_FORMS_ENABLED=true`, `MAIL_FORMS_ENABLED=false`, `MAIL_TEST_RECIPIENT=hyemlee@mycodx.com`으로 테스트 배포합니다. 이 문서 작성 단계에서는 원격 설정이나 배포를 실행하지 않았습니다.
+2. `RECRUIT_FORMS_ENABLED=true`, `MAIL_FORMS_ENABLED=false`, `MAIL_TEST_RECIPIENT=mycodx206@gmail.com`으로 테스트 배포합니다. 이 문서 작성 단계에서는 원격 설정이나 배포를 실행하지 않았습니다.
 3. Vercel 주소의 `/api/forms` 응답에서 `careersEnabled:true`를 확인합니다. `enabled`는 기존 문의·메일 설정이므로 이 단계에서는 false일 수 있습니다.
 4. 가상 지원서와 필수 3종 파일로 접수합니다. 지원자 화면은 저장 완료를 안내하고 접수번호는 표시하지 않아야 합니다.
 5. Supabase Table Editor에서 `recruit_applications.stage=submitted`, 파일 행의 `storage_status=ready`, `sha256` 값, 알림 `pending`, 버킷 비공개 설정을 확인합니다. 저장 경로에 개인정보가 없는지도 확인합니다.

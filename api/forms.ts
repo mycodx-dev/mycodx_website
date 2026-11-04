@@ -5,6 +5,9 @@ import { sendSubmission } from '../server/mail.ts'
 import { createFormsHandler } from '../server/forms.ts'
 import { createRecruitDatabase } from '../server/supabase.ts'
 import { createRecruitmentService } from '../server/recruitment.ts'
+import { createConfigurationLogger } from '../server/configDiagnostics.ts'
+
+const logConfiguration = createConfigurationLogger()
 
 export default {
   async fetch(request: Request) {
@@ -25,6 +28,7 @@ export default {
         return Response.json({ error: 'UNAVAILABLE' }, { status: 503, headers: { 'Cache-Control': 'no-store' } })
       }
     }
+    if (request.method === 'GET') logConfiguration(config)
     const dependencies = {
       config, store: createBlobStore(config.blobToken),
       sendMail: (submission: Parameters<typeof sendSubmission>[0]) => sendSubmission(submission, config),

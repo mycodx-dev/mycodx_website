@@ -1,5 +1,7 @@
 # Vercel · 비공개 업로드 · SMTP / Resend 설정
 
+2026-11-04 버튼 비활성화 점검, 환경변수 타입·값과 실제 발송 확인 순서는 [메일 테스트 점검표](mail-test-checklist.md)에 정리했습니다.
+
 채용 DB 저장 기능이 추가되었습니다. 채용 활성화·Supabase 설정·현재 Vercel 주소 테스트는
 [채용 저장 API 안내](recruit-storage-setup.md)를 우선 적용하세요. 아래 문서는 기존 메일 전송 계층의 설정과 검증 이력입니다.
 

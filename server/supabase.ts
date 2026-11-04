@@ -3,13 +3,14 @@ import type { FormsConfig } from './config.ts'
 import type { RecruitFile } from './submissions.ts'
 import { FormError } from './validation.ts'
 import { UUID_PATTERN } from './tokens.ts'
+import { ServiceOperationError, serviceOperation } from './serviceDiagnostics.ts'
 
 export const RECRUIT_BUCKET = 'recruit-files'
 export const sha256 = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex')
-const RPC_NAMES = new Set([
+const RPC_NAMES = [
   'recruit_begin_application', 'recruit_submission_status', 'recruit_verify_file',
   'recruit_finalize_application', 'recruit_claim_notification', 'recruit_finish_notification',
-])
+] as const
 
 export interface RecruitDatabase {
   rpc<T>(name: string, args: Record<string, unknown>, signal?: AbortSignal): Promise<T>
@@ -47,20 +48,28 @@ export function createRecruitDatabase(config: FormsConfig, fetcher: typeof fetch
   }
   return {
     async rpc<T>(name: string, args: Record<string, unknown>, signal?: AbortSignal): Promise<T> {
-      if (!RPC_NAMES.has(name)) throw new FormError('UNAVAILABLE', 503)
-      const response = await request(`/rest/v1/rpc/${name}`, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(args),
-      }, signal)
-      const bytes = await boundedBytes(response, 32 * 1024)
-      if (!response.ok) {
-        // Only exact, known SQL errors may leave the server. Never forward row details.
-        let message: unknown
-        try { message = JSON.parse(bytes.toString()).message } catch { /* generic error below */ }
-        if (message === 'IDEMPOTENCY_CONFLICT') throw new FormError('IDEMPOTENCY_CONFLICT', 409)
-        if (message === 'APPLICATION_EXPIRED') throw new FormError('SESSION_EXPIRED', 410)
-        throw new FormError('UNAVAILABLE', 503)
-      }
-      return (bytes.length ? JSON.parse(bytes.toString()) : null) as T
+      const operation = RPC_NAMES.find(allowed => allowed === name)
+      if (!operation) throw new FormError('UNAVAILABLE', 503)
+      return serviceOperation('supabase', operation, async () => {
+        const response = await request(`/rest/v1/rpc/${name}`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(args),
+        }, signal)
+        const bytes = await boundedBytes(response, 32 * 1024)
+        if (!response.ok) {
+          // Only exact, known SQL errors may leave the server. Never forward row details.
+          let message: unknown
+          let providerCode: unknown
+          try {
+            const failure = JSON.parse(bytes.toString())
+            message = failure?.message
+            providerCode = failure?.code
+          } catch { /* generic error below */ }
+          if (message === 'IDEMPOTENCY_CONFLICT') throw new FormError('IDEMPOTENCY_CONFLICT', 409)
+          if (message === 'APPLICATION_EXPIRED') throw new FormError('SESSION_EXPIRED', 410)
+          throw new ServiceOperationError('supabase', operation, undefined, response.status, providerCode)
+        }
+        return (bytes.length ? JSON.parse(bytes.toString()) : null) as T
+      })
     },
     async persistFile(file, bytes, signal) {
       // Paths originate from RPC, but validate again before attaching privileged headers.
@@ -80,9 +89,14 @@ export function createRecruitDatabase(config: FormsConfig, fetcher: typeof fetch
         }, signal)
         await response.body?.cancel()
       } catch { /* the read below is the authority for ambiguous writes */ }
-      const stored = await request(path, { method: 'GET' }, signal)
-      if (!stored.ok) { await stored.body?.cancel(); throw new FormError('UNAVAILABLE', 503) }
-      const copy = await boundedBytes(stored, file.size_bytes)
+      const copy = await serviceOperation('supabase', 'storage_download', async () => {
+        const stored = await request(path, { method: 'GET' }, signal)
+        if (!stored.ok) {
+          await stored.body?.cancel()
+          throw new ServiceOperationError('supabase', 'storage_download', undefined, stored.status)
+        }
+        return boundedBytes(stored, file.size_bytes)
+      })
       const hash = sha256(bytes)
       if (copy.byteLength !== file.size_bytes || sha256(copy) !== hash) throw new FormError('FILE_CONFLICT', 409)
       return hash

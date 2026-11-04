@@ -2,6 +2,7 @@ import { get, put, list, del } from '@vercel/blob'
 import { generateClientTokenFromReadWriteToken } from '@vercel/blob/client'
 import { FormError } from './validation.ts'
 import type { UploadTicket } from '../shared/forms.ts'
+import { serviceOperation } from './serviceDiagnostics.ts'
 
 export const STORAGE_PREFIX = 'mycodx-forms-v1/'
 
@@ -32,7 +33,7 @@ async function readBounded(stream: ReadableStream<Uint8Array>, maxBytes: number)
 }
 
 export function createBlobStore(token: string): FormsStore {
-  return {
+  const store: FormsStore = {
     async readJson<T>(path: string) {
       const result = await get(path, { access: 'private', token, useCache: false })
       if (!result) return null
@@ -72,6 +73,13 @@ export function createBlobStore(token: string): FormsStore {
         addRandomSuffix: false, allowOverwrite: false, cacheControlMaxAge: 60,
       })
     },
+  }
+  // Keep original errors private while identifying the failed boundary in server logs.
+  return {
+    readJson: <T>(path: string) => serviceOperation('blob', 'read_json', () => store.readJson<T>(path)),
+    createJson: (path, data) => serviceOperation('blob', 'create_json', () => store.createJson(path, data)),
+    readFile: (path, size) => serviceOperation('blob', 'read_file', () => store.readFile(path, size)),
+    uploadToken: (file, expiresAt) => serviceOperation('blob', 'upload_token', () => store.uploadToken(file, expiresAt)),
   }
 }
 

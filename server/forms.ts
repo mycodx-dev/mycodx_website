@@ -11,6 +11,7 @@ import type { OutgoingSubmission } from './mail.ts'
 import type { RecruitmentService } from './recruitment.ts'
 import type { Manifest } from './submissions.ts'
 import { submissionPath } from './submissions.ts'
+import { serviceFailureLog } from './serviceDiagnostics.ts'
 export { submissionPath } from './submissions.ts'
 
 interface Dependencies {
@@ -122,9 +123,9 @@ export function createFormsHandler(deps: Dependencies) {
         return response({ id: session.id, status: 'uncertain' }, 202)
       }
     } catch (error) {
+      if (!(error instanceof FormError) || error.status >= 500) console.error(serviceFailureLog(error))
       if (error instanceof FormError) return response({ error: error.code }, error.status)
       // Do not log API keys, candidate details, files, tokens or vendor errors.
-      console.error(JSON.stringify({ event: 'forms_service_error' }))
       return response({ error: 'UNAVAILABLE' }, 503)
     }
   }
