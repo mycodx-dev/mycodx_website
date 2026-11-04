@@ -92,7 +92,7 @@ test('careers start response loss preserves a random key without storing applica
     assert.deepEqual(Object.keys(body).sort(), ['action', 'token'])
     return Response.json({ status: 'submitted' })
   })
-  await assert.rejects(client.submitForm(application, selected, () => {}))
+  await assert.rejects(client.submitForm(application, selected, () => {}), { code: 'CONNECTION_FAILED' })
   assert.equal(await client.submitForm(application, selected, () => {}), session.id)
   assert.equal(keys.length, 2)
   assert.equal(keys[0], keys[1])
@@ -159,5 +159,51 @@ test('concurrent careers clicks share one in-flight operation', async t => {
   })
   assert.deepEqual(await Promise.all([client.submitForm(application, selected, () => {}), client.submitForm(application, selected, () => {})]), [session.id, session.id])
   assert.equal(starts, 1)
+  assert.equal(submits, 1)
+})
+
+test('unreadable attachment fails before API or operation creation and can be reselected safely', async t => {
+  const { client, selected, application, session, storage } = await recruitClient(t)
+  const actions = []
+  t.mock.method(globalThis, 'fetch', async (_url, options) => {
+    const { action } = JSON.parse(options.body)
+    actions.push(action)
+    return Response.json(action === 'start' ? session : { status: 'submitted' })
+  })
+  const read = t.mock.method(selected[0].file, 'arrayBuffer', async () => {
+    throw new DOMException('private-file-name@example.test', 'NotReadableError')
+  })
+  await assert.rejects(client.submitForm(application, selected, () => {}), error => {
+    assert.equal(error.code, 'FILE_READ_FAILED')
+    assert.equal(error.message, 'FILE_READ_FAILED')
+    return true
+  })
+  assert.deepEqual(actions, [])
+  assert.equal(storage.size, 0)
+  read.mock.restore()
+  assert.equal(await client.submitForm(application, selected, () => {}), session.id)
+  assert.deepEqual(actions, ['start', 'submit'])
+})
+
+test('invalid start response keeps its idempotency key and never dispatches a submission', async t => {
+  const { client, selected, application, session } = await recruitClient(t)
+  const keys = []
+  let submits = 0
+  t.mock.method(globalThis, 'fetch', async (_url, options) => {
+    const body = JSON.parse(options.body)
+    if (body.action === 'start') {
+      keys.push(body.idempotencyKey)
+      if (keys.length === 1) return new Response('<html>gateway error</html>', { status: 502 })
+      if (keys.length === 2) return Response.json(null)
+      return Response.json(session)
+    }
+    submits++
+    return Response.json({ status: 'submitted' })
+  })
+  await assert.rejects(client.submitForm(application, selected, () => {}), { code: 'INVALID_RESPONSE' })
+  await assert.rejects(client.submitForm(application, selected, () => {}), { code: 'INVALID_RESPONSE' })
+  assert.equal(submits, 0)
+  assert.equal(await client.submitForm(application, selected, () => {}), session.id)
+  assert.equal(new Set(keys).size, 1)
   assert.equal(submits, 1)
 })

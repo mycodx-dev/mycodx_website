@@ -14,10 +14,18 @@ async function api<T>(body: unknown): Promise<T> {
   const response = await fetch(FORM_API, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body), signal: AbortSignal.timeout(150_000),
-  })
-  const result = await response.json().catch(() => { throw new SubmissionError('UNAVAILABLE') })
+  }).catch(() => { throw new SubmissionError('CONNECTION_FAILED') })
+  const result = await response.json().catch(() => { throw new SubmissionError('INVALID_RESPONSE') })
+  if (!result || typeof result !== 'object' || Array.isArray(result)) throw new SubmissionError('INVALID_RESPONSE')
   if (!response.ok) throw new SubmissionError(result.error ?? 'UNAVAILABLE')
   return result as T
+}
+
+async function loadUploadClient() {
+  // A tab opened before a deployment can reference a removed JS chunk. Do not
+  // reload automatically: that would discard the applicant's entries and files.
+  try { return await import('@vercel/blob/client') }
+  catch { throw new SubmissionError('UPLOAD_PREPARATION_FAILED') }
 }
 
 interface PendingSubmission { id: string; token: string }
@@ -101,7 +109,12 @@ async function submitRecruit(
   const hex = async (value: ArrayBuffer) => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', value)),
     byte => byte.toString(16).padStart(2, '0')).join('')
   const hashes: string[] = []
-  for (const { file } of selected) hashes.push(await hex(await file.arrayBuffer()))
+  for (const { file } of selected) {
+    // Cloud-only, moved or externally changed files can fail before any API call.
+    // Never include filenames or the browser's original exception in the UI.
+    const bytes = await file.arrayBuffer().catch(() => { throw new SubmissionError('FILE_READ_FAILED') })
+    hashes.push(await hex(bytes))
+  }
   const fields = Object.fromEntries(Object.entries(input.fields).sort(([a], [b]) => a.localeCompare(b))
     .map(([name, value]) => [name, value.trim().normalize('NFC')]))
   const fingerprintFor = (salt: string) => hex(new TextEncoder().encode(JSON.stringify({
@@ -147,7 +160,7 @@ async function submitRecruit(
       if (!ticket) throw new SubmissionError('UPLOAD_FAILED')
       onProgress('uploading', Math.round(100 * completed / total))
       if (!ticket.uploaded) {
-        const { put } = await import('@vercel/blob/client')
+        const { put } = await loadUploadClient()
         await put(ticket.pathname, file, {
           token: ticket.uploadToken, access: 'private', contentType: ticket.contentType,
           abortSignal: AbortSignal.timeout(300_000),
@@ -205,7 +218,7 @@ export async function submitForm(
   for (const [index, { file }] of selected.entries()) {
     const ticket = session.files[index]
     onProgress('uploading', Math.round(100 * completed / total))
-    const { put } = await import('@vercel/blob/client')
+    const { put } = await loadUploadClient()
     await put(ticket.pathname, file, {
       token: ticket.uploadToken, access: 'private', contentType: ticket.contentType,
       abortSignal: AbortSignal.timeout(300_000),

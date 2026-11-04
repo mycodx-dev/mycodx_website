@@ -528,7 +528,11 @@
       "UPLOAD_FAILED": "Le transfert a échoué. Vos informations et fichiers sélectionnés sont conservés. Réessayez.",
       "UPLOAD_INCOMPLETE": "Le transfert de certains fichiers est incomplet. Réessayez.",
       "SESSION_EXPIRED": "La session a expiré. Vérifiez vos informations et réessayez.",
-      "DELIVERY_UNCERTAIN": "Nous ne pouvons pas confirmer la réception. Pour éviter un doublon, vérifiez à nouveau le dépôt ou contactez notre équipe."
+      "DELIVERY_UNCERTAIN": "Nous ne pouvons pas confirmer la réception. Pour éviter un doublon, vérifiez à nouveau le dépôt ou contactez notre équipe.",
+      "FILE_READ_FAILED": "Impossible de lire une pièce jointe. Enregistrez le fichier sur votre ordinateur puis sélectionnez-le à nouveau. Si vous l’avez modifié ou déplacé, joignez-le à nouveau.",
+      "UPLOAD_PREPARATION_FAILED": "Impossible de préparer l’envoi des fichiers. Conservez une copie de vos réponses, actualisez la page, puis joignez les fichiers à nouveau.",
+      "CONNECTION_FAILED": "Impossible de contacter le serveur. Vérifiez votre connexion Internet et réessayez avec les mêmes informations.",
+      "INVALID_RESPONSE": "Impossible de lire la réponse à votre envoi. Conservez vos informations et réessayez dans quelques instants."
     }
   }
 }

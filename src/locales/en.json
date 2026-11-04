@@ -528,7 +528,11 @@
       "UPLOAD_FAILED": "File upload failed. Your entries and selected files are preserved. Please try again.",
       "UPLOAD_INCOMPLETE": "Some files have not finished uploading. Please try again.",
       "SESSION_EXPIRED": "The submission session expired. Check your entries and try again.",
-      "DELIVERY_UNCERTAIN": "We could not confirm receipt. To avoid duplicate submissions, check the status again or contact our team."
+      "DELIVERY_UNCERTAIN": "We could not confirm receipt. To avoid duplicate submissions, check the status again or contact our team.",
+      "FILE_READ_FAILED": "We could not read an attachment. Save the file to your computer and select it again. If you edited or moved it, attach it again.",
+      "UPLOAD_PREPARATION_FAILED": "We could not prepare the file upload. Keep a separate copy of your entries, refresh the page, and attach the files again.",
+      "CONNECTION_FAILED": "We could not connect to the server. Check your internet connection and try again with the same entries.",
+      "INVALID_RESPONSE": "We could not read the submission response. Keep your entries unchanged and try again shortly."
     }
   }
 }
