@@ -2,8 +2,8 @@ import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 import productData from '../../content/products.json'
-import newsData from '../../content/news.json'
-import { localize, type ProductContent, type NewsContent } from '../../content/types'
+import { localize, type ProductContent } from '../../content/types'
+import { useNews } from '../../services/newsContext'
 
 const SITE_URL = 'https://mycodx.com'
 const SITE_NAME = 'MycoDx'
@@ -33,13 +33,14 @@ function setMeta(name: string, content: string, property = false) {
 export default function PageMeta() {
   const location = useLocation()
   const { t, i18n } = useTranslation()
+  const newsState=useNews()
 
   useEffect(() => {
     const path = location.pathname
     const language = i18n.resolvedLanguage ?? i18n.language
     const productId = path.startsWith('/product/') ? path.slice('/product/'.length) : ''
     const product = (productData as ProductContent[]).find((item) => item.id === productId)
-    const news = (newsData as NewsContent[]).find((item) =>
+    const news = newsState.items.find((item) =>
       item.visible !== false && path === `/news/${encodeURIComponent(item.id)}`
     )
     const route = routeMeta.find((item) => item.path === path)
@@ -64,6 +65,10 @@ export default function PageMeta() {
     } else if (path === '/privacy') {
       pageTitle = `${t('footer.privacy')} | ${SITE_NAME}`
       description = t('home.contact.form.privacyConsent')
+    } else if (path.startsWith('/news/') && (newsState.loading || newsState.error)) {
+      pageTitle = `${t('newsPage.title')} | ${SITE_NAME}`
+      description = t('newsPage.description')
+      noIndex = true
     } else if (path !== '/') {
       pageTitle = `404 | ${SITE_NAME}`
       description = 'The requested page could not be found.'
@@ -89,7 +94,7 @@ export default function PageMeta() {
       document.head.appendChild(canonical)
     }
     canonical.href = canonicalUrl
-  }, [i18n.language, i18n.resolvedLanguage, location.pathname, t])
+  }, [i18n.language, i18n.resolvedLanguage, location.pathname, t, newsState.items, newsState.loading, newsState.error])
 
   return null
 }

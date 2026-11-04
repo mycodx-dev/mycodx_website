@@ -37,7 +37,7 @@ function fixture(options = {}) {
     calls.push([name, args]); assert.equal(args.p_actor, USER)
     switch (name) {
       case 'recruit_is_admin': return active
-      case 'recruit_admin_list': return options.rows ?? [row]
+      case 'recruit_admin_search': return { items: options.rows ?? [row], options: { areas: ['연구'], experiences: ['신입'] } }
       case 'recruit_admin_detail': return { application, files: [file] }
       case 'recruit_set_review_status':
         if (args.p_expected_version !== 0) throw new FormError('VERSION_CONFLICT', 409)
@@ -126,7 +126,7 @@ test('list uses verified actor, bounded pagination, exact microsecond cursor and
   assert.equal(data.items.length, 30)
   assert.deepEqual(data.nextCursor, before)
   assert.ok(!JSON.stringify(data).includes('PRIVATE_HASH'))
-  assert.deepEqual(f.calls.at(-1), ['recruit_admin_list', { p_actor: USER, p_status: 'unread', p_limit: 31, p_before_time: before.time, p_before_id: APP }])
+  assert.deepEqual(f.calls.at(-1), ['recruit_admin_search', { p_actor: USER, p_status: 'unread', p_limit: 31, p_before_time: before.time, p_before_id: APP, p_query: '', p_area: null, p_experience: null }])
   assert.equal((await f.post({ action: 'list', before: { time: 'bad', id: APP } })).status, 400)
 })
 
@@ -216,5 +216,17 @@ test('real RPC adapter supports void download audit and safe administrator error
   for (const [message, code, status] of [['ADMIN_REQUIRED', 'ADMIN_FORBIDDEN', 403], ['APPLICATION_NOT_AVAILABLE', 'NOT_FOUND', 404], ['VERSION_CONFLICT', 'VERSION_CONFLICT', 409]]) {
     const rejected = createRecruitDatabase(config, async () => Response.json({ message, details: 'PRIVATE_PII' }, { status: 400 }))
     await assert.rejects(rejected.rpc('recruit_admin_detail', {}), { code, status })
+  }
+})
+
+ test('search forwards combined filters as bound RPC arguments, rejects oversized and control text', async () => {
+  const f = fixture()
+  const response = await f.post({ action: 'list', query: "  O'Reilly_%  ", area: '연구', experience: '신입', status: 'unread' })
+  assert.equal(response.status,200)
+  assert.equal(f.calls.at(-1)[1].p_query, "O'Reilly_%")
+  assert.equal(f.calls.at(-1)[1].p_area, '연구')
+  assert.equal(f.calls.at(-1)[1].p_experience, '신입')
+  for(const query of ['x'.repeat(101), 'bad\u0000', {}, ['name']]) {
+    assert.equal((await f.post({ action:'list',query })).status,400)
   }
 })

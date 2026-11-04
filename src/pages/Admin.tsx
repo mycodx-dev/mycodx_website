@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import type { AdminApplicationDetail, AdminApplicationList, AdminUser, ApplicationCursor, ReviewStatus } from '../../shared/admin'
 import { adminRequest, AdminError, adminErrorMessage } from '../services/admin'
 import '../styles/admin.css'
+import AdminNews from './AdminNews'
 
 const date = (value: string) => new Intl.DateTimeFormat('ko-KR', {
   timeZone: 'Asia/Seoul', dateStyle: 'medium', timeStyle: 'short',
@@ -16,9 +17,13 @@ export default function Admin() {
   const [checking, setChecking] = useState(true)
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
+  const [section, setSection] = useState<'recruit'|'news'>('recruit')
+  const newsDirty = useRef(false)
+  const setNewsDirty = useCallback((dirty:boolean)=>{newsDirty.current=dirty},[])
   const generation = useRef(0)
 
   const expire = useCallback((cause?: unknown) => {
+    newsDirty.current=false
     generation.current++
     setUser(null)
     setError(cause ? adminErrorMessage(cause) : '로그인이 만료되었습니다. 다시 로그인해 주세요.')
@@ -68,6 +73,8 @@ export default function Admin() {
     finally { setBusy(false) }
   }
   async function logout() {
+    if(newsDirty.current && !window.confirm('저장하지 않은 소식 내용을 버리고 로그아웃할까요?'))return
+    newsDirty.current=false
     generation.current++; setUser(null); setBusy(true); setError('')
     try { await adminRequest('logout') }
     catch { setError('화면에서 로그아웃했지만 서버 연결을 확인하지 못했습니다. 연결 후 로그아웃을 다시 눌러 주세요.') }
@@ -76,14 +83,19 @@ export default function Admin() {
 
   return <div className="admin-shell" lang="ko">
     <header className="admin-header">
-      <Link to="/" className="admin-brand">MycoDx <span>채용 관리</span></Link>
+      <Link to="/" className="admin-brand" onClick={e=>{if(newsDirty.current&&!window.confirm('저장하지 않은 내용을 버리고 홈페이지로 이동할까요?'))e.preventDefault()}}>MycoDx <span>관리자</span></Link>
       <div className="admin-account">{user && <span>{user.email}</span>}
         {(user || error.includes('로그아웃')) && <button className="admin-button admin-button--quiet" onClick={logout} disabled={busy}>로그아웃</button>}
-        <Link to="/">홈페이지 ↗</Link>
+        <Link to="/" onClick={e=>{if(newsDirty.current&&!window.confirm('저장하지 않은 내용을 버리고 홈페이지로 이동할까요?'))e.preventDefault()}}>홈페이지 ↗</Link>
       </div>
     </header>
     {checking ? <main className="admin-login"><p role="status">로그인 상태를 확인하고 있습니다.</p></main>
-      : user ? <Dashboard key={user.expiresAt} onExpired={expire} />
+      : user ? <><nav className="admin-tabs" aria-label="관리 메뉴">
+        {(['recruit','news'] as const).map(value=><button key={value} className={section===value?'is-active':''} aria-current={section===value?'page':undefined} onClick={()=>{
+          if(section!==value && newsDirty.current && !window.confirm('저장하지 않은 내용을 버리고 이동할까요?'))return
+          if(section!==value){newsDirty.current=false;setSection(value)}
+        }}>{value==='recruit'?'채용 관리':'소식 관리'}</button>)}
+      </nav>{section==='recruit'?<Dashboard key={user.expiresAt} onExpired={expire}/>:<AdminNews key={user.expiresAt} onExpired={expire} onDirty={setNewsDirty}/>}</>
       : <main className="admin-login">
         <p className="admin-eyebrow">RECRUITMENT</p><h1>관리자 로그인</h1>
         <p className="admin-muted">승인된 Supabase 관리자 계정으로 로그인해 주세요.</p>
@@ -101,6 +113,11 @@ export default function Admin() {
 
 function Dashboard({ onExpired }: { onExpired: (error: unknown) => void }) {
   const [filter, setFilter] = useState('')
+  const [query, setQuery] = useState('')
+  const [queryInput, setQueryInput] = useState('')
+  const [area, setArea] = useState('')
+  const [experience, setExperience] = useState('')
+  const [options, setOptions] = useState({ areas: [] as string[], experiences: [] as string[] })
   const [cursors, setCursors] = useState<(ApplicationCursor | null)[]>([null])
   const [revision, setRevision] = useState(0)
   const [result, setResult] = useState<AdminApplicationList | null>(null)
@@ -116,17 +133,17 @@ function Dashboard({ onExpired }: { onExpired: (error: unknown) => void }) {
 
   useEffect(() => {
     const controller = new AbortController()
-    adminRequest<AdminApplicationList>('list', { status: filter || null, before }, controller.signal).then(data => {
-      if (!controller.signal.aborted) { setResult(data); setError('') }
+    adminRequest<AdminApplicationList>('list', { status: filter || null, query, area, experience, before }, controller.signal).then(data => {
+      if (!controller.signal.aborted) { setResult(data); setOptions(data.options); setError('') }
     }).catch(cause => {
       if (!controller.signal.aborted) { setResult(null); setError(failed(cause)) }
     }).finally(() => { if (!controller.signal.aborted) setLoading(false) })
     return () => controller.abort()
-  }, [before, filter, revision, failed])
+  }, [before, filter, query, area, experience, revision, failed])
 
   function reload() { setLoading(true); setError(''); setRevision(value => value + 1) }
-  function changeFilter(value: string) {
-    setFilter(value); setCursors([null]); setSelected(null); setResult(null); setLoading(true)
+  function resetPage() {
+    setCursors([null]); setSelected(null); setResult(null); setLoading(true); setRevision(v => v + 1)
   }
   return <main className="admin-main">
     <div className="admin-title-row"><div><p className="admin-eyebrow">RECRUITMENT</p><h1>지원자 관리</h1>
@@ -136,10 +153,20 @@ function Dashboard({ onExpired }: { onExpired: (error: unknown) => void }) {
     <div className="admin-workspace">
       <section className="admin-panel admin-list" aria-labelledby="applicants-title" aria-busy={loading}>
         <div className="admin-panel-heading"><h2 id="applicants-title">지원자 목록</h2>
-          <div className="admin-filter"><label htmlFor="admin-status-filter">확인 상태</label><select id="admin-status-filter" value={filter} onChange={e => changeFilter(e.target.value)}>
+          <div className="admin-filter"><label htmlFor="admin-status-filter">확인 상태</label><select id="admin-status-filter" value={filter} onChange={e => { setFilter(e.target.value); resetPage() }}>
             <option value="">전체</option><option value="unread">미확인</option><option value="reviewed">확인 완료</option>
           </select></div>
         </div>
+        <form className="admin-search" onSubmit={e => { e.preventDefault(); setQuery(queryInput.trim()); resetPage() }}>
+          <label htmlFor="admin-search-query">지원자 검색</label>
+          <div className="admin-search-row"><input id="admin-search-query" type="search" value={queryInput} onChange={e => setQueryInput(e.target.value)} maxLength={100} placeholder="이름 · 이메일 · 연락처" /><button className="admin-button" type="submit">검색</button></div>
+          <div className="admin-search-filters">
+            <label>지원 분야<select value={area} onChange={e => { setArea(e.target.value); resetPage() }} aria-label="지원 분야 필터"><option value="">전체 분야</option>{[...new Set([...options.areas, ...(area ? [area] : [])])].map(value => <option key={value}>{value}</option>)}</select></label>
+            <label>경력 구분<select value={experience} onChange={e => { setExperience(e.target.value); resetPage() }} aria-label="경력 구분 필터"><option value="">전체 경력</option>{[...new Set([...options.experiences, ...(experience ? [experience] : [])])].map(value => <option key={value}>{value}</option>)}</select></label>
+            <button type="button" className="admin-button admin-button--quiet" onClick={() => { setQuery(''); setQueryInput(''); setFilter(''); setArea(''); setExperience(''); resetPage() }}>초기화</button>
+          </div>
+          {query && <p className="admin-note">적용된 검색어: {query}</p>}
+        </form>
         {error && <p className="admin-error admin-inset" role="alert">{error}</p>}
         {loading ? <p className="admin-empty" role="status">지원자 목록을 불러오는 중입니다.</p>
           : result?.items.length ? <div className="admin-table-scroll"><table className="admin-table">

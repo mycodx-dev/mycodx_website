@@ -180,6 +180,10 @@
     "placeholderDescription": "확인되지 않은 제품 정보를 임의로 표시하지 않습니다. 공개 가능한 제품 정보가 준비되면 이 페이지에서 정확하게 안내하겠습니다."
   },
   "newsPage": {
+    "loading": "소식을 불러오는 중입니다.",
+    "loadError": "소식을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.",
+    "retry": "다시 시도",
+    "more": "소식 더 보기",
     "readMore": "자세히 보기",
     "backToList": "소식 목록으로",
     "relatedLink": "관련 링크 (새 창)",

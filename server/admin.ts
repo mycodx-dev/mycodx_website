@@ -9,6 +9,8 @@ import { EMAIL_PATTERN, FormError, readJson } from './validation.ts'
 import { digest, UUID_PATTERN } from './tokens.ts'
 import { takeRateSlot } from './rateLimit.ts'
 import { serviceFailureLog } from './serviceDiagnostics.ts'
+import { validateNews } from './newsValidation.ts'
+import type { NewsPostSummary } from '../shared/news.ts'
 
 interface Dependencies {
   config: AdminConfig
@@ -31,6 +33,11 @@ function id(value: unknown) {
 function status(value: unknown) {
   if (value !== 'unread' && value !== 'reviewed') throw new FormError('INVALID_FIELDS')
   return value
+}
+function filterText(value: unknown) {
+  if (value == null) return ''
+  if (typeof value !== 'string' || value.length > 100 || Array.from(value).some(c=>c.charCodeAt(0)<32||c.charCodeAt(0)===127)) throw new FormError('INVALID_FIELDS')
+  return value.trim().normalize('NFC')
 }
 // Explicit projections keep internal hashes, notification recipients and storage paths
 // out of administrator responses, even if the DB adds columns in the future.
@@ -56,7 +63,7 @@ export function createAdminHandler({ config, gateway, database, store, now = Dat
       if (request.method !== 'POST') return new Response(null, { status: 405, headers: { ...headers, Allow: 'POST' } })
       checkOrigin(request, config)
       if (request.headers.get('x-admin-request') !== '1') throw new FormError('FORBIDDEN', 403)
-      const body = await readJson(request, 8 * 1024)
+      const body = await readJson(request, 200 * 1024)
       if (!body || typeof body !== 'object' || Array.isArray(body)) throw new FormError('INVALID_FIELDS')
       const input = body as Record<string, unknown>
       // Logout can always clear the browser cookie, including during a service outage.
@@ -90,7 +97,28 @@ export function createAdminHandler({ config, gateway, database, store, now = Dat
       const actor = await gateway.getUser(session.token)
       if (await database.rpc('recruit_is_admin', { p_actor: actor.id }) !== true) throw new FormError('ADMIN_FORBIDDEN', 403)
       const args = { p_actor: actor.id }
+      if (typeof input.action === 'string' && input.action.startsWith('news:') && !config.newsEnabled) throw new FormError('NEWS_DISABLED', 503)
       switch (input.action) {
+        case 'news:list': {
+          let time: string | null = null, cursorId: string | null = null
+          if (input.before != null) {
+            if (typeof input.before !== 'object') throw new FormError('INVALID_FIELDS')
+            const before = input.before as Record<string, unknown>
+            if (typeof before.time !== 'string' || before.time.length > 40 || !Number.isFinite(Date.parse(before.time))) throw new FormError('INVALID_FIELDS')
+            time = before.time; cursorId = id(before.id)
+          }
+          const rows = await database.rpc<NewsPostSummary[]>('news_admin_list', { ...args, p_before_time: time, p_before_id: cursorId })
+          const items = rows.slice(0,20), last = items.at(-1)
+          return reply({ items, nextCursor: rows.length>20 && last ? { time:last.updated_at,id:last.id } : null })
+        }
+        case 'news:detail': return reply(await database.rpc('news_admin_detail', { ...args, p_post_id: id(input.postId) }))
+        case 'news:save': case 'news:publish': {
+          if (!Number.isSafeInteger(input.version) || Number(input.version)<0 || Number(input.version)>2147483646) throw new FormError('INVALID_FIELDS')
+          const values = { ...args, p_post_id: id(input.postId), p_version: input.version }
+          if (input.action === 'news:save') return reply(await database.rpc('news_save', { ...values, p_draft: validateNews(input.draft) }))
+          if (typeof input.publish !== 'boolean') throw new FormError('INVALID_FIELDS')
+          return reply(await database.rpc('news_publish', { ...values, p_publish: input.publish }))
+        }
         case 'session': return reply({ email: actor.email, expiresAt: session.expiresAt })
         case 'list': {
           const filter = input.status == null ? null : status(input.status)
@@ -105,12 +133,15 @@ export function createAdminHandler({ config, gateway, database, store, now = Dat
             beforeTime = cursor.time
             beforeId = id(cursor.id)
           }
-          const rows = await database.rpc<AdminApplicationSummary[]>('recruit_admin_list', {
+          const result = await database.rpc<{ items: AdminApplicationSummary[]; options: { areas: string[]; experiences: string[] } }>('recruit_admin_search', {
             ...args, p_status: filter, p_limit: 31, p_before_time: beforeTime, p_before_id: beforeId,
+            p_query: filterText(input.query), p_area: filterText(input.area) || null, p_experience: filterText(input.experience) || null,
           })
+          const rows = result.items
           const items = rows.slice(0, 30).map(summary)
           const last = items.at(-1)
-          return reply({ items, nextCursor: rows.length > 30 && last ? { time: last.submitted_at, id: last.id } : null })
+          return reply({ items, nextCursor: rows.length > 30 && last ? { time: last.submitted_at, id: last.id } : null,
+            options: { areas: result.options.areas, experiences: result.options.experiences } })
         }
         case 'detail': return reply(detail(await database.rpc<AdminApplicationDetail>('recruit_admin_detail', {
           ...args, p_application_id: id(input.applicationId),

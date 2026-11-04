@@ -1,5 +1,7 @@
 # MycoDx Pages CMS 사용 가이드
 
+> 이 문서는 과거 GitHub 파일 기반 편집 방식입니다. 현재 저장소에는 `.pages.yml`이 없으며, `NEWS_CMS_ENABLED=true`로 전환한 소식은 `/admin`에서 Supabase에 저장합니다. 새 관리자 소식 기능은 [적용 안내](docs/admin-search-news-setup.md)를 따르세요.
+
 이 문서는 개발자가 아닌 직원도 제품, 소식, 갤러리 컨텐츠를 업로드할 수 있도록 정리한 운영 가이드입니다.
 
 ## 접속 전 준비

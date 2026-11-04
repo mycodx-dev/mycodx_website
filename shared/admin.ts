@@ -26,4 +26,5 @@ export interface AdminApplicationDetail {
 export interface AdminApplicationList {
   items: AdminApplicationSummary[]
   nextCursor: ApplicationCursor | null
+  options: { areas: string[]; experiences: string[] }
 }

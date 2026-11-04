@@ -10,8 +10,9 @@ export const sha256 = (bytes: Uint8Array | string) => createHash('sha256').updat
 const RPC_NAMES = [
   'recruit_begin_application', 'recruit_submission_status', 'recruit_verify_file',
   'recruit_finalize_application', 'recruit_claim_notification', 'recruit_finish_notification',
-  'recruit_is_admin', 'recruit_admin_list', 'recruit_admin_detail',
+  'recruit_is_admin', 'recruit_admin_list', 'recruit_admin_detail', 'recruit_admin_search',
   'recruit_set_review_status', 'recruit_prepare_download', 'recruit_record_download',
+  'news_admin_list', 'news_admin_detail', 'news_save', 'news_publish', 'news_public_list',
 ] as const
 const VOID_RPC_NAMES = new Set<string>(['recruit_verify_file', 'recruit_finish_notification', 'recruit_record_download'])
 
@@ -59,7 +60,8 @@ export function createRecruitDatabase(config: FormsConfig, fetcher: typeof fetch
         }, signal)
         // PostgREST returns 204 with a null body for RETURNS void functions.
         // Handle the HTTP result before interpreting an absent body as a failure.
-        const bytes = response.body ? await boundedBytes(response, operation === 'recruit_admin_list' ? 128 * 1024 : 32 * 1024) : Buffer.alloc(0)
+        const limit = operation.startsWith('news_') ? 512 * 1024 : ['recruit_admin_list', 'recruit_admin_search'].includes(operation) ? 256 * 1024 : 32 * 1024
+        const bytes = response.body ? await boundedBytes(response, limit) : Buffer.alloc(0)
         if (!response.ok) {
           // Only exact, known SQL errors may leave the server. Never forward row details.
           let message: unknown
@@ -74,6 +76,8 @@ export function createRecruitDatabase(config: FormsConfig, fetcher: typeof fetch
           if (message === 'ADMIN_REQUIRED') throw new FormError('ADMIN_FORBIDDEN', 403)
           if (message === 'APPLICATION_NOT_AVAILABLE' || message === 'FILE_NOT_AVAILABLE') throw new FormError('NOT_FOUND', 404)
           if (message === 'VERSION_CONFLICT') throw new FormError('VERSION_CONFLICT', 409)
+          if (message === 'NEWS_NOT_FOUND') throw new FormError('NEWS_NOT_FOUND', 404)
+          if (message === 'NEWS_SLUG_EXISTS' || message === 'NEWS_SLUG_IMMUTABLE') throw new FormError(message, 409)
           throw new ServiceOperationError('supabase', operation, undefined, response.status, providerCode)
         }
         if (!bytes.length) {

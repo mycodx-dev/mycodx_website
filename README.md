@@ -16,6 +16,8 @@ Vercel Functions + 비공개 Vercel Blob으로 처리하고, 이카운트 SMTP �
 배포 절차와 환경변수는 [Vercel 설정 안내](docs/vercel-mail-setup.md)를 참고하세요.
 Supabase 연동과 현재 Vercel 주소에서의 테스트 절차는 [채용 저장 API 안내](docs/recruit-storage-setup.md)를 먼저 확인하세요. `/admin` 관리자 로그인·지원자 조회·파일 다운로드·확인 상태 관리의 계정 및 환경변수 설정은 [관리자 페이지 안내](docs/recruit-admin-setup.md)에 정리되어 있습니다. Supabase 만료 데이터 삭제와 백업 실행은 후속 단계입니다.
 
+지원자 검색·분야/경력 필터와 관리자 소식 작성·임시저장·게시 기능은 [검색·소식 적용 안내](docs/admin-search-news-setup.md)를 따릅니다. 새 코드 배포 전에 추가 SQL 3개를 순서대로 적용하고 `NEWS_CMS_ENABLED`를 설정합니다.
+
 ## 새 저장소에 가져갈 파일
 
 압축을 푼 `mycodx-website` 폴더의 **내용 전체**를 새 저장소 최상위에 넣습니다.

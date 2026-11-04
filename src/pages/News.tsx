@@ -1,9 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import NewsCard from '../components/news/NewsCard'
-import newsData from '../content/news.json'
-import { localize, type NewsContent } from '../content/types'
-
-const newsItems = newsData as NewsContent[]
+import { localize } from '../content/types'
+import { useNews } from '../services/newsContext'
+import NewsLoading from '../components/news/NewsLoading'
 
 function formatNewsDate(dateValue: string, language: string) {
   const [year, month] = dateValue.split('-')
@@ -26,7 +25,8 @@ function formatNewsDate(dateValue: string, language: string) {
 
 export default function News() {
   const { t, i18n } = useTranslation()
-  const visibleNews = newsItems
+  const news=useNews()
+  const visibleNews = news.items
     .filter((item) => item.visible !== false)
     .sort((a, b) => b.date.localeCompare(a.date))
 
@@ -38,7 +38,7 @@ export default function News() {
         <span>{t('newsPage.description')}</span>
       </header>
 
-      {visibleNews.length > 0 ? (
+      {news.loading || (news.error && !visibleNews.length) ? <NewsLoading/> : visibleNews.length > 0 ? (
         <div className="editorial-list">
           {visibleNews.map((item) => (
             <NewsCard
@@ -57,6 +57,8 @@ export default function News() {
           <p>{t('newsPage.empty')}</p>
         </div>
       )}
+      {!!visibleNews.length&&news.error&&<NewsLoading/>}
+      {news.hasMore&&<div className="editorial-empty"><button type="button" disabled={news.loadingMore} onClick={news.more}>{t(news.loadingMore?'newsPage.loading':'newsPage.more')}</button></div>}
     </div>
   )
 }

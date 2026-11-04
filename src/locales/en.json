@@ -180,6 +180,10 @@
     "placeholderDescription": "We do not display unverified product information. Accurate product details will be added here when they are ready for publication."
   },
   "newsPage": {
+    "loading": "Loading news…",
+    "loadError": "Unable to load news. Please try again.",
+    "retry": "Try again",
+    "more": "More news",
     "readMore": "Read more",
     "backToList": "Back to news",
     "relatedLink": "Related link (opens in a new tab)",

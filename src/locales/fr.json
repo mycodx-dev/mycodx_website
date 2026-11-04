@@ -180,6 +180,10 @@
     "placeholderDescription": "Nous n'affichons pas d'informations non vérifiées. Des détails précis seront publiés sur cette page dès leur validation."
   },
   "newsPage": {
+    "loading": "Chargement des actualités…",
+    "loadError": "Impossible de charger les actualités. Veuillez réessayer.",
+    "retry": "Réessayer",
+    "more": "Plus d’actualités",
     "readMore": "En savoir plus",
     "backToList": "Retour aux actualités",
     "relatedLink": "Lien associé (nouvel onglet)",

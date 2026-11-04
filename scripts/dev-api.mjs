@@ -2,9 +2,10 @@ import { createServer } from 'node:http'
 import { Readable } from 'node:stream'
 import forms from '../api/forms.ts'
 import admin from '../api/admin.ts'
+import news from '../api/news.ts'
 
 const server = createServer(async (req, res) => {
-  const handler = { '/api/forms': forms, '/api/admin': admin }[req.url?.split('?')[0]]
+  const handler = { '/api/forms': forms, '/api/admin': admin, '/api/news': news }[req.url?.split('?')[0]]
   if (!handler) { res.writeHead(404).end(); return }
   try {
     const request = new Request(`http://127.0.0.1:3001${req.url}`, {
