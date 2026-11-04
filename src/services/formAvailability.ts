@@ -14,6 +14,8 @@ export function watchFormAvailability(
   onChange: (available: boolean) => void,
   sources: AvailabilitySources = { fetcher: fetch, events: window, page: document },
 ) {
+  // Window.fetch must not receive the sources object as its `this` value.
+  const { fetcher } = sources
   let active = true
   let controller: AbortController | undefined
   let timeout: ReturnType<typeof setTimeout> | undefined
@@ -26,7 +28,7 @@ export function watchFormAvailability(
     const timer = setTimeout(() => current.abort(), 10_000)
     timeout = timer
     try {
-      const response = await sources.fetcher(FORM_API, { signal: current.signal, cache: 'no-store' })
+      const response = await fetcher(FORM_API, { signal: current.signal, cache: 'no-store' })
       const result = response.ok ? await response.json() : null
       if (active && controller === current) {
         onChange((kind === 'careers' ? result?.careersEnabled : result?.enabled) === true)

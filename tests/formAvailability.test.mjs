@@ -9,6 +9,23 @@ function sources(fetcher) {
   return { fetcher, page, events: new EventTarget() }
 }
 
+test('browser fetch is called without binding the sources object as its receiver', async t => {
+  const values = []
+  const receivers = []
+  const source = sources(async function () {
+    receivers.push(this)
+    // Window.fetch rejects an arbitrary receiver before making any HTTP request.
+    if (this !== undefined) throw new TypeError('Illegal invocation')
+    return Response.json({ enabled: true, careersEnabled: true })
+  })
+  t.after(watchFormAvailability('careers', value => values.push(value), source))
+  await setImmediate()
+  source.events.dispatchEvent(new Event('focus'))
+  await setImmediate()
+  assert.deepEqual(receivers, [undefined, undefined])
+  assert.deepEqual(values, [true, true])
+})
+
 test('a failed availability request recovers on focus without reloading form inputs', async t => {
   const values = []
   let count = 0
