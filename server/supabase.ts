@@ -11,6 +11,7 @@ const RPC_NAMES = [
   'recruit_begin_application', 'recruit_submission_status', 'recruit_verify_file',
   'recruit_finalize_application', 'recruit_claim_notification', 'recruit_finish_notification',
 ] as const
+const VOID_RPC_NAMES = new Set<string>(['recruit_verify_file', 'recruit_finish_notification'])
 
 export interface RecruitDatabase {
   rpc<T>(name: string, args: Record<string, unknown>, signal?: AbortSignal): Promise<T>
@@ -54,7 +55,9 @@ export function createRecruitDatabase(config: FormsConfig, fetcher: typeof fetch
         const response = await request(`/rest/v1/rpc/${name}`, {
           method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(args),
         }, signal)
-        const bytes = await boundedBytes(response, 32 * 1024)
+        // PostgREST returns 204 with a null body for RETURNS void functions.
+        // Handle the HTTP result before interpreting an absent body as a failure.
+        const bytes = response.body ? await boundedBytes(response, 32 * 1024) : Buffer.alloc(0)
         if (!response.ok) {
           // Only exact, known SQL errors may leave the server. Never forward row details.
           let message: unknown
@@ -68,7 +71,12 @@ export function createRecruitDatabase(config: FormsConfig, fetcher: typeof fetch
           if (message === 'APPLICATION_EXPIRED') throw new FormError('SESSION_EXPIRED', 410)
           throw new ServiceOperationError('supabase', operation, undefined, response.status, providerCode)
         }
-        return (bytes.length ? JSON.parse(bytes.toString()) : null) as T
+        if (!bytes.length) {
+          if (VOID_RPC_NAMES.has(operation)) return null as T
+          // JSON-returning RPCs must still supply their result, including JSON null.
+          throw new FormError('UNAVAILABLE', 503)
+        }
+        return JSON.parse(bytes.toString()) as T
       })
     },
     async persistFile(file, bytes, signal) {
