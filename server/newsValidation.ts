@@ -27,8 +27,8 @@ function url(value: unknown, image = false) {
 export function validateNews(value: unknown): NewsContent {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new FormError('INVALID_FIELDS')
   const v = value as Record<string, unknown>
-  const id = text(v.id, 100, true), date = text(v.date, 10, true)
-  if (!NEWS_SLUG.test(id) || !/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(Date.parse(date)) ||
+  const id = text(v.id ?? '', 100), date = text(v.date, 10, true)
+  if ((id && !NEWS_SLUG.test(id)) || !/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(Date.parse(date)) ||
     new Date(date).toISOString().slice(0, 10) !== date) throw new FormError('INVALID_FIELDS')
   const category = text(v.category ?? 'News', 30)
   if (!['News', 'Notice', 'Press', 'Exhibition'].includes(category)) throw new FormError('INVALID_FIELDS')

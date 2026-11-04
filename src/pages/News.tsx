@@ -3,6 +3,7 @@ import NewsCard from '../components/news/NewsCard'
 import { localize } from '../content/types'
 import { useNews } from '../services/newsContext'
 import NewsLoading from '../components/news/NewsLoading'
+import { newsAddress } from '../../shared/news'
 
 function formatNewsDate(dateValue: string, language: string) {
   const [year, month] = dateValue.split('-')
@@ -48,7 +49,7 @@ export default function News() {
               title={localize(item.title, i18n.language)}
               summary={localize(item.summary, i18n.language)}
               category={item.category}
-              id={item.id}
+              id={newsAddress(item)}
             />
           ))}
         </div>

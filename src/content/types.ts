@@ -32,6 +32,7 @@ export interface NewsPhoto {
 
 export interface NewsContent {
   id: string
+  postNumber?: number
   visible?: boolean
   date: string
   category?: string

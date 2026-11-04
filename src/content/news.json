@@ -1,6 +1,7 @@
 [
   {
     "id": "kimes-busan-2026",
+    "postNumber": 2,
     "visible": true,
     "date": "2026-10-23",
     "category": "Exhibition",
@@ -25,6 +26,7 @@
   },
   {
     "id": "website-launch",
+    "postNumber": 1,
     "visible": true,
     "date": "2026-06-01",
     "category": "News",

@@ -1,18 +1,20 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, Navigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { localize } from '../content/types'
 import { useNews } from '../services/newsContext'
 import NewsLoading from '../components/news/NewsLoading'
 import NotFound from './NotFound'
+import { newsAddress } from '../../shared/news'
 
 export default function NewsDetail() {
   const { id } = useParams()
   const { t, i18n } = useTranslation()
   const news=useNews()
-  const item = news.items.find((news) => news.id === id && news.visible !== false)
+  const item = news.items.find((news) => (news.id === id || newsAddress(news) === id) && news.visible !== false)
 
   if(news.loading||news.error)return <div className="editorial-page"><NewsLoading/></div>
   if (!item) return <NotFound />
+  if (id !== newsAddress(item)) return <Navigate to={`/news/${newsAddress(item)}`} replace />
 
   const title = localize(item.title, i18n.language)
   const body = item.body ? localize(item.body, i18n.language) : ''

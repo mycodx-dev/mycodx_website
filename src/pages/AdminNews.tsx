@@ -40,7 +40,7 @@ export default function AdminNews({ onExpired, onDirty }: { onExpired:(cause:unk
     <div className="admin-news-workspace">
       <section className="admin-panel"><div className="admin-panel-heading"><h2>소식 목록</h2><button className="admin-button" onClick={reload} disabled={loading}>새로고침</button></div>
         {error && <p className="admin-error admin-inset" role="alert">{error}</p>}
-        {loading ? <p className="admin-empty" role="status">소식을 불러오는 중입니다.</p> : <ul className="admin-news-list">{list?.items.map(post=><li key={post.id}><button onClick={()=>select(post.id)} aria-pressed={selection?.id===post.id}><strong>{post.title}</strong><span>{stateLabel(post)}</span><small>/{post.slug}</small></button></li>)}</ul>}
+        {loading ? <p className="admin-empty" role="status">소식을 불러오는 중입니다.</p> : <ul className="admin-news-list">{list?.items.map(post=><li key={post.id}><button onClick={()=>select(post.id)} aria-pressed={selection?.id===post.id}><strong>{post.title}</strong><span>{stateLabel(post)}</span><small>/news/{post.post_number ?? post.slug}</small></button></li>)}</ul>}
         {!loading && list?.items.length===0 && <p className="admin-empty">저장한 소식이 없습니다.</p>}
         <div className="admin-pagination"><button className="admin-button" disabled={loading || cursors.length<2} onClick={()=>{setCursors(v=>v.slice(0,-1));setLoading(true)}}>이전</button><span>{cursors.length} 페이지</span><button className="admin-button" disabled={loading || !list?.nextCursor} onClick={()=>{if(list?.nextCursor){setCursors(v=>[...v,list.nextCursor]);setLoading(true)}}}>다음</button></div>
       </section>
@@ -100,7 +100,8 @@ function NewsEditor({selection,failed,onSaved,onDirty}:{selection:{id:string;fre
     {loading?<p className="admin-empty" role="status">글을 불러오는 중입니다.</p>:<form onSubmit={e=>{e.preventDefault();void persist('news:save')}}>
       <fieldset disabled={busy}>
         {error&&<p className="admin-error" role="alert">{error}</p>}{notice&&<p className="admin-success" role="status">{notice}</p>}
-        <div className="admin-news-language"><label>글 주소 (저장 후 변경 불가)<input required pattern="[a-z0-9]+(-[a-z0-9]+)*" maxLength={100} placeholder="company-news-2026" value={draft.id} disabled={!!post} onChange={e=>change('id',e.target.value)}/></label>
+        <p className="admin-note">{post ? `게시물 번호: ${post.post_number ?? '—'} · 주소: /news/${post.post_number ?? post.slug}` : '게시물 번호와 주소는 첫 임시저장 시 자동으로 생성됩니다.'}</p>
+        <div className="admin-news-language">
           <label>게시 날짜<input required type="date" value={draft.date} onChange={e=>change('date',e.target.value)}/></label>
           <label>분류<select value={draft.category} onChange={e=>change('category',e.target.value)}>{['News','Notice','Press','Exhibition'].map(c=><option key={c}>{c}</option>)}</select></label></div>
         {localized('title','제목',false,200)}{localized('summary','요약',true,1000)}{localized('body','본문',true,10000)}

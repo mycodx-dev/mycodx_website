@@ -27,21 +27,21 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase">
-              {t('menu.ABOUT')}
+              {t('header.primaryNav')}
             </h3>            <ul className="mt-4 space-y-3">
               <li>
                 <Link to="/about" className="text-sm text-gray-500 hover:text-blue-900 transition-colors">
-                  Company
+                  {t('header.navigation.about')}
                 </Link>
               </li>
               <li>
                 <Link to="/product" className="text-sm text-gray-500 hover:text-blue-900 transition-colors">
-                  Product
+                  {t('header.navigation.product')}
                 </Link>
               </li>
               <li>
                 <Link to="/news" className="text-sm text-gray-500 hover:text-blue-900 transition-colors">
-                  News
+                  {t('header.navigation.news')}
                 </Link>
               </li>
               <li>
@@ -60,7 +60,7 @@ const Footer = () => {
           {/* Contact Info */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase">
-              Contact
+              {t('header.navigation.contact')}
             </h3>
             <ul className="mt-4 space-y-3 text-sm text-gray-500">
               <li>{t('footer.address')}</li>

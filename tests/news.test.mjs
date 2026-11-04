@@ -7,10 +7,25 @@ import { createAdminHandler } from '../server/admin.ts'
 import { getAdminConfig } from '../server/adminConfig.ts'
 import { createAdminCookie } from '../server/adminSession.ts'
 import { createRecruitDatabase } from '../server/supabase.ts'
+import { newsAddress } from '../shared/news.ts'
 
 const origin='https://example.test',actor=randomUUID(),postId=randomUUID()
 const config=getAdminConfig({NEWS_CMS_ENABLED:'true',SUPABASE_URL:'https://test-project.supabase.co',SUPABASE_SECRET_KEY:'sb_secret_test',SUPABASE_PUBLISHABLE_KEY:'sb_publishable_test',FORM_SIGNING_SECRET:'test-only-secret-longer-than-thirty-two-characters',FORM_ALLOWED_ORIGINS:origin,BLOB_READ_WRITE_TOKEN:'test'})
 const content={id:'test-news',date:'2026-11-04',category:'News',title:{ko:'가상 소식',en:''},summary:{ko:'요약',en:''},body:{ko:'일반 텍스트\n\n두 번째 문단',en:''}}
+
+test('new drafts need no address; public numbers are server output and legacy cursors remain unchanged',async()=>{
+  assert.equal(validateNews({...content,id:''}).id,'')
+  assert.equal(validateNews({...content,id:undefined,postNumber:999}).postNumber,undefined)
+  assert.equal(newsAddress({...content,postNumber:12}),'12')
+  assert.equal(newsAddress({...content,postNumber:0}),'test-news')
+  const calls=[]
+  const handler=createNewsHandler(config,{async rpc(name,args){calls.push(args);return Array.from({length:21},(_,i)=>({...content,id:`legacy-${i}`,postNumber:i+1}))}},true)
+  const list=await (await handler(new Request(origin+'/api/news'))).json()
+  assert.equal(list.nextCursor.slug,'legacy-19')
+  assert.equal(newsAddress(list.items[19]),'20')
+  await handler(new Request(origin+'/api/news?slug=12'))
+  assert.equal(calls.at(-1).p_slug,'12')
+})
 
 test('news validates text/date/slug and preserves supported translations without accepting executable URLs',()=>{
   const result=validateNews({...content,title:{...content.title,ja:'見出し'},visible:false,secret:'PRIVATE',photos:[{image:'/uploads/news/test.jpg',alt:{ko:'사진',en:''}}]})

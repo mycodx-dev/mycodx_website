@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom'
 import productData from '../../content/products.json'
 import { localize, type ProductContent } from '../../content/types'
 import { useNews } from '../../services/newsContext'
+import { newsAddress } from '../../../shared/news'
 
 const SITE_URL = 'https://mycodx.com'
 const SITE_NAME = 'MycoDx'
@@ -41,7 +42,7 @@ export default function PageMeta() {
     const productId = path.startsWith('/product/') ? path.slice('/product/'.length) : ''
     const product = (productData as ProductContent[]).find((item) => item.id === productId)
     const news = newsState.items.find((item) =>
-      item.visible !== false && path === `/news/${encodeURIComponent(item.id)}`
+      item.visible !== false && [item.id, newsAddress(item)].some(id => path === `/news/${encodeURIComponent(id)}`)
     )
     const route = routeMeta.find((item) => item.path === path)
 
@@ -75,7 +76,7 @@ export default function PageMeta() {
       noIndex = true
     }
 
-    const canonicalUrl = `${SITE_URL}${path === '/' ? '' : path}`
+    const canonicalUrl = `${SITE_URL}${news ? `/news/${newsAddress(news)}` : path === '/' ? '' : path}`
 
     document.title = pageTitle
     setMeta('description', description)

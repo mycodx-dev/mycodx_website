@@ -12,10 +12,10 @@
       "ja": "開発中"
     },
     "title": {
-      "ko": "항결핵 약제 배지 모듈",
-      "en": "Anti-TB Drug Agar Module",
-      "fr": "Module de milieu agar pour médicaments antituberculeux",
-      "ja": "抗結核薬剤寒天培地モジュール"
+      "ko": "6-Well Culture Plate for DST",
+      "en": "6-Well Culture Plate for DST",
+      "fr": "6-Well Culture Plate for DST",
+      "ja": "6-Well Culture Plate for DST"
     },
     "summary": {
       "ko": "결핵균 약제감수성시험 워크플로우를 지원하기 위해 개발 중인 배양 기반 모듈입니다. 검사 편의성과 결과 관리의 표준화를 목표로 합니다.",
@@ -115,10 +115,10 @@
       "ja": "設計・開発中"
     },
     "title": {
-      "ko": "자동 접종 모듈",
-      "en": "Automated Inoculation Module",
-      "fr": "Module d'inoculation automatisée",
-      "ja": "自動接種モジュール"
+      "ko": "Automated Inoculation System",
+      "en": "Automated Inoculation System",
+      "fr": "Automated Inoculation System",
+      "ja": "Automated Inoculation System"
     },
     "summary": {
       "ko": "배양 기반 검사 과정에서 접종 흐름의 일관성과 사용 편의성을 높이기 위해 개발 중인 자동화 모듈입니다.",
@@ -212,10 +212,10 @@
       "ja": "開発・検証中"
     },
     "title": {
-      "ko": "자동 배양·AI 판독 시스템",
-      "en": "Automated Incubation & AI Reading System",
-      "fr": "Système d'incubation automatisée et de lecture IA",
-      "ja": "自動培養・AI判定システム"
+      "ko": "Automated Incubation, Imaging & AI Analysis",
+      "en": "Automated Incubation, Imaging & AI Analysis",
+      "fr": "Automated Incubation, Imaging & AI Analysis",
+      "ja": "Automated Incubation, Imaging & AI Analysis"
     },
     "summary": {
       "ko": "배양 상태 모니터링과 이미지 기반 판독을 지원하기 위해 개발 중인 자동 배양·AI 판독 시스템입니다.",
