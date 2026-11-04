@@ -500,21 +500,20 @@
   },
   "forms": {
     "checkingAvailability": "Vérification de la disponibilité du formulaire.",
-    "unavailable": "Les formulaires en ligne sont en préparation. Pour toute demande urgente, contactez-nous par e-mail.",
-    "checkStatus": "Vérifier l’envoi",
-    "accepted": "Le serveur de messagerie a accepté le message. La réception effective doit être confirmée par le destinataire.",
-    "receipt": "Référence : {{id}}",
-    "storageNotice": "Les candidatures et pièces jointes sont traitées par Vercel puis conservées dans un stockage privé Supabase pendant un an à compter de leur réception. Notre équipe est informée via ECOUNT Webmail ou Resend. Les données temporaires Vercel sont supprimées au prochain nettoyage après sept jours. Les e-mails reçus et les sauvegardes suivent des politiques de conservation et de suppression distinctes.",
-    "recruitAccepted": "Votre candidature et vos pièces jointes ont été enregistrées. Votre candidature est reçue.",
+    "unavailable": "Le dépôt en ligne est temporairement indisponible. Veuillez réessayer plus tard ou nous contacter par e-mail.",
+    "checkStatus": "Vérifier le dépôt",
+    "accepted": "Votre demande a été reçue. Notre équipe examinera votre message et répondra à l’adresse e-mail indiquée.",
+    "storageNotice": "Votre candidature et les pièces jointes sont conservées pendant un an à compter du dépôt pour l’examen de votre candidature.",
+    "recruitAccepted": "Votre candidature a été reçue. Après examen, nous vous contacterons individuellement si nécessaire.",
     "progress": {
-      "saving": "Enregistrement de votre candidature.",
+      "saving": "Dépôt de votre candidature…",
       "preparing": "Préparation de l’envoi…",
       "uploading": "Envoi des documents… {{percentage}} %",
-      "sending": "Envoi du message…",
-      "checking": "Vérification de l’envoi…"
+      "sending": "Dépôt en cours…",
+      "checking": "Vérification du dépôt…"
     },
     "errors": {
-      "RECRUIT_UNCERTAIN": "La réception n’a pas pu être confirmée. Réessayez avec les mêmes informations pour vérifier ou reprendre l’enregistrement existant. Contactez notre équipe si le résultat reste indisponible.",
+      "RECRUIT_UNCERTAIN": "Nous ne pouvons pas confirmer la réception. Conservez vos informations sans les modifier et vérifiez à nouveau le dépôt. Contactez notre équipe si le problème persiste.",
       "IDEMPOTENCY_CONFLICT": "Les informations diffèrent de votre tentative précédente. Réessayez avec les informations initiales ou contactez notre équipe.",
       "FILE_CONFLICT": "Le fichier diffère de la copie déjà téléversée. Vérifiez-le ou contactez notre équipe.",
       "UNAVAILABLE": "L’envoi en ligne est indisponible. Vos informations sont conservées dans le formulaire. Réessayez plus tard ou contactez-nous par e-mail.",
@@ -529,7 +528,7 @@
       "UPLOAD_FAILED": "Le transfert a échoué. Vos informations et fichiers sélectionnés sont conservés. Réessayez.",
       "UPLOAD_INCOMPLETE": "Le transfert de certains fichiers est incomplet. Réessayez.",
       "SESSION_EXPIRED": "La session a expiré. Vérifiez vos informations et réessayez.",
-      "DELIVERY_UNCERTAIN": "Le résultat de l’envoi n’a pas pu être confirmé. Aucun nouvel envoi automatique ne sera effectué afin d’éviter les doublons. Vérifiez à nouveau le statut ou contactez notre équipe."
+      "DELIVERY_UNCERTAIN": "Nous ne pouvons pas confirmer la réception. Pour éviter un doublon, vérifiez à nouveau le dépôt ou contactez notre équipe."
     }
   }
 }

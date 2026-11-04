@@ -11,7 +11,7 @@ export async function sendWithResend(id: string, mail: SubmissionMail, config: F
     },
     body: JSON.stringify({
       from: mail.from, to: mail.to, reply_to: mail.replyTo,
-      subject: mail.subject, text: mail.text, headers: mail.headers,
+      subject: mail.subject, text: mail.text, html: mail.html, headers: mail.headers,
       // Only verified bytes, never client-provided URLs or local file paths.
       attachments: mail.attachments.map(file => ({ filename: file.filename, content: file.content.toString('base64') })),
     }),

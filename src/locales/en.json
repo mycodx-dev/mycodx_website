@@ -500,21 +500,20 @@
   },
   "forms": {
     "checkingAvailability": "Checking submission availability.",
-    "unavailable": "Online submissions are being prepared. Please email us for urgent requests.",
-    "checkStatus": "Check delivery status",
-    "accepted": "The mail server accepted the message for delivery. The recipient must confirm actual receipt.",
-    "receipt": "Reference: {{id}}",
-    "storageNotice": "Applications and attachments are processed by Vercel and stored privately in Supabase for one year from receipt. Staff are notified via ECOUNT Webmail or Resend. Temporary Vercel data is deleted at the next cleanup after seven days. Received emails and backups follow separate retention and deletion policies.",
-    "recruitAccepted": "Your application and attachments have been saved. Your application is received.",
+    "unavailable": "Online submissions are temporarily unavailable. Please try again later or contact us by email.",
+    "checkStatus": "Check submission status",
+    "accepted": "Thank you for your inquiry. Our team will review your message and reply to the email address you provided.",
+    "storageNotice": "Your application and attachments are retained for recruitment review for one year from submission.",
+    "recruitAccepted": "Your application has been received. We will contact you individually if further information is needed after review.",
     "progress": {
-      "saving": "Saving your application.",
+      "saving": "Submitting your application…",
       "preparing": "Preparing your submission…",
       "uploading": "Uploading documents… {{percentage}}%",
-      "sending": "Sending your message…",
-      "checking": "Checking delivery status…"
+      "sending": "Submitting…",
+      "checking": "Checking your submission status…"
     },
     "errors": {
-      "RECRUIT_UNCERTAIN": "We could not confirm receipt. Retry with the same information to check or resume the existing submission. Contact our team if the result remains unavailable.",
+      "RECRUIT_UNCERTAIN": "We could not confirm receipt. Keep your entries unchanged and check the submission status again. Contact our team if the problem continues.",
       "IDEMPOTENCY_CONFLICT": "The information differs from your earlier submission attempt. Retry with the original information or contact our team.",
       "FILE_CONFLICT": "The file differs from the previously uploaded copy. Check the file or contact our team.",
       "UNAVAILABLE": "Online delivery is currently unavailable. Your entries are preserved. Please try later or email us.",
@@ -529,7 +528,7 @@
       "UPLOAD_FAILED": "File upload failed. Your entries and selected files are preserved. Please try again.",
       "UPLOAD_INCOMPLETE": "Some files have not finished uploading. Please try again.",
       "SESSION_EXPIRED": "The submission session expired. Check your entries and try again.",
-      "DELIVERY_UNCERTAIN": "We could not confirm delivery. To prevent duplicates, we will not resend automatically. Check the status again or contact our team to confirm receipt."
+      "DELIVERY_UNCERTAIN": "We could not confirm receipt. To avoid duplicate submissions, check the status again or contact our team."
     }
   }
 }

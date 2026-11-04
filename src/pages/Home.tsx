@@ -83,7 +83,6 @@ export default function Home() {
   const contactPending = useRef(false)
   const [contactStartedAt] = useState(() => Date.now())
   const [contactError, setContactError] = useState('')
-  const [contactReceipt, setContactReceipt] = useState('')
   const contactAvailable = useFormAvailability()
 
   const heroKeywordKeys = ['culture', 'integrated', 'intelligent'] as const
@@ -221,20 +220,17 @@ export default function Home() {
     const value = (name: string) => String(data.get(name) ?? '')
     setContactStatus('sending')
     setContactError('')
-    setContactReceipt('')
     try {
-      const id = await submitForm({
+      await submitForm({
         kind: 'contact', language: i18n.language.split('-')[0], startedAt: contactStartedAt,
         consent: data.has('privacy_consent'), website: value('_honey'),
         fields: { name: value('name'), email: value('email'), organization: value('organization'),
           inquiryType: value('inquiry_type'), message: value('message') },
       }, [], () => undefined)
-      setContactReceipt(id)
       form.reset()
       setContactStatus('sent')
     } catch (error) {
       setContactError(error instanceof SubmissionError ? error.code : 'UNAVAILABLE')
-      setContactReceipt(error instanceof SubmissionError ? error.receiptId ?? '' : '')
       setContactStatus('failed')
     } finally { contactPending.current = false }
   }
@@ -562,8 +558,8 @@ export default function Home() {
                       }`}
                       aria-live="polite"
                     >
-                      {contactStatus === 'sent' && `${t('forms.accepted')} ${t('forms.receipt', { id: contactReceipt })}`}
-                      {contactStatus === 'failed' && <>{t(`forms.errors.${contactError}`, { defaultValue: t('home.contact.form.failed') })} {contactReceipt && t('forms.receipt', { id: contactReceipt })}</>}
+                      {contactStatus === 'sent' && t('forms.accepted')}
+                      {contactStatus === 'failed' && t(`forms.errors.${contactError}`, { defaultValue: t('home.contact.form.failed') })}
                     </p>
                   </div>
                 </form>

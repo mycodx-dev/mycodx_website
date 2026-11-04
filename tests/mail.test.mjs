@@ -88,6 +88,7 @@ test('SMTP awaits final acceptance and preserves recipients, Reply-To and large 
               assert.deepEqual(mail.envelope, { from: 'sender@example.test', to: [target] })
               assert.equal(mail.replyTo, 'applicant@example.test')
               assert.equal(mail.subject.startsWith('[TEST]'), Boolean(testTo))
+              assert.match(mail.html, /새로운 채용 지원서가 접수되었습니다/)
               assert.deepEqual(mail.attachments[0].content, bytes)
               assert.equal(mail.messageId, `<mycodx-form.${outgoing.id}@example.test>`)
               await accepted
@@ -159,10 +160,65 @@ test('Nodemailer composes a real MIME message locally with a PDF and fixed deliv
     const mime = result.message.toString('utf8')
     assert.match(mime, /Reply-To: applicant@example\.test/)
     assert.match(mime, /Content-Type: multipart\/mixed/)
+    assert.match(mime, /Content-Type: multipart\/alternative/)
+    assert.match(mime, /Content-Type: text\/html/)
+    assert.match(mime, /Content-Type: text\/plain/)
     assert.match(mime, /Content-Type: application\/pdf/)
     assert.ok(mime.includes(bytes.toString('base64')))
     assert.equal(mime.includes(smtpEnv.SMTP_PASS), false)
   } finally {
     transport.close()
   }
+})
+
+test('business mail has structured escaped HTML and readable plain text without visible tracking identifiers', () => {
+  const outgoing = submission('careers', [{ group: 'application', name: '지원서<&>.pdf', contentType: 'application/pdf', content: Buffer.from('%PDF-test') }])
+  outgoing.fields = { name: '<img src=x onerror=alert(1)>', email: 'applicant@example.test', phone: '010-1234-5678',
+    area: '연구개발', education: '석사', experience: '경력', message: '첫 문단\n<script>alert(1)</script>\n둘째 문단', privateField: 'DO_NOT_SHOW' }
+  const mail = buildMail(outgoing, getConfig(smtpEnv))
+  assert.equal(mail.subject, '[MycoDx 채용] <img src=x onerror=alert(1)> · 연구개발')
+  assert.ok(mail.html.includes('&lt;img src=x onerror=alert(1)&gt;'))
+  assert.ok(mail.html.includes('&lt;script&gt;alert(1)&lt;/script&gt;'))
+  assert.ok(mail.html.includes('지원서&lt;&amp;&gt;.pdf'))
+  assert.ok(!mail.html.includes('<script>'))
+  assert.ok(!mail.html.includes('<img '))
+  for (const part of [mail.text, mail.html]) {
+    assert.ok(!part.includes(outgoing.id))
+    assert.ok(!part.includes('접수번호'))
+    assert.ok(!part.includes('DO_NOT_SHOW'))
+    assert.ok(part.includes('한국 시간'))
+    assert.ok(part.includes('09:00'))
+    assert.ok(part.includes('개인정보 수집·이용 동의'))
+  }
+  assert.ok(mail.text.includes(outgoing.fields.message))
+  assert.equal(mail.headers['X-Entity-Ref-ID'], outgoing.id)
+  assert.equal(mail.replyTo, outgoing.fields.email)
+})
+
+test('live recipient defaults route inquiries and applications separately; override stays explicit', async () => {
+  const liveEnv = { ...smtpEnv, CONTACT_TO: '', CAREERS_TO: '' }
+  for (const [kind, target] of [['contact','info@mycodx.com'],['careers','jakim@mycodx.com']]) {
+    const outgoing = submission(kind)
+    const live = buildMail(outgoing,getConfig(liveEnv))
+    assert.deepEqual(live.to,[target])
+    assert.deepEqual(live.envelope.to,[target])
+    assert.ok(!live.subject.startsWith('[TEST]'))
+    assert.ok(!live.html.includes('테스트 알림입니다'))
+    const testMail = buildMail(outgoing,getConfig({...liveEnv,MAIL_TEST_RECIPIENT:'tester@example.test'}))
+    assert.deepEqual(testMail.to,['tester@example.test'])
+    assert.ok(testMail.html.includes('테스트 알림입니다'))
+    assert.ok(testMail.text.includes(target))
+  }
+  const outgoing = submission('contact')
+  outgoing.fields.inquiryType='연구 협력'
+  outgoing.fields.organization='가상 기관'
+  const config=getConfig(resendEnv), expected=buildMail(outgoing,config)
+  await sendSubmission(outgoing,config,{fetcher:async(_url,options)=>{
+    const body=JSON.parse(options.body)
+    assert.equal(body.html,expected.html)
+    assert.equal(body.text,expected.text)
+    assert.equal(body.subject,'[MycoDx 문의] 테스트 지원자 · 연구 협력')
+    assert.ok(body.html.includes('가상 기관'))
+    return Response.json({id:'mock-receipt'})
+  }})
 })
