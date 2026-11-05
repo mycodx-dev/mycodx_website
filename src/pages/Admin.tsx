@@ -5,6 +5,7 @@ import type { AdminApplicationDetail, AdminApplicationList, AdminUser, Applicati
 import { adminRequest, AdminError, adminErrorMessage } from '../services/admin'
 import '../styles/admin.css'
 import AdminNews from './AdminNews'
+import AdminPassword from './AdminPassword'
 
 const date = (value: string) => new Intl.DateTimeFormat('ko-KR', {
   timeZone: 'Asia/Seoul', dateStyle: 'medium', timeStyle: 'short',
@@ -16,8 +17,9 @@ export default function Admin() {
   const [user, setUser] = useState<AdminUser | null>(null)
   const [checking, setChecking] = useState(true)
   const [error, setError] = useState('')
+  const [notice, setNotice] = useState('')
   const [busy, setBusy] = useState(false)
-  const [section, setSection] = useState<'recruit'|'news'>('recruit')
+  const [section, setSection] = useState<'recruit'|'news'|'password'>('recruit')
   const newsDirty = useRef(false)
   const setNewsDirty = useCallback((dirty:boolean)=>{newsDirty.current=dirty},[])
   const generation = useRef(0)
@@ -26,6 +28,7 @@ export default function Admin() {
     newsDirty.current=false
     generation.current++
     setUser(null)
+    setNotice('')
     setError(cause ? adminErrorMessage(cause) : '로그인이 만료되었습니다. 다시 로그인해 주세요.')
   }, [])
 
@@ -64,18 +67,18 @@ export default function Admin() {
     event.preventDefault()
     const form = event.currentTarget
     const values = new FormData(form)
-    setBusy(true); setError('')
+    setBusy(true); setError(''); setNotice('')
     const current = ++generation.current
     try {
       const session = await adminRequest<AdminUser>('login', { email: values.get('email'), password: values.get('password') })
-      if (current === generation.current) { form.reset(); setUser(session) }
+      if (current === generation.current) { form.reset(); setSection('recruit'); setUser(session) }
     } catch (cause) { if (current === generation.current) setError(adminErrorMessage(cause)) }
     finally { setBusy(false) }
   }
   async function logout() {
     if(newsDirty.current && !window.confirm('저장하지 않은 소식 내용을 버리고 로그아웃할까요?'))return
     newsDirty.current=false
-    generation.current++; setUser(null); setBusy(true); setError('')
+    generation.current++; setUser(null); setBusy(true); setError(''); setNotice('')
     try { await adminRequest('logout') }
     catch { setError('화면에서 로그아웃했지만 서버 연결을 확인하지 못했습니다. 연결 후 로그아웃을 다시 눌러 주세요.') }
     finally { setBusy(false) }
@@ -91,14 +94,18 @@ export default function Admin() {
     </header>
     {checking ? <main className="admin-login"><p role="status">로그인 상태를 확인하고 있습니다.</p></main>
       : user ? <><nav className="admin-tabs" aria-label="관리 메뉴">
-        {(['recruit','news'] as const).map(value=><button key={value} className={section===value?'is-active':''} aria-current={section===value?'page':undefined} onClick={()=>{
+        {(['recruit','news','password'] as const).map(value=><button key={value} disabled={busy} className={section===value?'is-active':''} aria-current={section===value?'page':undefined} onClick={()=>{
           if(section!==value && newsDirty.current && !window.confirm('저장하지 않은 내용을 버리고 이동할까요?'))return
           if(section!==value){newsDirty.current=false;setSection(value)}
-        }}>{value==='recruit'?'채용 관리':'소식 관리'}</button>)}
-      </nav>{section==='recruit'?<Dashboard key={user.expiresAt} onExpired={expire}/>:<AdminNews key={user.expiresAt} onExpired={expire} onDirty={setNewsDirty}/>}</>
+        }}>{value==='recruit'?'채용 관리':value==='news'?'소식 관리':'비밀번호 변경'}</button>)}
+      </nav>{section==='recruit'?<Dashboard key={user.expiresAt} onExpired={expire}/>:section==='news'?<AdminNews key={user.expiresAt} onExpired={expire} onDirty={setNewsDirty}/>:<AdminPassword
+        key={user.expiresAt} email={user.email} onExpired={expire} onBusy={setBusy} onChanged={()=>{
+          generation.current++; setUser(null); setError(''); setNotice('비밀번호가 변경되었습니다. 새 비밀번호로 로그인해 주세요.')
+        }}/>}</>
       : <main className="admin-login">
         <p className="admin-eyebrow">RECRUITMENT</p><h1>관리자 로그인</h1>
         <p className="admin-muted">승인된 Supabase 관리자 계정으로 로그인해 주세요.</p>
+        {notice && <p className="admin-success" role="status">{notice}</p>}
         <form onSubmit={login} className="admin-login-form">
           <label>이메일<input name="email" type="email" autoComplete="username" required maxLength={254} disabled={busy} /></label>
           <label>비밀번호<input name="password" type="password" autoComplete="current-password" required maxLength={1024} disabled={busy} /></label>

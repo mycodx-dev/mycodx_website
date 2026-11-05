@@ -11,6 +11,7 @@ import { takeRateSlot } from './rateLimit.ts'
 import { serviceFailureLog } from './serviceDiagnostics.ts'
 import { validateNews } from './newsValidation.ts'
 import type { NewsPostSummary } from '../shared/news.ts'
+import { passwordChangeError } from '../shared/adminPassword.ts'
 
 interface Dependencies {
   config: AdminConfig
@@ -54,6 +55,16 @@ function detail(data: AdminApplicationDetail): AdminApplicationDetail {
 }
 
 export function createAdminHandler({ config, gateway, database, store, now = Date.now, log = console.error }: Dependencies) {
+  const limitAuthentication = async (request: Request, email: string) => {
+    const ip = process.env.VERCEL ? request.headers.get('x-real-ip') || 'unknown' : 'local'
+    await takeRateSlot(store, `admin-login/ip/${digest(ip, config.signingSecret)}`, 10, now())
+    await takeRateSlot(store, `admin-login/email/${digest(email.toLowerCase(), config.signingSecret)}`, 10, now())
+    await takeRateSlot(store, 'admin-login/global', 100, now())
+  }
+  const endSession = async (token: string) => {
+    try { await gateway.signOut(token) }
+    catch (error) { log(serviceFailureLog(error)) }
+  }
   return async (request: Request) => {
     let cookie: string | undefined
     const reply = (data: unknown, code = 200) => Response.json(data, {
@@ -79,10 +90,7 @@ export function createAdminHandler({ config, gateway, database, store, now = Dat
           typeof input.password !== 'string' || !input.password.length || input.password.length > 1024) throw new FormError('INVALID_FIELDS')
         const email = input.email.trim().toLowerCase()
         // Vercel overwrites x-real-ip. Do not trust caller-supplied forwarded-for chains.
-        const ip = process.env.VERCEL ? request.headers.get('x-real-ip') || 'unknown' : 'local'
-        await takeRateSlot(store, `admin-login/ip/${digest(ip, config.signingSecret)}`, 10, now())
-        await takeRateSlot(store, `admin-login/email/${digest(email, config.signingSecret)}`, 10, now())
-        await takeRateSlot(store, 'admin-login/global', 100, now())
+        await limitAuthentication(request, email)
         const session = await gateway.signIn(email, input.password)
         const actor = await gateway.getUser(session.token)
         if (await database.rpc('recruit_is_admin', { p_actor: actor.id }) !== true) {
@@ -99,6 +107,39 @@ export function createAdminHandler({ config, gateway, database, store, now = Dat
       const args = { p_actor: actor.id }
       if (typeof input.action === 'string' && input.action.startsWith('news:') && !config.newsEnabled) throw new FormError('NEWS_DISABLED', 503)
       switch (input.action) {
+        case 'password:change': {
+          const invalid = passwordChangeError(input.currentPassword, input.newPassword, input.confirmPassword)
+          if (invalid) throw new FormError(invalid)
+          await limitAuthentication(request, actor.email)
+          let verified: { token: string; expiresIn: number }
+          try { verified = await gateway.signIn(actor.email, input.currentPassword as string) }
+          catch (error) {
+            if (error instanceof FormError && error.code === 'LOGIN_FAILED') throw new FormError('CURRENT_PASSWORD_INVALID')
+            throw error
+          }
+          try {
+            // Never accept a target email/user ID from the browser.
+            const freshActor = await gateway.getUser(verified.token)
+            if (freshActor.id !== actor.id || await database.rpc('recruit_is_admin', args) !== true) {
+              throw new FormError('ADMIN_FORBIDDEN', 403)
+            }
+            try { await gateway.updatePassword(verified.token, input.currentPassword as string, input.newPassword as string) }
+            catch (error) {
+              if (error instanceof FormError && error.status < 500) throw error
+              // A timeout may occur after Auth committed the change. Never retry it automatically.
+              cookie = clearAdminCookie(config)
+              log(serviceFailureLog(error))
+              await endSession(session.token)
+              return reply({ error: 'PASSWORD_CHANGE_UNCERTAIN' }, 503)
+            }
+            cookie = clearAdminCookie(config)
+            await endSession(session.token)
+            return reply({ ok: true })
+          } finally {
+            // Reauthentication creates a temporary session, including on policy rejection.
+            await endSession(verified.token)
+          }
+        }
         case 'news:list': {
           let time: string | null = null, cursorId: string | null = null
           if (input.before != null) {

@@ -9,6 +9,7 @@ export interface DownloadGrant { bucket: string; path: string; filename: string;
 export interface AdminGateway {
   signIn(email: string, password: string): Promise<{ token: string; expiresIn: number }>
   getUser(token: string): Promise<AuthUser>
+  updatePassword(token: string, currentPassword: string, password: string): Promise<void>
   signOut(token: string): Promise<void>
   signDownload(fileId: string, grant: DownloadGrant): Promise<string>
 }
@@ -51,6 +52,28 @@ export function createAdminGateway(config: AdminConfig, fetcher: typeof fetch = 
         throw new FormError('AUTH_REQUIRED', 401)
       }
       return { id: data.id, email: data.email }
+    }),
+    updatePassword: (token, currentPassword, password) => serviceOperation('supabase', 'auth_password', async () => {
+      const response = await request('/auth/v1/user', {
+        method: 'PUT', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password, current_password: currentPassword }),
+      }, config.publishableKey)
+      if (response.ok) { await response.body?.cancel(); return }
+      if (response.status === 429) { await response.body?.cancel(); throw new FormError('RATE_LIMITED', 429) }
+      if (response.status === 401) { await response.body?.cancel(); throw new FormError('AUTH_REQUIRED', 401) }
+      if ([400, 403, 422].includes(response.status)) {
+        const data = await json(response)
+        // Only fixed codes leave the adapter, never provider messages or bodies.
+        const codes: Record<string, string> = {
+          weak_password: 'PASSWORD_WEAK', same_password: 'PASSWORD_SAME',
+          invalid_credentials: 'CURRENT_PASSWORD_INVALID',
+          reauthentication_needed: 'PASSWORD_REAUTH_REQUIRED', reauthentication_not_valid: 'PASSWORD_REAUTH_REQUIRED',
+          insufficient_aal: 'PASSWORD_REAUTH_REQUIRED',
+        }
+        throw new FormError(typeof data.code === 'string' ? codes[data.code] ?? 'PASSWORD_REJECTED' : 'PASSWORD_REJECTED')
+      }
+      await response.body?.cancel()
+      throw new ServiceOperationError('supabase', 'auth_password', undefined, response.status)
     }),
     signOut: token => serviceOperation('supabase', 'auth_logout', async () => {
       const response = await request('/auth/v1/logout?scope=local', { method: 'POST', headers: { Authorization: `Bearer ${token}` } }, config.publishableKey)

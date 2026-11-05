@@ -7,6 +7,7 @@ import { createAdminCookie, readAdminSession, ADMIN_SESSION_MS } from '../server
 import { createAdminGateway } from '../server/adminGateway.ts'
 import { createRecruitDatabase } from '../server/supabase.ts'
 import { FormError } from '../server/validation.ts'
+import { passwordChangeError } from '../shared/adminPassword.ts'
 
 const NOW = Date.UTC(2026, 10, 4, 8)
 const ORIGIN = 'https://example.test'
@@ -29,8 +30,13 @@ function fixture(options = {}) {
   let active = options.active ?? true
   const gateway = {
     async signIn(email, password) { calls.push(['login', email]); if (options.invalidLogin) throw new FormError('LOGIN_FAILED', 401); assert.equal(password, 'password-test-only'); return { token: TOKEN, expiresIn: 3600 } },
-    async getUser(token) { assert.equal(token, TOKEN); calls.push(['user']); return { id: USER, email: 'admin@example.test' } },
-    async signOut() { calls.push(['logout']) },
+    async getUser(token) { assert.equal(token, TOKEN); calls.push(['user']); return { id: options.wrongFreshUser && calls.some(c => c[0] === 'login') ? randomUUID() : USER, email: 'admin@example.test' } },
+    async signOut() { calls.push(['logout']); if (options.logoutFails) throw new Error('PRIVATE_LOGOUT_SECRET') },
+    async updatePassword(token, current, password) {
+      calls.push(['password', token])
+      assert.equal(current, 'password-test-only'); assert.equal(password, 'new-password-test-only')
+      if (options.passwordError) throw options.passwordError
+    },
     async signDownload() { calls.push(['sign']); return 'https://test-project.supabase.co/storage/signed?token=TEST_ONLY' },
   }
   const database = { async rpc(name, args) {
@@ -63,6 +69,107 @@ test('admin configuration is independent of email provider and needs server-only
     assert.equal(getAdminConfig({ ...env, [key]: '' }).enabled, false, key)
   }
   assert.equal(getAdminConfig({ ...env, SUPABASE_URL: 'https://attacker.test' }).enabled, false)
+})
+
+const change = { action: 'password:change', currentPassword: 'password-test-only',
+  newPassword: 'new-password-test-only', confirmPassword: 'new-password-test-only' }
+
+test('password change verifies the current actor, ignores target IDs, clears cookies and closes both sessions', async () => {
+  const f = fixture()
+  const response = await f.post({ ...change, email: 'other@example.test', userId: randomUUID() })
+  assert.equal(response.status, 200)
+  assert.deepEqual(await response.json(), { ok: true })
+  assert.match(response.headers.get('set-cookie'), /Max-Age=0/)
+  assert.deepEqual(f.calls.map(c => c[0]), ['user', 'recruit_is_admin', 'login', 'user', 'recruit_is_admin', 'password', 'logout', 'logout'])
+  assert.equal(f.calls.find(c => c[0] === 'login')[1], 'admin@example.test')
+  assert.equal(f.logs.length, 0)
+})
+
+test('password mutation requires session, same origin and an active approved admin', async () => {
+  for (const [headers, status] of [[{ Cookie: '' }, 401], [{ Origin: 'https://attacker.test' }, 403], [{ 'X-Admin-Request': '' }, 403]]) {
+    const f = fixture()
+    assert.equal((await f.post(change, headers)).status, status)
+    assert.equal(f.calls.length, 0)
+  }
+  const inactive = fixture({ active: false })
+  assert.equal((await inactive.post(change)).status, 403)
+  assert.ok(!inactive.calls.some(c => c[0] === 'login' || c[0] === 'password'))
+  const wrongActor = fixture({ wrongFreshUser: true })
+  assert.equal((await wrongActor.post(change)).status, 403)
+  assert.ok(!wrongActor.calls.some(c => c[0] === 'password'))
+  assert.equal(wrongActor.calls.at(-1)[0], 'logout')
+})
+
+test('wrong current password is bounded by shared login rate limits and does not change or log credentials', async () => {
+  const f = fixture({ invalidLogin: true })
+  for (let i = 0; i < 10; i++) {
+    const response = await f.post(change)
+    assert.equal(response.status, 400)
+    assert.deepEqual(await response.json(), { error: 'CURRENT_PASSWORD_INVALID' })
+    assert.equal(response.headers.get('set-cookie'), null)
+  }
+  assert.equal((await f.post(change)).status, 429)
+  assert.equal((await f.post({ action: 'login', email: 'admin@example.test', password: 'password-test-only' })).status, 429)
+  assert.equal(f.calls.filter(c => c[0] === 'login').length, 10)
+  assert.ok(!f.calls.some(c => c[0] === 'password'))
+  assert.equal(f.logs.length, 0)
+})
+
+test('password validation rejects mismatches, short, equal and oversized UTF-8 values before reauthentication', async () => {
+  const f = fixture()
+  for (const [fields, code] of [
+    [{ newPassword: 'short', confirmPassword: 'short' }, 'PASSWORD_TOO_SHORT'],
+    [{ confirmPassword: 'different-password' }, 'PASSWORD_MISMATCH'],
+    [{ newPassword: change.currentPassword, confirmPassword: change.currentPassword }, 'PASSWORD_SAME'],
+    [{ newPassword: '한'.repeat(25), confirmPassword: '한'.repeat(25) }, 'PASSWORD_TOO_LONG'],
+    [{ currentPassword: null }, 'INVALID_FIELDS'],
+  ]) assert.deepEqual(await (await f.post({ ...change, ...fields })).json(), { error: code })
+  assert.ok(!f.calls.some(c => c[0] === 'login' || c[0] === 'password'))
+  assert.equal(passwordChangeError('old', '  pass word 12  ', '  pass word 12  '), null)
+  assert.equal(passwordChangeError('old', '한'.repeat(24), '한'.repeat(24)), null)
+})
+
+test('provider rejection cleans temporary session, uncertain update clears session, logout failure cannot undo success', async () => {
+  const rejected = fixture({ passwordError: new FormError('PASSWORD_WEAK') })
+  const failure = await rejected.post(change)
+  assert.deepEqual(await failure.json(), { error: 'PASSWORD_WEAK' })
+  assert.equal(failure.headers.get('set-cookie'), null)
+  assert.equal(rejected.calls.filter(c => c[0] === 'logout').length, 1)
+  const uncertain = fixture({ passwordError: new Error('PRIVATE_PASSWORD_AND_TOKEN') })
+  const result = await uncertain.post(change)
+  assert.equal(result.status, 503)
+  assert.deepEqual(await result.json(), { error: 'PASSWORD_CHANGE_UNCERTAIN' })
+  assert.match(result.headers.get('set-cookie'), /Max-Age=0/)
+  assert.equal(uncertain.calls.filter(c => c[0] === 'password').length, 1)
+  assert.equal(uncertain.calls.filter(c => c[0] === 'logout').length, 2)
+  assert.ok(!JSON.stringify(uncertain.logs).includes('PRIVATE_'))
+  const logoutFailure = fixture({ logoutFails: true })
+  assert.deepEqual(await (await logoutFailure.post(change)).json(), { ok: true })
+  assert.ok(!JSON.stringify(logoutFailure.logs).includes('PRIVATE_'))
+})
+
+test('password adapter uses user-scoped PUT and maps provider failures without leaking raw error bodies', async () => {
+  const gateway = createAdminGateway(config, async (url, init) => {
+    assert.equal(url, `${config.supabaseUrl}/auth/v1/user`)
+    assert.equal(init.method, 'PUT')
+    assert.equal(init.headers.apikey, config.publishableKey)
+    assert.equal(init.headers.Authorization, `Bearer ${TOKEN}`)
+    assert.deepEqual(JSON.parse(init.body), { password: change.newPassword, current_password: change.currentPassword })
+    assert.ok(!JSON.stringify(init).includes(config.supabaseSecretKey))
+    return Response.json({ id: USER })
+  })
+  await gateway.updatePassword(TOKEN, change.currentPassword, change.newPassword)
+  for (const [status, code, expected] of [
+    [422, 'weak_password', 'PASSWORD_WEAK'], [422, 'same_password', 'PASSWORD_SAME'],
+    [400, 'reauthentication_needed', 'PASSWORD_REAUTH_REQUIRED'], [400, 'invalid_credentials', 'CURRENT_PASSWORD_INVALID'],
+    [403, 'insufficient_aal', 'PASSWORD_REAUTH_REQUIRED'], [400, 'unknown', 'PASSWORD_REJECTED'],
+    [429, 'rate', 'RATE_LIMITED'], [401, 'expired', 'AUTH_REQUIRED'], [500, 'unexpected', 'UNAVAILABLE'],
+  ]) {
+    const failing = createAdminGateway(config, async () => Response.json({ code, message: 'PRIVATE_SECRET' }, { status }))
+    await assert.rejects(failing.updatePassword(TOKEN, change.currentPassword, change.newPassword), error => {
+      assert.equal(error.code, expected); assert.ok(!JSON.stringify(error).includes('PRIVATE_SECRET')); return true
+    })
+  }
 })
 
 test('admin session is signed, HttpOnly, Secure, Strict, host-only, expires within one hour', () => {
