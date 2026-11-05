@@ -5,6 +5,7 @@ import type { AdminApplicationDetail, AdminApplicationList, AdminUser, Applicati
 import { adminRequest, AdminError, adminErrorMessage } from '../services/admin'
 import '../styles/admin.css'
 import AdminNews from './AdminNews'
+import AdminPublications from './AdminPublications'
 import AdminPassword from './AdminPassword'
 
 const date = (value: string) => new Intl.DateTimeFormat('ko-KR', {
@@ -19,13 +20,13 @@ export default function Admin() {
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
   const [busy, setBusy] = useState(false)
-  const [section, setSection] = useState<'recruit'|'news'|'password'>('recruit')
-  const newsDirty = useRef(false)
-  const setNewsDirty = useCallback((dirty:boolean)=>{newsDirty.current=dirty},[])
+  const [section, setSection] = useState<'recruit'|'news'|'publications'|'password'>('recruit')
+  const contentDirty = useRef(false)
+  const setContentDirty = useCallback((dirty:boolean)=>{contentDirty.current=dirty},[])
   const generation = useRef(0)
 
   const expire = useCallback((cause?: unknown) => {
-    newsDirty.current=false
+    contentDirty.current=false
     generation.current++
     setUser(null)
     setNotice('')
@@ -79,8 +80,8 @@ export default function Admin() {
     finally { setBusy(false) }
   }
   async function logout() {
-    if(newsDirty.current && !window.confirm('저장하지 않은 소식 내용을 버리고 로그아웃할까요?'))return
-    newsDirty.current=false
+    if(contentDirty.current && !window.confirm('저장하지 않은 내용을 버리고 로그아웃할까요?'))return
+    contentDirty.current=false
     generation.current++; setUser(null); setBusy(true); setError(''); setNotice('')
     try { await adminRequest('logout') }
     catch { setError('화면에서 로그아웃했지만 서버 연결을 확인하지 못했습니다. 연결 후 로그아웃을 다시 눌러 주세요.') }
@@ -89,19 +90,19 @@ export default function Admin() {
 
   return <div className="admin-shell" lang="ko">
     <header className="admin-header">
-      <Link to="/" className="admin-brand" onClick={e=>{if(newsDirty.current&&!window.confirm('저장하지 않은 내용을 버리고 홈페이지로 이동할까요?'))e.preventDefault()}}>MycoDx <span>관리자</span></Link>
+      <Link to="/" className="admin-brand" onClick={e=>{if(busy||(contentDirty.current&&!window.confirm('저장하지 않은 내용을 버리고 홈페이지로 이동할까요?')))e.preventDefault()}}>MycoDx <span>관리자</span></Link>
       <div className="admin-account">{user && <span>{user.email}</span>}
         {(user || error.includes('로그아웃')) && <button className="admin-button admin-button--quiet" onClick={logout} disabled={busy}>로그아웃</button>}
-        <Link to="/" onClick={e=>{if(newsDirty.current&&!window.confirm('저장하지 않은 내용을 버리고 홈페이지로 이동할까요?'))e.preventDefault()}}>홈페이지 ↗</Link>
+        <Link to="/" onClick={e=>{if(busy||(contentDirty.current&&!window.confirm('저장하지 않은 내용을 버리고 홈페이지로 이동할까요?')))e.preventDefault()}}>홈페이지 ↗</Link>
       </div>
     </header>
     {checking ? <main className="admin-login"><p role="status">로그인 상태를 확인하고 있습니다.</p></main>
       : user ? <><nav className="admin-tabs" aria-label="관리 메뉴">
-        {(['recruit','news','password'] as const).map(value=><button key={value} disabled={busy} className={section===value?'is-active':''} aria-current={section===value?'page':undefined} onClick={()=>{
-          if(section!==value && newsDirty.current && !window.confirm('저장하지 않은 내용을 버리고 이동할까요?'))return
-          if(section!==value){newsDirty.current=false;setSection(value)}
-        }}>{value==='recruit'?'채용 관리':value==='news'?'소식 관리':'비밀번호 변경'}</button>)}
-      </nav>{section==='recruit'?<Dashboard key={user.expiresAt} onExpired={expire}/>:section==='news'?<AdminNews key={user.expiresAt} onExpired={expire} onDirty={setNewsDirty}/>:<AdminPassword
+        {(['recruit','news','publications','password'] as const).map(value=><button key={value} disabled={busy} className={section===value?'is-active':''} aria-current={section===value?'page':undefined} onClick={()=>{
+          if(section!==value && contentDirty.current && !window.confirm('저장하지 않은 내용을 버리고 이동할까요?'))return
+          if(section!==value){contentDirty.current=false;setSection(value)}
+        }}>{value==='recruit'?'채용 관리':value==='news'?'소식 관리':value==='publications'?'논문 관리':'비밀번호 변경'}</button>)}
+      </nav>{section==='recruit'?<Dashboard key={user.expiresAt} onExpired={expire}/>:section==='news'?<AdminNews key={user.expiresAt} onExpired={expire} onDirty={setContentDirty}/>:section==='publications'?<AdminPublications key={user.expiresAt} onExpired={expire} onDirty={setContentDirty} onBusy={setBusy}/>:<AdminPassword
         key={user.expiresAt} email={user.email} onExpired={expire} onBusy={setBusy} onChanged={()=>{
           generation.current++; setUser(null); setError(''); setNotice('비밀번호가 변경되었습니다. 새 비밀번호로 로그인해 주세요.')
         }}/>}</>

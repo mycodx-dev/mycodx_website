@@ -4,11 +4,13 @@ import { Link, useLocation } from 'react-router-dom'
 import mycoDxLogo from '../../assets/logo/mycodx-wordmark.png'
 import { homeNavigation } from '../../data/homeNavigation'
 
+// Display ISO 3166-1 alpha-2 country codes; keep language codes for i18n/html lang.
+// English uses the US country label, without changing the translation locale.
 const languageOptions = [
-  { code: 'ko', shortLabel: 'KO', label: '한국어' },
-  { code: 'en', shortLabel: 'EN', label: 'English' },
-  { code: 'fr', shortLabel: 'FR', label: 'Français' },
-  { code: 'ja', shortLabel: 'JA', label: '日本語' },
+  { code: 'ko', countryCode: 'KR', label: '한국어' },
+  { code: 'en', countryCode: 'US', label: 'English' },
+  { code: 'fr', countryCode: 'FR', label: 'Français' },
+  { code: 'ja', countryCode: 'JP', label: '日本語' },
 ] as const
 
 const getLanguageCode = (language: string) => {
@@ -135,7 +137,7 @@ export default function Header() {
               aria-expanded={languageMenuOpen}
               onClick={() => setLanguageMenuOpen((open) => !open)}
             >
-              <span>{currentLanguage.shortLabel}</span>
+              <span>{currentLanguage.countryCode}</span>
               <span className="language-button__chevron" aria-hidden="true" />
             </button>
 
@@ -153,7 +155,7 @@ export default function Header() {
                       aria-checked={isSelected}
                       onClick={() => selectLanguage(language.code)}
                     >
-                      <span className="language-menu__short">{language.shortLabel}</span>
+                      <span className="language-menu__short">{language.countryCode}</span>
                       <span className="language-menu__label">{language.label}</span>
                     </button>
                   )

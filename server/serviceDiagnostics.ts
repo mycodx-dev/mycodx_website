@@ -7,6 +7,7 @@ type Operation = 'read_json' | 'create_json' | 'read_file' | 'upload_token' |
   'storage_upload' | 'storage_download' | 'storage_sign' | 'auth_login' | 'auth_user' | 'auth_logout' | 'auth_password' |
   'recruit_is_admin' | 'recruit_admin_list' | 'recruit_admin_detail' | 'recruit_admin_search' |
   'recruit_set_review_status' | 'recruit_prepare_download' | 'recruit_record_download' |
+  'publications_admin_list' | 'publications_admin_detail' | 'publications_save' | 'publications_publish' | 'publications_public_list' |
   'news_admin_list' | 'news_admin_detail' | 'news_save' | 'news_publish' | 'news_public_list'
 
 // Fixed codes only: never copy messages, URLs, request bodies, paths or stacks.

@@ -33,18 +33,8 @@ export interface PatentPublication {
   url?: string
 }
 
-export interface ResearchPublication {
-  year: number
-  title: string
-  authors: string
-  mycodxAuthors: string
-  journal: string
-  volume: string
-  article: string
-  description: LocalizedText
-  doi: string
-  url: string
-}
+export type { PublicationContent as ResearchPublication } from '../../shared/publications'
+import type { PublicationContent as ResearchPublication } from '../../shared/publications'
 
 export interface PublicationYearGroup {
   year: number

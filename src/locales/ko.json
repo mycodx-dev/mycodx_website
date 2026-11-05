@@ -164,7 +164,14 @@
     "emptyPapers": "등록된 논문 자료가 없습니다.",
     "emptyPatents": "특허 자료가 준비되는 대로 업데이트됩니다.",
     "country": "국가",
-    "registrationNumber": "등록번호"
+    "registrationNumber": "등록번호",
+    "loading": "논문을 불러오는 중입니다.",
+    "loadError": "논문을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.",
+    "retry": "다시 불러오기",
+    "empty": "등록된 논문이 없습니다.",
+    "more": "논문 더 보기",
+    "volumeInfo": "{{volume}}권",
+    "articleInfo": "Article {{article}}"
   },
   "product": {
     "kicker": "Product",

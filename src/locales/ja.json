@@ -164,7 +164,14 @@
     "emptyPapers": "登録された論文資料がありません。",
     "emptyPatents": "特許資料は準備ができ次第更新されます。",
     "country": "国",
-    "registrationNumber": "登録番号"
+    "registrationNumber": "登録番号",
+    "loading": "論文を読み込んでいます。",
+    "loadError": "論文を読み込めませんでした。もう一度お試しください。",
+    "retry": "再読み込み",
+    "empty": "公開されている論文はありません。",
+    "more": "論文をもっと見る",
+    "volumeInfo": "{{volume}}巻",
+    "articleInfo": "Article {{article}}"
   },
   "product": {
     "kicker": "Product",

@@ -1,3 +1,5 @@
+import { validatePublication } from './publicationValidation.ts'
+import type { PublicationSummary } from '../shared/publications.ts'
 import type { AdminConfig } from './adminConfig.ts'
 import type { AdminGateway, DownloadGrant } from './adminGateway.ts'
 import type { RecruitDatabase } from './supabase.ts'
@@ -32,6 +34,7 @@ const headers = {
 // round trip. Session inspection and password changes still check explicitly.
 const authorizedRpcActions = new Set([
   'list', 'detail', 'review', 'download', 'news:list', 'news:detail', 'news:save', 'news:publish',
+  'publications:list', 'publications:detail', 'publications:save', 'publications:publish',
 ])
 function id(value: unknown) {
   if (typeof value !== 'string' || !UUID_PATTERN.test(value)) throw new FormError('INVALID_FIELDS')
@@ -118,6 +121,7 @@ export function createAdminHandler({ config, gateway, database, store, now = Dat
         await database.rpc('recruit_is_admin', { p_actor: actor.id }) !== true) throw new FormError('ADMIN_FORBIDDEN', 403)
       const args = { p_actor: actor.id }
       if (typeof input.action === 'string' && input.action.startsWith('news:') && !config.newsEnabled) throw new FormError('NEWS_DISABLED', 503)
+      if (typeof input.action === 'string' && input.action.startsWith('publications:') && !config.publicationsEnabled) throw new FormError('PUBLICATIONS_DISABLED', 503)
       switch (input.action) {
         case 'password:change': {
           const invalid = passwordChangeError(input.currentPassword, input.newPassword, input.confirmPassword)
@@ -171,6 +175,26 @@ export function createAdminHandler({ config, gateway, database, store, now = Dat
           if (input.action === 'news:save') return reply(await database.rpc('news_save', { ...values, p_draft: validateNews(input.draft) }))
           if (typeof input.publish !== 'boolean') throw new FormError('INVALID_FIELDS')
           return reply(await database.rpc('news_publish', { ...values, p_publish: input.publish }))
+        }
+        case 'publications:list': {
+          let time: string | null = null, cursorId: string | null = null
+          if (input.before != null) {
+            if (typeof input.before !== 'object' || Array.isArray(input.before)) throw new FormError('INVALID_FIELDS')
+            const before = input.before as Record<string, unknown>
+            if (typeof before.time !== 'string' || before.time.length > 40 || !/^\d{4}-\d{2}-\d{2}T[\d:.]+(?:Z|[+-]\d{2}:\d{2})$/.test(before.time) || !Number.isFinite(Date.parse(before.time))) throw new FormError('INVALID_FIELDS')
+            time = before.time; cursorId = id(before.id)
+          }
+          const rows = await database.rpc<PublicationSummary[]>('publications_admin_list', { ...args, p_before_time: time, p_before_id: cursorId })
+          const items = rows.slice(0,20), last = items.at(-1)
+          return reply({ items, nextCursor: rows.length>20 && last ? { time:last.updated_at,id:last.id } : null })
+        }
+        case 'publications:detail': return reply(await database.rpc('publications_admin_detail', { ...args, p_post_id: id(input.postId) }))
+        case 'publications:save': case 'publications:publish': {
+          if (!Number.isSafeInteger(input.version) || Number(input.version)<0 || Number(input.version)>2147483646) throw new FormError('INVALID_FIELDS')
+          const values = { ...args, p_post_id: id(input.postId), p_version: input.version }
+          if (input.action === 'publications:save') return reply(await database.rpc('publications_save', { ...values, p_draft: validatePublication(input.draft) }))
+          if (typeof input.publish !== 'boolean') throw new FormError('INVALID_FIELDS')
+          return reply(await database.rpc('publications_publish', { ...values, p_publish: input.publish }))
         }
         case 'session': return reply({ email: actor.email, expiresAt: session.expiresAt })
         case 'list': {

@@ -164,7 +164,14 @@
     "emptyPapers": "No paper records are currently available.",
     "emptyPatents": "Patent records will be updated when the source data is available.",
     "country": "Country",
-    "registrationNumber": "Registration No."
+    "registrationNumber": "Registration No.",
+    "loading": "Loading publications…",
+    "loadError": "Unable to load publications. Please try again.",
+    "retry": "Retry",
+    "empty": "No publications are available.",
+    "more": "More publications",
+    "volumeInfo": "Volume {{volume}}",
+    "articleInfo": "Article {{article}}"
   },
   "product": {
     "kicker": "Product",

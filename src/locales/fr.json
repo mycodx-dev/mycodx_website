@@ -164,7 +164,14 @@
     "emptyPapers": "Aucun article enregistré pour le moment.",
     "emptyPatents": "Les données de brevets seront mises à jour dès leur disponibilité.",
     "country": "Pays",
-    "registrationNumber": "Numéro d'enregistrement"
+    "registrationNumber": "Numéro d'enregistrement",
+    "loading": "Chargement des publications…",
+    "loadError": "Impossible de charger les publications. Veuillez réessayer.",
+    "retry": "Réessayer",
+    "empty": "Aucune publication disponible.",
+    "more": "Plus de publications",
+    "volumeInfo": "Volume {{volume}}",
+    "articleInfo": "Article {{article}}"
   },
   "product": {
     "kicker": "Produits",
