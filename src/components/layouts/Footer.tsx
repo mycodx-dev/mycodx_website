@@ -17,6 +17,8 @@ const Footer = () => {
               <img
                 src={isKorean ? mycoDxLogoKo : mycoDxLogo}
                 alt={isKorean ? 'MycoDx, 주식회사 마이코디엑스' : 'MycoDx'}
+                loading="lazy"
+                decoding="async"
               />
             </Link>
             <p className="footer-slogan">

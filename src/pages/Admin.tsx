@@ -48,12 +48,15 @@ export default function Admin() {
     const controller = new AbortController()
     const current = generation.current
     const timer = window.setTimeout(() => expire(), Math.max(0, user.expiresAt - Date.now()))
+    let verifying = false
     const verify = () => {
-      if (document.visibilityState !== 'visible') return
+      // A single tab return commonly emits both focus and visibilitychange.
+      if (document.visibilityState !== 'visible' || verifying) return
+      verifying = true
       adminRequest<AdminUser>('session', {}, controller.signal).catch(cause => {
         // Fail closed when returning to an unattended administrator tab.
         if (!controller.signal.aborted && current === generation.current) expire(cause)
-      })
+      }).finally(() => { verifying = false })
     }
     window.addEventListener('focus', verify)
     document.addEventListener('visibilitychange', verify)

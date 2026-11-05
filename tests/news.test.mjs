@@ -8,6 +8,7 @@ import { getAdminConfig } from '../server/adminConfig.ts'
 import { createAdminCookie } from '../server/adminSession.ts'
 import { createRecruitDatabase } from '../server/supabase.ts'
 import { newsAddress } from '../shared/news.ts'
+import { FormError } from '../server/validation.ts'
 
 const origin='https://example.test',actor=randomUUID(),postId=randomUUID()
 const config=getAdminConfig({NEWS_CMS_ENABLED:'true',SUPABASE_URL:'https://test-project.supabase.co',SUPABASE_SECRET_KEY:'sb_secret_test',SUPABASE_PUBLISHABLE_KEY:'sb_publishable_test',FORM_SIGNING_SECRET:'test-only-secret-longer-than-thirty-two-characters',FORM_ALLOWED_ORIGINS:origin,BLOB_READ_WRITE_TOKEN:'test'})
@@ -62,7 +63,7 @@ test('public news uses only published RPC and validates cursor/slug, never accep
 test('news admin writes require verified actor and allowlist, with fixed RPCs and validated drafts',async()=>{
   const calls=[];let active=true
   const gateway={async getUser(){return{id:actor,email:'admin@example.test'}}}
-  const database={async rpc(name,args){calls.push([name,args]);if(name==='recruit_is_admin')return active;return{id:postId,draft:args.p_draft,version:1}}}
+  const database={async rpc(name,args){calls.push([name,args]);if(name==='recruit_is_admin')return active;if(!active)throw new FormError('ADMIN_FORBIDDEN',403);return{id:postId,draft:args.p_draft,version:1}}}
   const handler=createAdminHandler({config,gateway,database,store:{},log:()=>{}})
   const cookie=createAdminCookie('header.payload.signature',3600,config).cookie.split(';')[0]
   const request=(body,withCookie=true)=>handler(new Request(origin+'/api/admin',{method:'POST',headers:{origin,'X-Admin-Request':'1','Content-Type':'application/json',cookie:withCookie?cookie:''},body:JSON.stringify(body)}))

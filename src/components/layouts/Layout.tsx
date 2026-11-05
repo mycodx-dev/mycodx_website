@@ -1,9 +1,10 @@
-import { useEffect, type ReactNode } from 'react'
+import { useEffect, type ReactNode, type SyntheticEvent } from 'react'
 import { useLocation } from 'react-router-dom'
 import BackToTopButton from '../common/BackToTopButton'
 import PageMeta from '../common/PageMeta'
 import Footer from './Footer'
 import Header from './Header'
+import { preloadPage } from '../../routes/pageModules'
 
 interface LayoutProps {
   children: ReactNode
@@ -12,6 +13,11 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation()
   const isHome = location.pathname === '/'
+  const prepareNavigation = (event: SyntheticEvent) => {
+    const anchor = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>('a[href]') : null
+    if (!anchor || anchor.origin !== window.location.origin || anchor.target === '_blank') return
+    preloadPage(anchor.pathname)
+  }
 
   useEffect(() => {
     if (location.hash) return
@@ -23,7 +29,8 @@ export default function Layout({ children }: LayoutProps) {
   }
 
   return (
-    <div className={isHome ? 'site-shell site-shell--home' : 'site-shell'}>
+    <div className={isHome ? 'site-shell site-shell--home' : 'site-shell'}
+      onPointerOver={prepareNavigation} onFocusCapture={prepareNavigation} onTouchStart={prepareNavigation}>
       <PageMeta />
       <Header />
       <div

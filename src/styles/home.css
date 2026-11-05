@@ -317,7 +317,7 @@
   --copy-shift: -45%;
   top: 50%;
   max-width: 56rem;
-  animation: home-copy-in 900ms 180ms both cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(var(--copy-shift));
 }
 
 .home-eyebrow,
@@ -344,7 +344,7 @@
 }
 
 .home-visual__title {
-  animation: home-title-focus 1.65s 260ms both cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 1;
 }
 
 .home-visual h1 span {
@@ -1304,9 +1304,9 @@ html[lang='ko'] .home-visual h1 {
 .reveal {
   opacity: 0;
   transform: translateY(2.2rem);
-  transition: opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: var(--reveal-delay, 0ms);
+  transition: opacity 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: min(var(--reveal-delay, 0ms), 60ms);
 }
 
 .reveal.is-visible {
@@ -1325,8 +1325,8 @@ html[lang='ko'] .home-visual h1 {
 .home-contact__heading h2 {
   opacity: 0;
   transform: translateY(1.5rem);
-  transition: opacity 720ms 140ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 820ms 140ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 180ms 40ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 220ms 40ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .home-focus__heading.is-visible h2,

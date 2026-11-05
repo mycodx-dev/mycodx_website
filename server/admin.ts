@@ -27,6 +27,12 @@ const headers = {
   'X-Content-Type-Options': 'nosniff', 'X-Robots-Tag': 'noindex, nofollow',
   'Referrer-Policy': 'no-referrer',
 }
+// Each of these RPCs starts with recruit_private.require_admin(p_actor).
+// Authorize within the operation transaction instead of a separate preflight
+// round trip. Session inspection and password changes still check explicitly.
+const authorizedRpcActions = new Set([
+  'list', 'detail', 'review', 'download', 'news:list', 'news:detail', 'news:save', 'news:publish',
+])
 function id(value: unknown) {
   if (typeof value !== 'string' || !UUID_PATTERN.test(value)) throw new FormError('INVALID_FIELDS')
   return value
@@ -57,9 +63,14 @@ function detail(data: AdminApplicationDetail): AdminApplicationDetail {
 export function createAdminHandler({ config, gateway, database, store, now = Date.now, log = console.error }: Dependencies) {
   const limitAuthentication = async (request: Request, email: string) => {
     const ip = process.env.VERCEL ? request.headers.get('x-real-ip') || 'unknown' : 'local'
-    await takeRateSlot(store, `admin-login/ip/${digest(ip, config.signingSecret)}`, 10, now())
-    await takeRateSlot(store, `admin-login/email/${digest(email.toLowerCase(), config.signingSecret)}`, 10, now())
-    await takeRateSlot(store, 'admin-login/global', 100, now())
+    // Independent scopes can be checked together. All must succeed, and all
+    // writes settle before responding. Partial reservations are conservative.
+    const outcomes = await Promise.allSettled([
+      takeRateSlot(store, `admin-login/ip/${digest(ip, config.signingSecret)}`, 10, now()),
+      takeRateSlot(store, `admin-login/email/${digest(email.toLowerCase(), config.signingSecret)}`, 10, now()),
+      takeRateSlot(store, 'admin-login/global', 100, now()),
+    ])
+    for (const outcome of outcomes) if (outcome.status === 'rejected') throw outcome.reason
   }
   const endSession = async (token: string) => {
     try { await gateway.signOut(token) }
@@ -103,7 +114,8 @@ export function createAdminHandler({ config, gateway, database, store, now = Dat
       }
       const session = readAdminSession(request, config, now())
       const actor = await gateway.getUser(session.token)
-      if (await database.rpc('recruit_is_admin', { p_actor: actor.id }) !== true) throw new FormError('ADMIN_FORBIDDEN', 403)
+      if ((typeof input.action !== 'string' || !authorizedRpcActions.has(input.action)) &&
+        await database.rpc('recruit_is_admin', { p_actor: actor.id }) !== true) throw new FormError('ADMIN_FORBIDDEN', 403)
       const args = { p_actor: actor.id }
       if (typeof input.action === 'string' && input.action.startsWith('news:') && !config.newsEnabled) throw new FormError('NEWS_DISABLED', 503)
       switch (input.action) {

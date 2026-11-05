@@ -41,6 +41,7 @@ function fixture(options = {}) {
   }
   const database = { async rpc(name, args) {
     calls.push([name, args]); assert.equal(args.p_actor, USER)
+    if (name !== 'recruit_is_admin' && !active) throw new FormError('ADMIN_FORBIDDEN', 403)
     switch (name) {
       case 'recruit_is_admin': return active
       case 'recruit_admin_search': return { items: options.rows ?? [row], options: { areas: ['연구'], experiences: ['신입'] } }
@@ -53,7 +54,10 @@ function fixture(options = {}) {
       default: throw new Error('Unexpected RPC')
     }
   } }
-  const store = { async createJson(path, value) { if (rate.has(path)) return false; rate.set(path, value); return true } }
+  const store = {
+    async readJson(path) { return rate.get(path) ?? null },
+    async createJson(path, value) { if (rate.has(path)) return false; rate.set(path, value); return true },
+  }
   const handler = createAdminHandler({ config: options.config ?? config, database, gateway, store, now: () => NOW, log: value => logs.push(value) })
   const cookie = createAdminCookie(TOKEN, 3600, config, NOW).cookie.split(';')[0]
   const post = (input, headers = {}, method = 'POST') => handler(new Request(`${ORIGIN}/api/admin`, {
@@ -186,7 +190,7 @@ test('admin session is signed, HttpOnly, Secure, Strict, host-only, expires with
   assert.throws(() => readAdminSession(request(cookie), config, NOW + ADMIN_SESSION_MS), { code: 'AUTH_REQUIRED' })
 })
 
-test('CSRF, non-POST, missing session and inactive administrator fail before private RPCs', async () => {
+test('CSRF and missing sessions fail before RPCs; revoked administrators fail inside authorized RPCs', async () => {
   const f = fixture()
   for (const [headers, status] of [[{ Origin: 'https://attacker.test' }, 403], [{ Origin: '' }, 403],
     [{ 'X-Admin-Request': '' }, 403], [{ 'Sec-Fetch-Site': 'cross-site' }, 403], [{ Cookie: '' }, 401]]) {
@@ -198,7 +202,7 @@ test('CSRF, non-POST, missing session and inactive administrator fail before pri
   const denied = await f.post({ action: 'detail', applicationId: APP })
   assert.equal(denied.status, 403)
   assert.match(denied.headers.get('set-cookie'), /Max-Age=0/)
-  assert.deepEqual(f.calls.map(c => c[0]), ['user', 'recruit_is_admin'])
+  assert.deepEqual(f.calls.map(c => c[0]), ['user', 'recruit_admin_detail'])
 })
 
 test('login returns no access/refresh token and rejects valid but non-approved accounts', async () => {
@@ -230,11 +234,31 @@ test('list uses verified actor, bounded pagination, exact microsecond cursor and
   const response = await f.post({ action: 'list', status: 'unread', before, p_actor: randomUUID(), limit: 999999 })
   const data = await response.json()
   assert.equal(response.status, 200)
+  assert.deepEqual(f.calls.map(c => c[0]), ['user', 'recruit_admin_search'])
   assert.equal(data.items.length, 30)
   assert.deepEqual(data.nextCursor, before)
   assert.ok(!JSON.stringify(data).includes('PRIVATE_HASH'))
   assert.deepEqual(f.calls.at(-1), ['recruit_admin_search', { p_actor: USER, p_status: 'unread', p_limit: 31, p_before_time: before.time, p_before_id: APP, p_query: '', p_area: null, p_experience: null }])
   assert.equal((await f.post({ action: 'list', before: { time: 'bad', id: APP } })).status, 400)
+})
+
+test('each administrator operation rejects revoked access in its own RPC, without separate authorization round trips', async () => {
+  for (const input of [
+    { action: 'list' }, { action: 'detail', applicationId: APP },
+    { action: 'review', applicationId: APP, version: 0, status: 'reviewed' }, { action: 'download', fileId: FILE },
+    { action: 'news:list' }, { action: 'news:detail', postId: APP },
+    { action: 'news:save', postId: APP, version: 0, draft: { date: '2026-11-05', title: { ko: 'test' }, summary: { ko: '' } } },
+    { action: 'news:publish', postId: APP, version: 1, publish: true },
+  ]) {
+    const f = fixture({ active: false, config: { ...config, newsEnabled: true } })
+    const response = await f.post(input)
+    assert.equal(response.status, 403, input.action)
+    assert.deepEqual(await response.json(), { error: 'ADMIN_FORBIDDEN' })
+    assert.match(response.headers.get('set-cookie'), /Max-Age=0/)
+    assert.equal(f.calls[0][0], 'user')
+    assert.equal(f.calls.length, 2)
+    assert.notEqual(f.calls[1][0], 'recruit_is_admin')
+  }
 })
 
 test('detail audits via existing RPC and excludes internal fields; version zero can be reviewed', async () => {

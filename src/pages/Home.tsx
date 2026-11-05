@@ -75,6 +75,8 @@ export default function Home() {
   const location = useLocation()
   const touchStartX = useRef<number | null>(null)
   const [activeSlide, setActiveSlide] = useState(0)
+  const [firstImageLoaded, setFirstImageLoaded] = useState(false)
+  const [loadOtherSlides, setLoadOtherSlides] = useState(false)
   const [heroPaused, setHeroPaused] = useState(false)
   const [reduceMotion, setReduceMotion] = useState(false)
   const [contactStatus, setContactStatus] = useState<
@@ -107,6 +109,13 @@ export default function Home() {
   ).slice(0, 3)
 
   useEffect(() => {
+    if (!firstImageLoaded) return
+    // Let the initial visual and text settle before fetching hidden slides.
+    const timer = window.setTimeout(() => setLoadOtherSlides(true), 1200)
+    return () => window.clearTimeout(timer)
+  }, [firstImageLoaded])
+
+  useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     const updateMotionPreference = () => setReduceMotion(mediaQuery.matches)
 
@@ -137,10 +146,12 @@ export default function Home() {
     let animationFrame = 0
 
     const updateParallax = () => {
+      animationFrame = 0
       const viewportCenter = window.innerHeight / 2
-
-      parallaxElements.forEach((element) => {
-        const bounds = element.getBoundingClientRect()
+      // Read layout before writing styles, and skip images outside the viewport.
+      const positions = parallaxElements.map(element => ({ element, bounds: element.getBoundingClientRect() }))
+      positions.forEach(({ element, bounds }) => {
+        if (bounds.bottom < 0 || bounds.top > window.innerHeight) return
         const elementCenter = bounds.top + bounds.height / 2
         const offset = Math.max(
           -32,
@@ -152,7 +163,7 @@ export default function Home() {
     }
 
     const requestParallaxUpdate = () => {
-      window.cancelAnimationFrame(animationFrame)
+      if (animationFrame) return
       animationFrame = window.requestAnimationFrame(updateParallax)
     }
 
@@ -253,11 +264,13 @@ export default function Home() {
             {heroSlides.map((slide, index) => (
               <img
                 key={slide.src}
-                src={slide.src}
+                src={index === 0 || index === activeSlide || loadOtherSlides ? slide.src : undefined}
                 alt={index === activeSlide ? t(slide.altKey) : ''}
                 className={index === activeSlide ? 'is-active' : ''}
                 aria-hidden={index !== activeSlide}
-                fetchPriority={index === 0 ? 'high' : 'auto'}
+                fetchPriority={index === 0 ? 'high' : 'low'}
+                decoding="async"
+                onLoad={index === 0 ? () => setFirstImageLoaded(true) : undefined}
               />
             ))}
           </div>
@@ -414,6 +427,8 @@ export default function Home() {
             <img
               src={collaborationImage}
               alt={t('home.visuals.collaboration')}
+              loading="lazy"
+              decoding="async"
               data-parallax
             />
           </div>
@@ -430,7 +445,7 @@ export default function Home() {
 
         <section id="contact" className="home-contact">
           <div className="home-contact__background" aria-hidden="true">
-            <img src={heroCultureImage} alt="" data-parallax />
+            <img src={heroCultureImage} alt="" loading="lazy" decoding="async" data-parallax />
           </div>
           <div className="home-contact__veil" aria-hidden="true" />
 
