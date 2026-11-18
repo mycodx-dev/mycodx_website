@@ -3,6 +3,7 @@ import type { FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import type { AdminApplicationDetail, AdminApplicationList, AdminUser, ApplicationCursor, ReviewStatus } from '../../shared/admin'
 import { adminRequest, AdminError, adminErrorMessage } from '../services/admin'
+import { adminFileGroups, downloadApplicationFile } from '../services/adminDownload'
 import '../styles/admin.css'
 import AdminNews from './AdminNews'
 import AdminPublications from './AdminPublications'
@@ -12,7 +13,6 @@ const date = (value: string) => new Intl.DateTimeFormat('ko-KR', {
   timeZone: 'Asia/Seoul', dateStyle: 'medium', timeStyle: 'short',
 }).format(new Date(value))
 const reviewLabel = (value: ReviewStatus) => value === 'reviewed' ? '확인 완료' : '미확인'
-const fileGroups: Record<string, string> = { application: '입사지원서', degree: '학위 증명', transcript: '성적 증명', papers: '논문 및 기타' }
 
 export default function Admin() {
   const [user, setUser] = useState<AdminUser | null>(null)
@@ -241,18 +241,12 @@ function ApplicationDetail({ applicationId, failed, onChanged, onClose }: {
       }
     } finally { if (!signal.aborted) setBusy(false) }
   }
-  async function download(fileId: string) {
-    if (!controller.current) return
+  async function download(file: AdminApplicationDetail['files'][number]) {
+    if (!data || !controller.current) return
     const signal = controller.current.signal
     setBusy(true); setError('')
     try {
-      const result = await adminRequest<{ url: string }>('download', { fileId }, signal)
-      if (!signal.aborted) {
-        const link = document.createElement('a')
-        link.href = result.url; link.rel = 'noreferrer noopener'; link.referrerPolicy = 'no-referrer'
-        // The server signs an attachment download; no file preview or inline execution.
-        document.body.appendChild(link); link.click(); link.remove()
-      }
+      await downloadApplicationFile(data.application.name, file, signal)
     } catch (cause) { if (!signal.aborted) setError(failed(cause)) }
     finally { if (!signal.aborted) setBusy(false) }
   }
@@ -271,8 +265,9 @@ function ApplicationDetail({ applicationId, failed, onChanged, onClose }: {
       </dl>
       <h4>주요 경력 및 지원 내용</h4><p className="admin-message">{a.message || '작성한 내용이 없습니다.'}</p>
       <h4>제출 파일 <span>{data.files.length}</span></h4>
-      <ul className="admin-files">{data.files.map(file => <li key={file.id}><div><span>{fileGroups[file.group] || file.group}</span><strong>{file.name}</strong><small>{(file.size / 1024).toFixed(1)} KB</small></div>
-        <button className="admin-button" onClick={() => download(file.id)} disabled={busy} aria-label={`${file.name} 다운로드`}>다운로드</button></li>)}</ul>
+      <ul className="admin-files">{data.files.map(file => <li key={file.id}><div><span>{adminFileGroups[file.group] || file.group}</span><strong>{file.name}</strong><small>{(file.size / 1024).toFixed(1)} KB</small></div>
+        <button className="admin-button" onClick={() => download(file)} disabled={busy} aria-label={`${file.name} 다운로드`}>다운로드</button></li>)}</ul>
+      <p className="admin-note">파일명은 ‘지원자명_서류종류_원래파일명’으로 저장됩니다.</p>
       <p className="admin-note">다운로드 링크는 최대 60초 동안 유효합니다. 다운로드한 파일은 담당자의 관리 책임 아래 보관·삭제해 주세요.</p>
     </div> : <div className="admin-inset"><button className="admin-button" onClick={() => { setLoading(true); setError(''); setRevision(v => v + 1) }}>다시 불러오기</button></div>}
   </section>

@@ -34,6 +34,7 @@ export function adminErrorMessage(error: unknown) {
       case 'PASSWORD_REJECTED': return '비밀번호를 변경하지 못했습니다. 계정의 비밀번호 정책을 확인해 주세요.'
       case 'PASSWORD_CHANGE_UNCERTAIN': return '비밀번호 변경 결과를 확인하지 못했습니다. 새 비밀번호로 로그인해 보세요. 실패하면 기존 비밀번호로 로그인해 확인해 주세요.'
       case 'VERSION_CONFLICT': return '다른 관리자가 상태를 변경했습니다. 최신 정보를 확인한 뒤 다시 변경해 주세요.'
+      case 'DOWNLOAD_FAILED': return '파일을 다운로드하지 못했습니다. 연결 상태를 확인하고 다운로드 버튼을 다시 눌러 주세요.'
       case 'PUBLICATIONS_DISABLED': return '논문 관리가 아직 활성화되지 않았습니다. SQL 적용 후 PUBLICATIONS_CMS_ENABLED 설정을 확인해 주세요.'
       case 'PUBLICATION_NOT_FOUND': return '논문을 찾을 수 없습니다.'
       case 'PUBLICATION_INVALID_URL': return '논문 링크는 HTTPS 주소 또는 /papers/파일명.pdf 경로를 입력해 주세요.'
