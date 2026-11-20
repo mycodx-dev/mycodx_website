@@ -1,5 +1,57 @@
 [
   {
+    "id": "4",
+    "postNumber": 4,
+    "visible": true,
+    "date": "2026-11-10",
+    "category": "Exhibition",
+    "title": {
+      "ko": "마이코디엑스, ICID 2026에서 결핵 약제감수성검사 자동화 플랫폼 연구 발표",
+      "en": "MycoDx Presents Research on an Automated Tuberculosis Drug Susceptibility Testing Platform at ICID 2026"
+    },
+    "summary": {
+      "ko": "마이코디엑스가 스페인 마드리드에서 열린 ICID 2026에 참가해 AI 기반 결핵 약제감수성검사 자동화 플랫폼 관련 연구를 포스터로 발표했습니다.",
+      "en": "MycoDx presented research on its AI-driven platform for automated tuberculosis drug susceptibility testing at ICID 2026 in Madrid, Spain."
+    },
+    "body": {
+      "ko": "마이코디엑스(MycoDx)는 2026년 11월 10일부터 13일까지 스페인 마드리드에서 열린 제21회 국제감염병학회(ICID 2026)에 참가해 연구 성과를 발표했습니다.\n\n이번 학회에서는 다제내성 및 광범위 약제내성 결핵(MDR/XDR-TB)의 약제감수성검사(DST)를 자동화하기 위한 AI 기반 플랫폼의 개발 및 임상 평가 연구를 포스터로 발표했습니다.\n\n이 플랫폼은 6-well 고체배지 기반 검사에 자동 접종, 배양 및 AI 기반 집락 판독 기술을 통합하는 것을 목표로 합니다. 임상 검체에서 분리한 결핵균 53개 균주를 대상으로 비교 평가한 결과, 6-well 고체배지 기반 검사는 REMA 기준 검사법과 87.8%의 전체 약제감수성 판정 일치율을 보였습니다. AI 기반 집락 판독 성능에 대한 검증은 진행 중입니다.\n\n마이코디엑스는 앞으로도 검사 과정의 자동화와 표준화를 위한 플랫폼 개발 및 검증을 이어갈 계획입니다.",
+      "en": "MycoDx presented its research at the 21st International Congress on Infectious Diseases (ICID 2026), held in Madrid, Spain, from November 10 to 13, 2026.\n\nThe company presented a poster on the development and clinical evaluation of an AI-driven platform to automate drug susceptibility testing (DST) for multidrug-resistant and extensively drug-resistant tuberculosis (MDR/XDR-TB).\n\nThe platform is being developed to combine six-well solid-medium testing with automated inoculation, incubation, and AI-based colony reading. In a comparison involving 53 tuberculosis strains isolated from clinical samples, the six-well solid-medium assay showed 87.8% overall agreement in drug susceptibility results with the REMA reference method. Validation of AI-based colony reading performance is ongoing.\n\nMycoDx plans to continue developing and validating the platform to help automate and standardize testing workflows."
+    },
+    "image": "/uploads/news/icid-2026-poster.jpg",
+    "imageAlt": {
+      "ko": "스페인 마드리드에서 열린 ICID 2026에 전시된 마이코디엑스의 결핵 약제감수성검사 자동화 플랫폼 연구 포스터.",
+      "en": "MycoDx's research poster on an automated tuberculosis drug susceptibility testing platform, displayed at ICID 2026 in Madrid, Spain."
+    },
+    "url": "",
+    "photos": []
+  },
+  {
+    "id": "3",
+    "visible": true,
+    "date": "2026-11-05",
+    "category": "Exhibition",
+    "title": {
+      "ko": "MycoDx, CES 2027 참가 확정",
+      "en": "MycoDx confirms participation in CES 2027"
+    },
+    "summary": {
+      "ko": "MycoDx의 CES 2027 참가가 확정되었습니다. 행사는 2027년 1월 6일부터 9일까지 미국 라스베이거스에서 개최됩니다.",
+      "en": "MycoDx has confirmed its participation in CES 2027, taking place January 6–9, 2027, in Las Vegas, USA."
+    },
+    "body": {
+      "ko": "MycoDx의 CES 2027 참가가 확정되었습니다. CES 2027은 2027년 1월 6일부터 9일까지 미국 라스베이거스에서 개최됩니다.\n\n부스 위치와 전시 내용 등 세부 참가 정보는 확정되는 대로 홈페이지 소식란을 통해 안내하겠습니다.\n\nCES 2027에서 전해드릴 MycoDx의 새로운 소식에 많은 관심 부탁드립니다.",
+      "en": "MycoDx has confirmed its participation in CES 2027. The event will take place January 6–9, 2027, in Las Vegas, USA.\n\nDetails of our participation, including the booth location and exhibition content, will be announced in the news section of our website as they are confirmed.\n\nStay tuned for more updates from MycoDx at CES 2027."
+    },
+    "url": "https://www.ces.tech/",
+    "image": "",
+    "imageAlt": {
+      "ko": "",
+      "en": ""
+    },
+    "photos": [],
+    "postNumber": 3
+  },
+  {
     "id": "kimes-busan-2026",
     "postNumber": 2,
     "visible": true,
