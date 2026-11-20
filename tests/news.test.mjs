@@ -7,12 +7,36 @@ import { createAdminHandler } from '../server/admin.ts'
 import { getAdminConfig } from '../server/adminConfig.ts'
 import { createAdminCookie } from '../server/adminSession.ts'
 import { createRecruitDatabase } from '../server/supabase.ts'
-import { newsAddress } from '../shared/news.ts'
+import { compareNews, newsAddress, newsSortDate } from '../shared/news.ts'
 import { FormError } from '../server/validation.ts'
 
 const origin='https://example.test',actor=randomUUID(),postId=randomUUID()
 const config=getAdminConfig({NEWS_CMS_ENABLED:'true',SUPABASE_URL:'https://test-project.supabase.co',SUPABASE_SECRET_KEY:'sb_secret_test',SUPABASE_PUBLISHABLE_KEY:'sb_publishable_test',FORM_SIGNING_SECRET:'test-only-secret-longer-than-thirty-two-characters',FORM_ALLOWED_ORIGINS:origin,BLOB_READ_WRITE_TOKEN:'test'})
 const content={id:'test-news',date:'2026-11-04',category:'News',title:{ko:'가상 소식',en:''},summary:{ko:'요약',en:''},body:{ko:'일반 텍스트\n\n두 번째 문단',en:''}}
+
+test('event ordering keeps publication dates and addresses, and survives admin validation',()=>{
+  const ces={...content,id:'4',postNumber:4,date:'2026-11-05',sortDate:'2027-01-06'}
+  const icid={...content,id:'3',postNumber:3,date:'2026-11-10'}
+  assert.deepEqual([icid,ces].sort(compareNews).map(newsAddress),['4','3'])
+  const saved=validateNews(ces)
+  assert.equal(saved.date,'2026-11-05');assert.equal(saved.sortDate,'2027-01-06')
+  assert.equal(newsSortDate(validateNews({...ces,sortDate:''})),'2026-11-05')
+  assert.equal(newsSortDate(icid),'2026-11-10')
+  for(const sortDate of ['2027-02-29','2027-13-01','01/06/2027',42]) assert.throws(()=>validateNews({...ces,sortDate}))
+  assert.deepEqual([{...icid,id:'10'},{...icid,id:'9'}].sort(compareNews).map(item=>item.id),['9','10'])
+})
+
+test('news pagination uses the sorting date rather than the publication date',async()=>{
+  const rows=Array.from({length:21},(_,i)=>({...content,id:`news-${i}`,sortDate:'2027-01-06'}))
+  const calls=[]
+  const handler=createNewsHandler(config,{async rpc(name,args){calls.push(args);return rows}},true)
+  const result=await (await handler(new Request(origin+'/api/news'))).json()
+  assert.deepEqual(result.nextCursor,{date:'2027-01-06',slug:'news-19'})
+  assert.equal(result.items[19].date,'2026-11-04')
+  const query=new URLSearchParams({beforeDate:result.nextCursor.date,beforeSlug:result.nextCursor.slug})
+  await handler(new Request(origin+'/api/news?'+query))
+  assert.equal(calls.at(-1).p_before_date,'2027-01-06')
+})
 
 test('new drafts need no address; public numbers are server output and legacy cursors remain unchanged',async()=>{
   assert.equal(validateNews({...content,id:''}).id,'')

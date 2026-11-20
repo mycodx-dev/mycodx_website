@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import { useLocation } from 'react-router-dom'
 import newsData from '../../content/news.json'
 import type { NewsContent, PublicNewsResult } from '../../../shared/news'
+import { compareNews } from '../../../shared/news'
 import { NewsContext } from '../../services/newsContext'
 function decode(value:string){try{return decodeURIComponent(value)}catch{return value}}
 async function readNews(response:Response):Promise<PublicNewsResult>{
@@ -28,7 +29,7 @@ export default function NewsProvider({children}:{children:ReactNode}) {
       fetch(`/api/news${params}`,{cache:'no-store',signal:AbortSignal.any([abort.signal,AbortSignal.timeout(15000)])})
         .then(readNews)
         .then(result=>{
-          if(!abort.signal.aborted){setLoadingMore(false);setState({key:pathname,items:result.enabled?result.items:(newsData as NewsContent[]).filter(n=>n.visible!==false).sort((a,b)=>b.date.localeCompare(a.date)),error:false,cursor:result.enabled?result.nextCursor:null})}
+          if(!abort.signal.aborted){setLoadingMore(false);setState({key:pathname,items:result.enabled?result.items:(newsData as NewsContent[]).filter(n=>n.visible!==false).sort(compareNews),error:false,cursor:result.enabled?result.nextCursor:null})}
         }).catch(()=>{if(!abort.signal.aborted){setLoadingMore(false);setState({key:pathname,items:[],error:true,cursor:null})}})
     }
     return ()=>abort.abort()

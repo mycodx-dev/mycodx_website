@@ -1,7 +1,7 @@
 [
   {
-    "id": "4",
-    "postNumber": 4,
+    "id": "3",
+    "postNumber": 3,
     "visible": true,
     "date": "2026-11-10",
     "category": "Exhibition",
@@ -26,9 +26,10 @@
     "photos": []
   },
   {
-    "id": "3",
+    "id": "4",
     "visible": true,
     "date": "2026-11-05",
+    "sortDate": "2027-01-06",
     "category": "Exhibition",
     "title": {
       "ko": "MycoDx, CES 2027 참가 확정",
@@ -49,7 +50,7 @@
       "en": ""
     },
     "photos": [],
-    "postNumber": 3
+    "postNumber": 4
   },
   {
     "id": "kimes-busan-2026",

@@ -104,6 +104,8 @@ function NewsEditor({selection,failed,onSaved,onDirty}:{selection:{id:string;fre
         <div className="admin-news-language">
           <label>게시 날짜<input required type="date" value={draft.date} onChange={e=>change('date',e.target.value)}/></label>
           <label>분류<select value={draft.category} onChange={e=>change('category',e.target.value)}>{['News','Notice','Press','Exhibition'].map(c=><option key={c}>{c}</option>)}</select></label></div>
+        <label>정렬 기준일 (선택)<input type="date" value={draft.sortDate??''} onChange={e=>change('sortDate',e.target.value)}/></label>
+        <p className="admin-note">행사일 순서로 배치하려면 행사 날짜를 입력하세요. 비워두면 게시 날짜로 정렬하며, 더 늦은 날짜가 위에 표시됩니다. 게시 날짜와 글 주소는 바뀌지 않습니다.</p>
         {localized('title','제목',false,200)}{localized('summary','요약',true,1000)}{localized('body','본문',true,10000)}
         <p className="admin-note">본문은 일반 텍스트입니다. 빈 줄로 문단을 나눕니다. 영어를 비워두면 한국어가 표시됩니다.</p>
         <label>대표 이미지 주소<input value={draft.image??''} maxLength={1000} onChange={e=>change('image',e.target.value)} placeholder="https://… 또는 /uploads/news/…"/></label>

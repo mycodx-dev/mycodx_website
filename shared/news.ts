@@ -12,3 +12,12 @@ export interface PublicNewsResult { enabled: boolean; items: NewsContent[]; next
 export function newsAddress(item: NewsContent) {
   return Number.isSafeInteger(item.postNumber) && item.postNumber! > 0 ? String(item.postNumber) : item.id
 }
+
+export function newsSortDate(item: NewsContent) {
+  return item.sortDate || item.date
+}
+
+export function compareNews(a: NewsContent, b: NewsContent) {
+  const dateOrder = newsSortDate(b).localeCompare(newsSortDate(a))
+  return dateOrder || (a.id === b.id ? 0 : a.id < b.id ? 1 : -1)
+}

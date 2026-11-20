@@ -1,6 +1,9 @@
 import type { NewsContent } from '../shared/news.ts'
 import { FormError } from './validation.ts'
 export const NEWS_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+function validDate(value: string) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value
+}
 function text(value: unknown, limit: number, required = false) {
   if (typeof value !== 'string' || value.length > limit || Array.from(value).some(c=>c.charCodeAt(0)===127||(c.charCodeAt(0)<32&&![9,10,13].includes(c.charCodeAt(0))))) throw new FormError('INVALID_FIELDS')
   const clean = value.trim()
@@ -27,13 +30,12 @@ function url(value: unknown, image = false) {
 export function validateNews(value: unknown): NewsContent {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new FormError('INVALID_FIELDS')
   const v = value as Record<string, unknown>
-  const id = text(v.id ?? '', 100), date = text(v.date, 10, true)
-  if ((id && !NEWS_SLUG.test(id)) || !/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(Date.parse(date)) ||
-    new Date(date).toISOString().slice(0, 10) !== date) throw new FormError('INVALID_FIELDS')
+  const id = text(v.id ?? '', 100), date = text(v.date, 10, true), sortDate = text(v.sortDate ?? '', 10)
+  if ((id && !NEWS_SLUG.test(id)) || !validDate(date) || (sortDate && !validDate(sortDate))) throw new FormError('INVALID_FIELDS')
   const category = text(v.category ?? 'News', 30)
   if (!['News', 'Notice', 'Press', 'Exhibition'].includes(category)) throw new FormError('INVALID_FIELDS')
   if (v.photos != null && (!Array.isArray(v.photos) || v.photos.length > 10)) throw new FormError('INVALID_FIELDS')
-  const result: NewsContent = { id, visible: true, date, category, title: localized(v.title, 200, true), summary: localized(v.summary, 1000),
+  const result: NewsContent = { id, visible: true, date, ...(sortDate ? { sortDate } : {}), category, title: localized(v.title, 200, true), summary: localized(v.summary, 1000),
     body: localized(v.body ?? { ko: '', en: '' }, 10000), image: url(v.image, true), url: url(v.url),
     imageAlt: localized(v.imageAlt ?? { ko: '', en: '' }, 300),
     photos: ((v.photos ?? []) as Record<string, unknown>[]).map(photo => {

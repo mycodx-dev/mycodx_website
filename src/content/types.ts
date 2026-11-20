@@ -35,6 +35,7 @@ export interface NewsContent {
   postNumber?: number
   visible?: boolean
   date: string
+  sortDate?: string
   category?: string
   image?: string
   title: LocalizedText

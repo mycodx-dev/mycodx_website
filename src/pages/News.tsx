@@ -3,7 +3,7 @@ import NewsCard from '../components/news/NewsCard'
 import { localize } from '../content/types'
 import { useNews } from '../services/newsContext'
 import NewsLoading from '../components/news/NewsLoading'
-import { newsAddress } from '../../shared/news'
+import { compareNews, newsAddress } from '../../shared/news'
 
 function formatNewsDate(dateValue: string, language: string) {
   const [year, month] = dateValue.split('-')
@@ -29,7 +29,7 @@ export default function News() {
   const news=useNews()
   const visibleNews = news.items
     .filter((item) => item.visible !== false)
-    .sort((a, b) => b.date.localeCompare(a.date))
+    .sort(compareNews)
 
   return (
     <div className="editorial-page news-page">
