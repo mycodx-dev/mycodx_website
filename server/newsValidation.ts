@@ -33,7 +33,7 @@ export function validateNews(value: unknown): NewsContent {
   const id = text(v.id ?? '', 100), date = text(v.date, 10, true), sortDate = text(v.sortDate ?? '', 10)
   if ((id && !NEWS_SLUG.test(id)) || !validDate(date) || (sortDate && !validDate(sortDate))) throw new FormError('INVALID_FIELDS')
   const category = text(v.category ?? 'News', 30)
-  if (!['News', 'Notice', 'Press', 'Exhibition'].includes(category)) throw new FormError('INVALID_FIELDS')
+  if (!['News', 'Notice', 'Press', 'Exhibition', 'Partnership'].includes(category)) throw new FormError('INVALID_FIELDS')
   if (v.photos != null && (!Array.isArray(v.photos) || v.photos.length > 10)) throw new FormError('INVALID_FIELDS')
   const result: NewsContent = { id, visible: true, date, ...(sortDate ? { sortDate } : {}), category, title: localized(v.title, 200, true), summary: localized(v.summary, 1000),
     body: localized(v.body ?? { ko: '', en: '' }, 10000), image: url(v.image, true), url: url(v.url),

@@ -103,7 +103,7 @@ function NewsEditor({selection,failed,onSaved,onDirty}:{selection:{id:string;fre
         <p className="admin-note">{post ? `게시물 번호: ${post.post_number ?? '—'} · 주소: /news/${post.post_number ?? post.slug}` : '게시물 번호와 주소는 첫 임시저장 시 자동으로 생성됩니다.'}</p>
         <div className="admin-news-language">
           <label>게시 날짜<input required type="date" value={draft.date} onChange={e=>change('date',e.target.value)}/></label>
-          <label>분류<select value={draft.category} onChange={e=>change('category',e.target.value)}>{['News','Notice','Press','Exhibition'].map(c=><option key={c}>{c}</option>)}</select></label></div>
+          <label>분류<select value={draft.category} onChange={e=>change('category',e.target.value)}>{['News','Notice','Press','Exhibition','Partnership'].map(c=><option key={c} value={c}>{c==='Partnership'?'업무협약':c}</option>)}</select></label></div>
         <label>정렬 기준일 (선택)<input type="date" value={draft.sortDate??''} onChange={e=>change('sortDate',e.target.value)}/></label>
         <p className="admin-note">행사일 순서로 배치하려면 행사 날짜를 입력하세요. 비워두면 게시 날짜로 정렬하며, 더 늦은 날짜가 위에 표시됩니다. 게시 날짜와 글 주소는 바뀌지 않습니다.</p>
         {localized('title','제목',false,200)}{localized('summary','요약',true,1000)}{localized('body','본문',true,10000)}

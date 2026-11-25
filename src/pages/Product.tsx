@@ -43,7 +43,9 @@ export default function Product() {
                 key={product.id}
               >
                 {product.image && (
-                  <img src={product.image} alt={localize(product.title, i18n.language)} />
+                  <div className="product-card__visual">
+                    <img src={product.imagePreview ?? product.image} alt="" loading="lazy" decoding="async" />
+                  </div>
                 )}
                 <div className="product-card__intro">
                   {product.category && (

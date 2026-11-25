@@ -182,11 +182,15 @@
     "bundleDescription": "Three specialized modules are being connected into a single TB drug susceptibility testing platform for more consistent culture-based workflows.",
     "status": "Current status",
     "backToList": "Back to list",
+    "viewLarger": "View larger",
+    "enlargeImage": "Enlarge photo of {{product}}",
+    "closeImage": "Close enlarged photo",
     "specsTitle": "Key features",
     "placeholderTitle": "Product information is being prepared.",
     "placeholderDescription": "We do not display unverified product information. Accurate product details will be added here when they are ready for publication."
   },
   "newsPage": {
+    "categoryPartnership": "Partnership",
     "loading": "Loading news…",
     "loadError": "Unable to load news. Please try again.",
     "retry": "Try again",

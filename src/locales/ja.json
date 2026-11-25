@@ -182,11 +182,15 @@
     "bundleDescription": "3つのモジュールを1つの結核薬剤耐性検査プラットフォームに統合し、培地、接種、培養・判定のプロセスを統合的に提供します。",
     "status": "現在のステータス",
     "backToList": "一覧へ戻る",
+    "viewLarger": "写真を拡大",
+    "enlargeImage": "{{product}}の写真を拡大",
+    "closeImage": "拡大写真を閉じる",
     "specsTitle": "主な仕様",
     "placeholderTitle": "製品情報を準備中です。",
     "placeholderDescription": "未確認の製品情報を無造作に表示することはありません。公開可能な製品情報が準備でき次第、本ページにて正確にご案内いたします。"
   },
   "newsPage": {
+    "categoryPartnership": "業務協約",
     "loading": "お知らせを読み込んでいます。",
     "loadError": "お知らせを読み込めませんでした。再試行してください。",
     "retry": "再試行",

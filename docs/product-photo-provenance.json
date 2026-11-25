@@ -1,0 +1,83 @@
+{
+  "processing": "Full-size images: only crop empty outer margins and lossless encoding, exact pixels verified. Previews: proportional downscaling only. No generation, retouching, recoloring or background replacement.",
+  "images": [
+    {
+      "file": "culture-plate.webp",
+      "sourceFilename": "Module1_DST plate.png",
+      "sourceSha256": "9047b84f6a0949f2e9fa041bb0e7ec227ddcdd5de6811c0e94a5c88687c6a3fb",
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "crop": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "outputSize": [
+        1536,
+        1024
+      ],
+      "outputSha256": "4b73f84dfae3c2447294f41b23aff3d978cae1a7b52757e46f5c86e40e878635",
+      "pixelIdenticalToSourceCrop": true,
+      "previewFile": "culture-plate-preview.webp",
+      "previewSize": [
+        960,
+        640
+      ]
+    },
+    {
+      "file": "automated-inoculation.webp",
+      "sourceFilename": "module2.png",
+      "sourceSha256": "3a304cf5f666e1f05215739f05370d7be75758003873f8a0f454312120ec07c1",
+      "sourceSize": [
+        4284,
+        5712
+      ],
+      "crop": [
+        834,
+        1710,
+        3973,
+        4775
+      ],
+      "outputSize": [
+        3139,
+        3065
+      ],
+      "outputSha256": "daa9c48528f8fd9a2d2af6c9b9ea8acc2ebd1a418a67dba8f231b9f2070842fb",
+      "pixelIdenticalToSourceCrop": true,
+      "previewFile": "automated-inoculation-preview.webp",
+      "previewSize": [
+        960,
+        937
+      ]
+    },
+    {
+      "file": "automated-incubation.webp",
+      "sourceFilename": "module3.png",
+      "sourceSha256": "9662fd0679bcf10c20db9597af4ce264aade92f6db436bd514ffa60eaa9270bf",
+      "sourceSize": [
+        4284,
+        5712
+      ],
+      "crop": [
+        857,
+        1189,
+        3064,
+        5167
+      ],
+      "outputSize": [
+        2207,
+        3978
+      ],
+      "outputSha256": "3566f8976c31ad52e2958a559877f6f307d8550d1417f1ebba824962e9a74a28",
+      "pixelIdenticalToSourceCrop": true,
+      "previewFile": "automated-incubation-preview.webp",
+      "previewSize": [
+        533,
+        960
+      ]
+    }
+  ]
+}

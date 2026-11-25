@@ -5,6 +5,8 @@
     "featured": true,
     "order": 1,
     "category": "Module 01",
+    "image": "/products/culture-plate.webp",
+    "imagePreview": "/products/culture-plate-preview.webp",
     "status": {
       "ko": "개발 중",
       "en": "In development",
@@ -108,6 +110,8 @@
     "visible": true,
     "order": 2,
     "category": "Module 02",
+    "image": "/products/automated-inoculation.webp",
+    "imagePreview": "/products/automated-inoculation-preview.webp",
     "status": {
       "ko": "설계·개발 중",
       "en": "In design and development",
@@ -205,6 +209,8 @@
     "visible": true,
     "order": 3,
     "category": "Module 03",
+    "image": "/products/automated-incubation.webp",
+    "imagePreview": "/products/automated-incubation-preview.webp",
     "status": {
       "ko": "개발·검증 중",
       "en": "In development and validation",

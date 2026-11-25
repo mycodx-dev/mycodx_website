@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import productData from '../content/products.json'
 import { localize, type ProductContent } from '../content/types'
 import NotFound from './NotFound'
+import ProductPhoto from '../components/products/ProductPhoto'
 
 const productItems = productData as ProductContent[]
 
@@ -26,12 +27,19 @@ export default function ProductDetail() {
       </header>
 
       <div className="product-detail__body">
-        <div className="product-detail__visual">
-          {product.image && (
-            <img src={product.image} alt={localize(product.title, i18n.language)} />
-          )}
-          {product.category && <span className="product-detail__category">{product.category}</span>}
-        </div>
+        {product.image ? (
+          <ProductPhoto
+            key={product.id}
+            src={product.image}
+            preview={product.imagePreview}
+            title={localize(product.title, i18n.language)}
+            category={product.category}
+          />
+        ) : (
+          <div className="product-detail__visual">
+            {product.category && <span className="product-detail__category">{product.category}</span>}
+          </div>
+        )}
 
         <div className="product-detail__content">
           <div className="product-detail__meta">

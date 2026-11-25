@@ -182,11 +182,15 @@
     "bundleDescription": "세 가지 모듈을 하나의 결핵 약제내성 검사 플랫폼으로 연결해, 배양 기반 검사 흐름을 더 일관되게 운영할 수 있도록 개발하고 있습니다.",
     "status": "현재 상태",
     "backToList": "목록으로",
+    "viewLarger": "사진 확대",
+    "enlargeImage": "{{product}} 사진 확대",
+    "closeImage": "확대 사진 닫기",
     "specsTitle": "주요 특징",
     "placeholderTitle": "제품 정보를 준비하고 있습니다.",
     "placeholderDescription": "확인되지 않은 제품 정보를 임의로 표시하지 않습니다. 공개 가능한 제품 정보가 준비되면 이 페이지에서 정확하게 안내하겠습니다."
   },
   "newsPage": {
+    "categoryPartnership": "업무협약",
     "loading": "소식을 불러오는 중입니다.",
     "loadError": "소식을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.",
     "retry": "다시 시도",

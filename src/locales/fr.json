@@ -182,11 +182,15 @@
     "bundleDescription": "Trois modules spécialisés réunis en une plateforme unique de test de sensibilité aux antituberculeux, couvrant milieu, inoculation, culture et lecture.",
     "status": "Statut actuel",
     "backToList": "Retour à la liste",
+    "viewLarger": "Agrandir la photo",
+    "enlargeImage": "Agrandir la photo de {{product}}",
+    "closeImage": "Fermer la photo agrandie",
     "specsTitle": "Spécifications principales",
     "placeholderTitle": "Les informations sur les produits sont en cours de préparation.",
     "placeholderDescription": "Nous n'affichons pas d'informations non vérifiées. Des détails précis seront publiés sur cette page dès leur validation."
   },
   "newsPage": {
+    "categoryPartnership": "Partenariat",
     "loading": "Chargement des actualités…",
     "loadError": "Impossible de charger les actualités. Veuillez réessayer.",
     "retry": "Réessayer",

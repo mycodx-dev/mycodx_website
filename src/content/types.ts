@@ -13,6 +13,7 @@ export interface ProductContent {
   category?: string
   family?: LocalizedText
   image?: string
+  imagePreview?: string
   status?: LocalizedText
   title: LocalizedText
   summary: LocalizedText
