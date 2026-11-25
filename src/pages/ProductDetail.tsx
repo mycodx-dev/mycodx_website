@@ -12,7 +12,10 @@ export default function ProductDetail() {
   const { t, i18n } = useTranslation()
 
   const product = productItems.find((item) => item.id === id)
-  const detailFeatures = product?.detailFeatures ?? product?.specs
+  const detailFeatures = product?.detailFeatures ?? product?.specs?.map((description) => ({
+    title: undefined,
+    description,
+  }))
 
   if (!product) {
     return <NotFound />
@@ -22,7 +25,12 @@ export default function ProductDetail() {
     <div className="editorial-page product-detail-page">
       <header className="editorial-page__header product-detail__header">
         <p>{t('product.kicker')}</p>
-        <h1>{localize(product.title, i18n.language)}</h1>
+        <div className="product-detail__title">
+          <h1>{localize(product.title, i18n.language)}</h1>
+          {localize(product.title, i18n.language) !== product.title.en && (
+            <p className="product-detail__english-name" lang="en">{product.title.en}</p>
+          )}
+        </div>
         <span>{localize(product.detailSummary ?? product.summary, i18n.language)}</span>
       </header>
 
@@ -42,22 +50,22 @@ export default function ProductDetail() {
         )}
 
         <div className="product-detail__content">
-          <div className="product-detail__meta">
-            {product.family && (
+          {product.family && (
+            <div className="product-detail__meta">
               <span className="product-detail__family">
                 {localize(product.family, i18n.language)}
               </span>
-            )}
-            {product.status && <em>{localize(product.status, i18n.language)}</em>}
-          </div>
+            </div>
+          )}
 
           <div className="product-detail__section">
             <h2>{t('product.specsTitle')}</h2>
             {detailFeatures && detailFeatures.length > 0 ? (
               <ul className="product-detail__specs">
                 {detailFeatures.map((feature) => (
-                  <li key={localize(feature, i18n.language)}>
-                    {localize(feature, i18n.language)}
+                  <li key={localize(feature.title ?? feature.description, i18n.language)}>
+                    {feature.title && <h3>{localize(feature.title, i18n.language)}</h3>}
+                    <p>{localize(feature.description, i18n.language)}</p>
                   </li>
                 ))}
               </ul>

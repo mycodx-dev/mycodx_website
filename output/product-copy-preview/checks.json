@@ -1,0 +1,68 @@
+{
+  "rows": [
+    {
+      "module": "Module 01",
+      "width": 1440,
+      "photoTop": 425,
+      "previousPhotoTop": 533,
+      "movedUp": 108
+    },
+    {
+      "module": "Module 02",
+      "width": 1440,
+      "photoTop": 425,
+      "previousPhotoTop": 533,
+      "movedUp": 108
+    },
+    {
+      "module": "Module 03",
+      "width": 1440,
+      "photoTop": 425,
+      "previousPhotoTop": 600,
+      "movedUp": 175
+    },
+    {
+      "module": "Module 01",
+      "width": 390,
+      "photoTop": 399,
+      "previousPhotoTop": 573,
+      "movedUp": 174
+    },
+    {
+      "module": "Module 02",
+      "width": 390,
+      "photoTop": 399,
+      "previousPhotoTop": 625,
+      "movedUp": 226
+    },
+    {
+      "module": "Module 03",
+      "width": 390,
+      "photoTop": 433,
+      "previousPhotoTop": 677,
+      "movedUp": 244
+    },
+    {
+      "module": "Module 01",
+      "width": 320,
+      "photoTop": 399,
+      "previousPhotoTop": 656,
+      "movedUp": 257
+    },
+    {
+      "module": "Module 02",
+      "width": 320,
+      "photoTop": 430,
+      "previousPhotoTop": 656,
+      "movedUp": 226
+    },
+    {
+      "module": "Module 03",
+      "width": 320,
+      "photoTop": 464,
+      "previousPhotoTop": 708,
+      "movedUp": 244
+    }
+  ],
+  "exceptions": []
+}

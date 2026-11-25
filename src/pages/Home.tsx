@@ -403,9 +403,6 @@ export default function Home() {
                         {product.category ?? `Module ${String(index + 1).padStart(2, '0')}`}
                       </span>
                       <h3>{localize(product.title, i18n.language)}</h3>
-                      {product.status && (
-                        <strong>{localize(product.status, i18n.language)}</strong>
-                      )}
                     </Link>
                   </li>
                 ))}

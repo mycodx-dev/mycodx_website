@@ -1,0 +1,95 @@
+{
+  "rows": [
+    {
+      "language": "ko",
+      "width": 1440,
+      "module": 1
+    },
+    {
+      "language": "ko",
+      "width": 1440,
+      "module": 2
+    },
+    {
+      "language": "ko",
+      "width": 1440,
+      "module": 3
+    },
+    {
+      "language": "ko",
+      "width": 390,
+      "module": 1
+    },
+    {
+      "language": "ko",
+      "width": 390,
+      "module": 2
+    },
+    {
+      "language": "ko",
+      "width": 390,
+      "module": 3
+    },
+    {
+      "language": "ko",
+      "width": 320,
+      "module": 1
+    },
+    {
+      "language": "ko",
+      "width": 320,
+      "module": 2
+    },
+    {
+      "language": "ko",
+      "width": 320,
+      "module": 3
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "module": 1
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "module": 2
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "module": 3
+    },
+    {
+      "language": "fr",
+      "width": 390,
+      "module": 1
+    },
+    {
+      "language": "fr",
+      "width": 390,
+      "module": 2
+    },
+    {
+      "language": "fr",
+      "width": 390,
+      "module": 3
+    },
+    {
+      "language": "ja",
+      "width": 390,
+      "module": 1
+    },
+    {
+      "language": "ja",
+      "width": 390,
+      "module": 2
+    },
+    {
+      "language": "ja",
+      "width": 390,
+      "module": 3
+    }
+  ],
+  "exceptions": []
+}

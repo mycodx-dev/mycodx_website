@@ -53,7 +53,12 @@ export default function Product() {
                       <span>{product.category}</span>
                     </div>
                   )}
-                  <h3>{localize(product.title, i18n.language)}</h3>
+                  <div className="product-card__title">
+                    <h3>{localize(product.title, i18n.language)}</h3>
+                    {localize(product.title, i18n.language) !== product.title.en && (
+                      <p className="product-card__english-name" lang="en">{product.title.en}</p>
+                    )}
+                  </div>
                   <p>{localize(product.listSummary ?? product.summary, i18n.language)}</p>
                 </div>
                 {product.listFeatures && product.listFeatures.length > 0 && (

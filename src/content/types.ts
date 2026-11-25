@@ -5,6 +5,11 @@ export interface LocalizedText {
   ja?: string
 }
 
+export interface ProductFeature {
+  title: LocalizedText
+  description: LocalizedText
+}
+
 export interface ProductContent {
   id: string
   visible?: boolean
@@ -14,13 +19,12 @@ export interface ProductContent {
   family?: LocalizedText
   image?: string
   imagePreview?: string
-  status?: LocalizedText
   title: LocalizedText
   summary: LocalizedText
   listSummary?: LocalizedText
   detailSummary?: LocalizedText
   listFeatures?: LocalizedText[]
-  detailFeatures?: LocalizedText[]
+  detailFeatures?: ProductFeature[]
   specs?: LocalizedText[]
   tags?: string[]
 }

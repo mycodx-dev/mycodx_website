@@ -176,16 +176,16 @@
   "product": {
     "kicker": "Produits",
     "title": "Présentation des produits",
-    "description": "Une présentation synthétique de la plateforme intégrée TB DST en développement et de ses spécifications clés.",
+    "description": "Découvrez trois modules pour les tests de sensibilité aux antituberculeux (DST) et le rôle de chacun.",
     "bundleName": "Plateforme intégrée TB-DST",
     "bundleBadge": "Plateforme intégrée",
-    "bundleDescription": "Trois modules spécialisés réunis en une plateforme unique de test de sensibilité aux antituberculeux, couvrant milieu, inoculation, culture et lecture.",
+    "bundleDescription": "Une plateforme modulaire comprenant une plaque de culture, un système d’inoculation automatisée et un système d’incubation, d’imagerie et d’analyse par IA.",
     "status": "Statut actuel",
     "backToList": "Retour à la liste",
     "viewLarger": "Agrandir la photo",
     "enlargeImage": "Agrandir la photo de {{product}}",
     "closeImage": "Fermer la photo agrandie",
-    "specsTitle": "Spécifications principales",
+    "specsTitle": "Caractéristiques principales",
     "placeholderTitle": "Les informations sur les produits sont en cours de préparation.",
     "placeholderDescription": "Nous n'affichons pas d'informations non vérifiées. Des détails précis seront publiés sur cette page dès leur validation."
   },
@@ -280,10 +280,10 @@
       "platformMessage": "MycoDx va au-delà des technologies isolées pour bâtir une plateforme de diagnostic intégré des maladies infectieuses, du prélèvement à l'interprétation."
     },
     "pipeline": {
-      "kicker": "Pipeline produit",
-      "title": "Un aperçu compact du flux produit",
-      "description": "MycoDx développe un flux modulaire allant des milieux à l'inoculation automatisée, à l'incubation et à l'interprétation par IA.",
-      "note": "La page d'accueil présente le pipeline de manière concise ; la page produit fournit uniquement un aperçu public de chaque module.",
+      "kicker": "Plateforme produit",
+      "title": "Trois modules pour les tests DST",
+      "description": "Découvrez les plaques de culture, l’inoculation automatisée, ainsi que l’incubation, l’imagerie et l’analyse par IA.",
+      "note": "Consultez le rôle et les principales caractéristiques de chaque module.",
       "link": "Voir les détails du produit"
     },
     "story": {
@@ -391,7 +391,7 @@
     "kicker": "Carrières · Vivier de talents",
     "title": "<line>Créons ensemble</line><line>de nouvelles possibilités</line>",
     "lead": "MycoDx mène des recherches en biotechnologie, diagnostic in vitro et technologies de santé, centrées sur le diagnostic des maladies infectieuses. Nous souhaitons évoluer avec des talents qui apportent expertise et regard neuf.",
-    "heroAlt": "L’équipe MycoDx examine ensemble des résultats de recherche",
+    "heroAlt": "Une personne réalisant une expérience en laboratoire",
     "introLabel": "Pourquoi MycoDx",
     "introTitle": "<line>Notre vivier de talents reste ouvert</line><line>au-delà des périodes de recrutement.</line>",
     "introBody": "Vous pouvez postuler même lorsqu’aucun poste n’est actuellement ouvert. Lorsqu’un besoin apparaît, nous examinons la formation, l’expérience, le parcours de recherche et l’adéquation au poste, puis contactons individuellement les profils correspondants.",

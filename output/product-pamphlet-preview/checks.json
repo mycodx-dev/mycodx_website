@@ -1,0 +1,126 @@
+{
+  "rows": [
+    {
+      "language": "ko",
+      "width": 1440,
+      "workflow": [
+        "01\n배양 플레이트",
+        "02\n자동 접종",
+        "03\n배양·이미징",
+        "04\nAI 보조 분석",
+        "05\n결과 관리"
+      ]
+    },
+    {
+      "language": "ko",
+      "width": 768,
+      "workflow": [
+        "01\n배양 플레이트",
+        "02\n자동 접종",
+        "03\n배양·이미징",
+        "04\nAI 보조 분석",
+        "05\n결과 관리"
+      ]
+    },
+    {
+      "language": "ko",
+      "width": 390,
+      "workflow": [
+        "01\n배양 플레이트",
+        "02\n자동 접종",
+        "03\n배양·이미징",
+        "04\nAI 보조 분석",
+        "05\n결과 관리"
+      ]
+    },
+    {
+      "language": "ko",
+      "width": 320,
+      "workflow": [
+        "01\n배양 플레이트",
+        "02\n자동 접종",
+        "03\n배양·이미징",
+        "04\nAI 보조 분석",
+        "05\n결과 관리"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 1440,
+      "workflow": [
+        "01\nCulture plates",
+        "02\nAutomated inoculation",
+        "03\nIncubation & imaging",
+        "04\nAI-assisted analysis",
+        "05\nResult management"
+      ]
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "workflow": [
+        "01\nCulture plates",
+        "02\nAutomated inoculation",
+        "03\nIncubation & imaging",
+        "04\nAI-assisted analysis",
+        "05\nResult management"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 1440,
+      "workflow": [
+        "01\nPlaques de culture",
+        "02\nInoculation automatisée",
+        "03\nIncubation et imagerie",
+        "04\nAnalyse assistée par IA",
+        "05\nGestion des résultats"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 768,
+      "workflow": [
+        "01\nPlaques de culture",
+        "02\nInoculation automatisée",
+        "03\nIncubation et imagerie",
+        "04\nAnalyse assistée par IA",
+        "05\nGestion des résultats"
+      ]
+    },
+    {
+      "language": "fr",
+      "width": 390,
+      "workflow": [
+        "01\nPlaques de culture",
+        "02\nInoculation automatisée",
+        "03\nIncubation et imagerie",
+        "04\nAnalyse assistée par IA",
+        "05\nGestion des résultats"
+      ]
+    },
+    {
+      "language": "ja",
+      "width": 1440,
+      "workflow": [
+        "01\n培養プレート",
+        "02\n自動接種",
+        "03\n培養・イメージング",
+        "04\nAIによる解析支援",
+        "05\n結果管理"
+      ]
+    },
+    {
+      "language": "ja",
+      "width": 390,
+      "workflow": [
+        "01\n培養プレート",
+        "02\n自動接種",
+        "03\n培養・イメージング",
+        "04\nAIによる解析支援",
+        "05\n結果管理"
+      ]
+    }
+  ],
+  "exceptions": []
+}

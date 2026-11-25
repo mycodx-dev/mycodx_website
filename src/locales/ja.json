@@ -176,16 +176,16 @@
   "product": {
     "kicker": "Product",
     "title": "製品紹介",
-    "description": "開発中の結核DST統合プラットフォームの構成とコア仕様を簡潔にご紹介します。",
+    "description": "結核菌薬剤感受性試験（DST）のための3つのモジュールと、それぞれの役割をご紹介します。",
     "bundleName": "TB-DST Integrated Platform",
     "bundleBadge": "Integrated platform",
-    "bundleDescription": "3つのモジュールを1つの結核薬剤耐性検査プラットフォームに統合し、培地、接種、培養・判定のプロセスを統合的に提供します。",
+    "bundleDescription": "培養プレート、自動接種、培養・イメージング・AI解析で構成されるモジュール型プラットフォームです。",
     "status": "現在のステータス",
     "backToList": "一覧へ戻る",
     "viewLarger": "写真を拡大",
     "enlargeImage": "{{product}}の写真を拡大",
     "closeImage": "拡大写真を閉じる",
-    "specsTitle": "主な仕様",
+    "specsTitle": "主な特徴",
     "placeholderTitle": "製品情報を準備中です。",
     "placeholderDescription": "未確認の製品情報を無造作に表示することはありません。公開可能な製品情報が準備でき次第、本ページにて正確にご案内いたします。"
   },
@@ -280,10 +280,10 @@
       "platformMessage": "MycoDxは個別の診断技術にとどまらず、検体から結果判定までをつなぐ感染症統合診断プラットフォームを構築します。"
     },
     "pipeline": {
-      "kicker": "製品パイプライン",
-      "title": "製品フローの概要",
-      "description": "MycoDxは、培地から自動接種、培養、AI判定までをつなぐモジュール型フローを開発しています。",
-      "note": "ホームではパイプラインの概要を簡潔に示し、製品ページでは各モジュールの公開可能な概要のみを掲載しています。",
+      "kicker": "製品プラットフォーム",
+      "title": "DSTを支える3つのモジュール",
+      "description": "培養プレート、自動接種、培養・イメージング・AI解析へとつながる製品構成をご紹介します。",
+      "note": "各モジュールの役割と主な特徴をご覧ください。",
       "link": "製品詳細を見る"
     },
     "story": {
@@ -391,7 +391,7 @@
     "kicker": "採用 · タレントプール",
     "title": "<line>新たな可能性を</line><line>ともにつくる仲間を募集します</line>",
     "lead": "MycoDxは感染症診断を中心に、バイオ・体外診断・ヘルスケア技術を研究しています。各分野の専門性と新しい視点を持つ方とともに成長していきたいと考えています。",
-    "heroAlt": "研究結果をともに確認するMycoDxチーム",
+    "heroAlt": "実験室で実験を行う研究者",
     "introLabel": "Why MycoDx",
     "introTitle": "<line>採用時期に限らず</line><line>常時タレントプールを運営しています。</line>",
     "introBody": "現在募集中のポジションがない場合でも、いつでもご応募いただけます。採用ニーズが発生した際に、専攻・経歴・研究経験・職務適性を確認し、適した方へ個別にご連絡します。",

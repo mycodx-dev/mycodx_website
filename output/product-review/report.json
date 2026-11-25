@@ -1,0 +1,301 @@
+{
+  "report": [
+    {
+      "page": "list",
+      "width": 1440,
+      "overflow": false,
+      "cards": [
+        {
+          "title": "6-Well Culture Plate for DST",
+          "href": "/product/tb-dst-agar-module",
+          "imageHeight": 249.984375
+        },
+        {
+          "title": "Automated Inoculation System",
+          "href": "/product/tb-dst-auto-inoculation-module",
+          "imageHeight": 250
+        },
+        {
+          "title": "Automated Incubation, Imaging & AI Analysis",
+          "href": "/product/tb-dst-ai-incubation-reader",
+          "imageHeight": 249.984375
+        }
+      ],
+      "title": "제품소개 | MycoDx"
+    },
+    {
+      "page": "tb-dst-agar-module",
+      "width": 1440,
+      "overflow": false,
+      "title": "6-Well Culture Plate for DST | MycoDx",
+      "h1": "6-Well Culture Plate for DST",
+      "headingHeight": 66.796875,
+      "photoTop": 533.390625,
+      "contentLinks": [
+        {
+          "text": "목록으로",
+          "href": "/product"
+        }
+      ],
+      "statusBadge": false,
+      "overflowElements": []
+    },
+    {
+      "page": "tb-dst-auto-inoculation-module",
+      "width": 1440,
+      "overflow": false,
+      "title": "Automated Inoculation System | MycoDx",
+      "h1": "Automated Inoculation System",
+      "headingHeight": 66.796875,
+      "photoTop": 533.390625,
+      "contentLinks": [
+        {
+          "text": "목록으로",
+          "href": "/product"
+        }
+      ],
+      "statusBadge": false,
+      "overflowElements": []
+    },
+    {
+      "page": "tb-dst-ai-incubation-reader",
+      "width": 1440,
+      "overflow": false,
+      "title": "Automated Incubation, Imaging & AI Analysis | MycoDx",
+      "h1": "Automated Incubation, Imaging & AI Analysis",
+      "headingHeight": 133.59375,
+      "photoTop": 600.1875,
+      "contentLinks": [
+        {
+          "text": "목록으로",
+          "href": "/product"
+        }
+      ],
+      "statusBadge": false,
+      "overflowElements": []
+    },
+    {
+      "page": "list",
+      "width": 768,
+      "overflow": false,
+      "cards": [
+        {
+          "title": "6-Well Culture Plate for DST",
+          "href": "/product/tb-dst-agar-module",
+          "imageHeight": 221.96875
+        },
+        {
+          "title": "Automated Inoculation System",
+          "href": "/product/tb-dst-auto-inoculation-module",
+          "imageHeight": 221.984375
+        },
+        {
+          "title": "Automated Incubation, Imaging & AI Analysis",
+          "href": "/product/tb-dst-ai-incubation-reader",
+          "imageHeight": 221.96875
+        }
+      ],
+      "title": "제품소개 | MycoDx"
+    },
+    {
+      "page": "tb-dst-agar-module",
+      "width": 768,
+      "overflow": false,
+      "title": "6-Well Culture Plate for DST | MycoDx",
+      "h1": "6-Well Culture Plate for DST",
+      "headingHeight": 42.671875,
+      "photoTop": 437.265625,
+      "contentLinks": [
+        {
+          "text": "목록으로",
+          "href": "/product"
+        }
+      ],
+      "statusBadge": false,
+      "overflowElements": []
+    },
+    {
+      "page": "tb-dst-auto-inoculation-module",
+      "width": 768,
+      "overflow": false,
+      "title": "Automated Inoculation System | MycoDx",
+      "h1": "Automated Inoculation System",
+      "headingHeight": 42.671875,
+      "photoTop": 437.265625,
+      "contentLinks": [
+        {
+          "text": "목록으로",
+          "href": "/product"
+        }
+      ],
+      "statusBadge": false,
+      "overflowElements": []
+    },
+    {
+      "page": "tb-dst-ai-incubation-reader",
+      "width": 768,
+      "overflow": false,
+      "title": "Automated Incubation, Imaging & AI Analysis | MycoDx",
+      "h1": "Automated Incubation, Imaging & AI Analysis",
+      "headingHeight": 85.34375,
+      "photoTop": 479.9375,
+      "contentLinks": [
+        {
+          "text": "목록으로",
+          "href": "/product"
+        }
+      ],
+      "statusBadge": false,
+      "overflowElements": []
+    },
+    {
+      "page": "list",
+      "width": 390,
+      "overflow": false,
+      "cards": [
+        {
+          "title": "6-Well Culture Plate for DST",
+          "href": "/product/tb-dst-agar-module",
+          "imageHeight": 234.5
+        },
+        {
+          "title": "Automated Inoculation System",
+          "href": "/product/tb-dst-auto-inoculation-module",
+          "imageHeight": 234.5
+        },
+        {
+          "title": "Automated Incubation, Imaging & AI Analysis",
+          "href": "/product/tb-dst-ai-incubation-reader",
+          "imageHeight": 234.5
+        }
+      ],
+      "title": "제품소개 | MycoDx"
+    },
+    {
+      "page": "tb-dst-agar-module",
+      "width": 390,
+      "overflow": false,
+      "title": "6-Well Culture Plate for DST | MycoDx",
+      "h1": "6-Well Culture Plate for DST",
+      "headingHeight": 103.90625,
+      "photoTop": 572.875,
+      "contentLinks": [
+        {
+          "text": "목록으로",
+          "href": "/product"
+        }
+      ],
+      "statusBadge": false,
+      "overflowElements": []
+    },
+    {
+      "page": "tb-dst-auto-inoculation-module",
+      "width": 390,
+      "overflow": false,
+      "title": "Automated Inoculation System | MycoDx",
+      "h1": "Automated Inoculation System",
+      "headingHeight": 155.859375,
+      "photoTop": 624.828125,
+      "contentLinks": [
+        {
+          "text": "목록으로",
+          "href": "/product"
+        }
+      ],
+      "statusBadge": false,
+      "overflowElements": []
+    },
+    {
+      "page": "tb-dst-ai-incubation-reader",
+      "width": 390,
+      "overflow": false,
+      "title": "Automated Incubation, Imaging & AI Analysis | MycoDx",
+      "h1": "Automated Incubation, Imaging & AI Analysis",
+      "headingHeight": 207.8125,
+      "photoTop": 676.78125,
+      "contentLinks": [
+        {
+          "text": "목록으로",
+          "href": "/product"
+        }
+      ],
+      "statusBadge": false,
+      "overflowElements": []
+    },
+    {
+      "page": "list",
+      "width": 320,
+      "overflow": false,
+      "cards": [
+        {
+          "title": "6-Well Culture Plate for DST",
+          "href": "/product/tb-dst-agar-module",
+          "imageHeight": 182
+        },
+        {
+          "title": "Automated Inoculation System",
+          "href": "/product/tb-dst-auto-inoculation-module",
+          "imageHeight": 182
+        },
+        {
+          "title": "Automated Incubation, Imaging & AI Analysis",
+          "href": "/product/tb-dst-ai-incubation-reader",
+          "imageHeight": 182
+        }
+      ],
+      "title": "제품소개 | MycoDx"
+    },
+    {
+      "page": "tb-dst-agar-module",
+      "width": 320,
+      "overflow": false,
+      "title": "6-Well Culture Plate for DST | MycoDx",
+      "h1": "6-Well Culture Plate for DST",
+      "headingHeight": 155.859375,
+      "photoTop": 656.015625,
+      "contentLinks": [
+        {
+          "text": "목록으로",
+          "href": "/product"
+        }
+      ],
+      "statusBadge": false,
+      "overflowElements": []
+    },
+    {
+      "page": "tb-dst-auto-inoculation-module",
+      "width": 320,
+      "overflow": false,
+      "title": "Automated Inoculation System | MycoDx",
+      "h1": "Automated Inoculation System",
+      "headingHeight": 155.859375,
+      "photoTop": 656.015625,
+      "contentLinks": [
+        {
+          "text": "목록으로",
+          "href": "/product"
+        }
+      ],
+      "statusBadge": false,
+      "overflowElements": []
+    },
+    {
+      "page": "tb-dst-ai-incubation-reader",
+      "width": 320,
+      "overflow": false,
+      "title": "Automated Incubation, Imaging & AI Analysis | MycoDx",
+      "h1": "Automated Incubation, Imaging & AI Analysis",
+      "headingHeight": 207.8125,
+      "photoTop": 707.96875,
+      "contentLinks": [
+        {
+          "text": "목록으로",
+          "href": "/product"
+        }
+      ],
+      "statusBadge": false,
+      "overflowElements": []
+    }
+  ],
+  "exceptions": []
+}

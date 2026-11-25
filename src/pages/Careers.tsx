@@ -1,6 +1,6 @@
 import { Trans, useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import careersTeamImage from '../assets/mycodx-careers-team-v2.jpg'
+import careersResearcherImage from '../assets/mycodx-careers-researcher.png'
 
 export default function Careers() {
   const { t } = useTranslation()
@@ -21,7 +21,7 @@ export default function Careers() {
           </div>
         </div>
         <figure className="careers-hero__visual">
-          <img src={careersTeamImage} alt={t('careers.heroAlt')} />
+          <img src={careersResearcherImage} alt={t('careers.heroAlt')} width={2048} height={768} />
         </figure>
       </header>
 

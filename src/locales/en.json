@@ -176,10 +176,10 @@
   "product": {
     "kicker": "Product",
     "title": "Product Introduction",
-    "description": "A public overview of the in-development TB DST integrated platform and its modules.",
+    "description": "Explore three modules for tuberculosis drug susceptibility testing (DST) and the role of each module.",
     "bundleName": "TB-DST Integrated Platform",
     "bundleBadge": "Integrated platform",
-    "bundleDescription": "Three specialized modules are being connected into a single TB drug susceptibility testing platform for more consistent culture-based workflows.",
+    "bundleDescription": "A modular platform comprising a culture plate, automated inoculation, and incubation, imaging and AI analysis.",
     "status": "Current status",
     "backToList": "Back to list",
     "viewLarger": "View larger",
@@ -280,10 +280,10 @@
       "platformMessage": "MycoDx goes beyond individual diagnostic technologies to build an integrated infectious disease platform from specimen to result interpretation."
     },
     "pipeline": {
-      "kicker": "Product Pipeline",
-      "title": "A compact view of the product flow",
-      "description": "MycoDx is developing a modular flow from media to automated inoculation, incubation, and AI interpretation.",
-      "note": "The homepage keeps the pipeline brief; the product page provides only a public overview of each module.",
+      "kicker": "Product Platform",
+      "title": "Three modules for TB DST",
+      "description": "Explore the product lineup from culture plates and automated inoculation to incubation, imaging and AI analysis.",
+      "note": "Learn more about the role and key features of each module.",
       "link": "View product details"
     },
     "story": {
@@ -391,7 +391,7 @@
     "kicker": "Careers · Talent Pool",
     "title": "<line>Join us in creating</line><line>new possibilities</line>",
     "lead": "MycoDx researches biotechnology, in vitro diagnostics, and healthcare technologies centered on infectious-disease diagnostics. We aim to grow with people who bring expertise and fresh perspectives.",
-    "heroAlt": "The MycoDx team reviewing research results together",
+    "heroAlt": "A researcher conducting an experiment in a laboratory",
     "introLabel": "Why MycoDx",
     "introTitle": "<line>Our talent pool is open</line><line>beyond specific hiring periods.</line>",
     "introBody": "You are welcome to apply even when no position is currently open. When a hiring need arises, we review each applicant’s education, experience, research background, and role fit, then contact suitable candidates individually.",
