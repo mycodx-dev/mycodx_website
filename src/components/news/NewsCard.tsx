@@ -23,7 +23,7 @@ export default function NewsCard({
     <>
       <div className="news-card__meta">
         <time dateTime={dateTime}>{date}</time>
-        <span>{category === 'Partnership' ? t('newsPage.categoryPartnership') : category}</span>
+        <span>{category}</span>
       </div>
       <h3>{title}</h3>
       <p>{summary}</p>

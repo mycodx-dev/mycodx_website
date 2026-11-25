@@ -115,6 +115,11 @@
           "year": "2026.06",
           "title": "Accord d'entreprise participante au programme RISE",
           "description": "Signature de la convention d'entreprise participante au système d'aide universitaire axé sur l'innovation régionale (RISE) de l'Université nationale de Changwon."
+        },
+        {
+          "year": "2026.11",
+          "title": "Accord de coopération en recherche",
+          "description": "Signature d’un protocole d’accord de coopération en recherche avec le Centre de soutien à la recherche en sciences de la vie et anti-âge de Gyeongnam de l’Université nationale de Changwon."
         }
       ]
     },
@@ -190,7 +195,6 @@
     "placeholderDescription": "Nous n'affichons pas d'informations non vérifiées. Des détails précis seront publiés sur cette page dès leur validation."
   },
   "newsPage": {
-    "categoryPartnership": "Partenariat",
     "loading": "Chargement des actualités…",
     "loadError": "Impossible de charger les actualités. Veuillez réessayer.",
     "retry": "Réessayer",

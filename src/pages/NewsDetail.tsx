@@ -28,7 +28,7 @@ export default function NewsDetail() {
         <h1>{title}</h1>
         <div className="news-card__meta">
           <time dateTime={item.date}>{item.date.replaceAll('-', '.')}</time>
-          {item.category && <span>{item.category === 'Partnership' ? t('newsPage.categoryPartnership') : item.category}</span>}
+          {item.category && <span>{item.category}</span>}
         </div>
         <span>{localize(item.summary, i18n.language)}</span>
       </header>

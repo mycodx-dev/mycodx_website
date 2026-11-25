@@ -115,6 +115,11 @@
           "year": "2026.06",
           "title": "RISE Participating Company Agreement",
           "description": "Signed a participating company agreement for Changwon National University's Regional Innovation System & Education (RISE) program."
+        },
+        {
+          "year": "2026.11",
+          "title": "Research Cooperation MOU",
+          "description": "Signed a research cooperation MOU with the Gyeongnam Life Science and Anti-Aging Core Research Support Center at Changwon National University."
         }
       ]
     },
@@ -190,7 +195,6 @@
     "placeholderDescription": "We do not display unverified product information. Accurate product details will be added here when they are ready for publication."
   },
   "newsPage": {
-    "categoryPartnership": "Partnership",
     "loading": "Loading news…",
     "loadError": "Unable to load news. Please try again.",
     "retry": "Try again",
