@@ -235,8 +235,7 @@
     "visible": true,
     "order": 3,
     "category": "Module 03",
-    "image": "/products/automated-incubation.webp",
-    "imagePreview": "/products/automated-incubation-preview.webp",
+    "image": "/products/automated-incubation-open.png",
     "title": {
       "ko": "자동 배양·이미징·AI 분석 시스템",
       "en": "Automated Incubation, Imaging & AI Analysis",

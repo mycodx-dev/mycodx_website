@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { NewsAdminList, NewsContent, NewsCursor, NewsPost } from '../../shared/news'
 import { AdminError, adminErrorMessage, adminRequest } from '../services/admin'
+import { localize } from '../content/types'
+
+const languages = ['ko','en','fr','ja'] as const
+type NewsLanguage = typeof languages[number]
+const languageLabels: Record<NewsLanguage,string> = {ko:'한국어',en:'영어',fr:'프랑스어',ja:'일본어'}
 
 const emptyNews = (): NewsContent => ({ id:'',date:new Date().toLocaleDateString('sv-SE',{timeZone:'Asia/Seoul'}),category:'News',
   title:{ko:'',en:''},summary:{ko:'',en:''},body:{ko:'',en:''},image:'',imageAlt:{ko:'',en:''},url:'',photos:[] })
@@ -59,6 +64,7 @@ function NewsEditor({selection,failed,onSaved,onDirty}:{selection:{id:string;fre
   const [error,setError]=useState('')
   const [notice,setNotice]=useState('')
   const [preview,setPreview]=useState(false)
+  const [previewLanguage,setPreviewLanguage]=useState<NewsLanguage>('ko')
   const [reload,setReload]=useState(0)
   const controller=useRef<AbortController|null>(null)
   const dirty=JSON.stringify(draft)!==baseline
@@ -91,7 +97,7 @@ function NewsEditor({selection,failed,onSaved,onDirty}:{selection:{id:string;fre
     finally{if(!signal.aborted)setBusy(false)}
   }
   function localized(key:'title'|'summary'|'body'|'imageAlt',label:string,multiline=false,maxLength=1000) {
-    return <div className="admin-news-language">{(['ko','en'] as const).map(language=><label key={language}>{label} · {language==='ko'?'한국어':'영어 (선택)'}
+    return <div className="admin-news-language admin-news-language--translations">{languages.map(language=><label key={language}>{label} · {languageLabels[language]}{language!=='ko'&&' (선택)'}
       {multiline?<textarea rows={key==='body'?10:3} maxLength={maxLength} value={draft[key]?.[language]??''} onChange={e=>change(key,{ko:'',en:'',...draft[key],[language]:e.target.value})}/>
         :<input required={key==='title'&&language==='ko'} maxLength={maxLength} value={draft[key]?.[language]??''} onChange={e=>change(key,{ko:'',en:'',...draft[key],[language]:e.target.value})}/>}
     </label>)}</div>
@@ -107,16 +113,16 @@ function NewsEditor({selection,failed,onSaved,onDirty}:{selection:{id:string;fre
         <label>정렬 기준일 (선택)<input type="date" value={draft.sortDate??''} onChange={e=>change('sortDate',e.target.value)}/></label>
         <p className="admin-note">행사일 순서로 배치하려면 행사 날짜를 입력하세요. 비워두면 게시 날짜로 정렬하며, 더 늦은 날짜가 위에 표시됩니다. 게시 날짜와 글 주소는 바뀌지 않습니다.</p>
         {localized('title','제목',false,200)}{localized('summary','요약',true,1000)}{localized('body','본문',true,10000)}
-        <p className="admin-note">본문은 일반 텍스트입니다. 빈 줄로 문단을 나눕니다. 영어를 비워두면 한국어가 표시됩니다.</p>
+        <p className="admin-note">본문은 일반 텍스트입니다. 빈 줄로 문단을 나눕니다. 각 언어의 제목·요약·본문을 직접 입력해 주세요. 비어 있는 번역은 영어, 영어도 없으면 한국어로 표시됩니다. 자동 번역되지는 않습니다.</p>
         <label>대표 이미지 주소<input value={draft.image??''} maxLength={1000} onChange={e=>change('image',e.target.value)} placeholder="https://… 또는 /uploads/news/…"/></label>
         {localized('imageAlt','대표 이미지 설명',false,300)}
         <label>관련 링크<input value={draft.url??''} maxLength={1000} onChange={e=>change('url',e.target.value)} placeholder="https://…"/></label>
         <div className="admin-panel-heading"><h3>추가 사진</h3><button type="button" className="admin-button" disabled={(draft.photos?.length??0)>=10} onClick={()=>change('photos',[...draft.photos??[],{image:'',alt:{ko:'',en:''},caption:{ko:'',en:''}}])}>사진 주소 추가</button></div>
         {draft.photos?.map((photo,index)=><div className="admin-news-photo" key={index}>
           <label>사진 {index+1} 주소<input required value={photo.image} maxLength={1000} onChange={e=>change('photos',draft.photos?.map((p,i)=>i===index?{...p,image:e.target.value}:p))}/></label>
-          {(['ko','en'] as const).map(language=><div className="admin-news-language" key={language}>
-            <label>사진 설명 · {language}<input value={photo.alt[language]} maxLength={300} onChange={e=>change('photos',draft.photos?.map((p,i)=>i===index?{...p,alt:{...p.alt,[language]:e.target.value}}:p))}/></label>
-            <label>사진 캡션 · {language}<input value={photo.caption?.[language]??''} maxLength={500} onChange={e=>change('photos',draft.photos?.map((p,i)=>i===index?{...p,caption:{ko:'',en:'',...p.caption,[language]:e.target.value}}:p))}/></label>
+          {languages.map(language=><div className="admin-news-language" key={language}>
+            <label>사진 설명 · {languageLabels[language]}<input value={photo.alt[language]??''} maxLength={300} onChange={e=>change('photos',draft.photos?.map((p,i)=>i===index?{...p,alt:{...p.alt,[language]:e.target.value}}:p))}/></label>
+            <label>사진 캡션 · {languageLabels[language]}<input value={photo.caption?.[language]??''} maxLength={500} onChange={e=>change('photos',draft.photos?.map((p,i)=>i===index?{...p,caption:{ko:'',en:'',...p.caption,[language]:e.target.value}}:p))}/></label>
           </div>)}<button type="button" className="admin-button" onClick={()=>change('photos',draft.photos?.filter((_,i)=>i!==index))}>이 사진 제외</button>
         </div>)}
         <p className="admin-note">사진은 기존 업로드 경로나 HTTPS 이미지 주소로 연결합니다. 이 화면의 파일 직접 업로드는 아직 제공하지 않습니다.</p>
@@ -129,7 +135,9 @@ function NewsEditor({selection,failed,onSaved,onDirty}:{selection:{id:string;fre
         </div>
         {dirty&&<p className="admin-note">저장하지 않은 변경사항이 있습니다. 게시하려면 먼저 임시저장해 주세요.</p>}
       </fieldset>
-      {preview&&<div className="admin-news-preview"><p className="admin-eyebrow">미리보기 · 아직 게시되지 않은 내용일 수 있습니다</p><h2>{draft.title.ko||'제목 없음'}</h2><p>{draft.summary.ko}</p><div>{draft.body?.ko.split(/\n\s*\n/).map((paragraph,index)=><p key={index}>{paragraph}</p>)}</div></div>}
+      {preview&&<div className="admin-news-preview"><p className="admin-eyebrow">미리보기 · 아직 게시되지 않은 내용일 수 있습니다</p>
+        <label>미리보기 언어<select value={previewLanguage} onChange={e=>setPreviewLanguage(e.target.value as NewsLanguage)}>{languages.map(language=><option key={language} value={language}>{languageLabels[language]}</option>)}</select></label>
+        <h2>{localize(draft.title,previewLanguage)||'제목 없음'}</h2><p>{localize(draft.summary,previewLanguage)}</p><div>{draft.body&&localize(draft.body,previewLanguage).split(/\n\s*\n/).map((paragraph,index)=><p key={index}>{paragraph}</p>)}</div></div>}
     </form>}
   </section>
 }

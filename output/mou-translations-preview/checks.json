@@ -1,0 +1,38 @@
+{
+  "rows": [
+    {
+      "language": "ko",
+      "width": 1440
+    },
+    {
+      "language": "ko",
+      "width": 390
+    },
+    {
+      "language": "en",
+      "width": 1440
+    },
+    {
+      "language": "en",
+      "width": 390
+    },
+    {
+      "language": "fr",
+      "width": 1440
+    },
+    {
+      "language": "fr",
+      "width": 390
+    },
+    {
+      "language": "ja",
+      "width": 1440
+    },
+    {
+      "language": "ja",
+      "width": 390
+    }
+  ],
+  "exceptions": [],
+  "dataSource": "Translated publication fixture; production DB not modified"
+}

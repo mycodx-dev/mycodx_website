@@ -1,5 +1,5 @@
 {
-  "processing": "Full-size images: only crop empty outer margins and lossless encoding, exact pixels verified. Previews: proportional downscaling only. No generation, retouching, recoloring or background replacement.",
+  "processing": "M1/M2 full-size images: only crop empty outer margins and lossless encoding, exact pixels verified. M1/M2 previews: proportional downscaling only. M3 open-door photo: original PNG copied byte-for-byte and used for the list, detail and enlarged view. No generation, retouching, recoloring or background replacement.",
   "images": [
     {
       "file": "culture-plate.webp",
@@ -54,30 +54,26 @@
       ]
     },
     {
-      "file": "automated-incubation.webp",
-      "sourceFilename": "module3.png",
-      "sourceSha256": "9662fd0679bcf10c20db9597af4ce264aade92f6db436bd514ffa60eaa9270bf",
+      "file": "automated-incubation-open.png",
+      "sourceFilename": "M3_장비사진(문열림).png",
+      "sourceSha256": "b56928544fc4533e200ecd96124ac142d6f1bfbd44c8b1229e42a3b504db5390",
       "sourceSize": [
-        4284,
-        5712
+        1029,
+        1371
       ],
       "crop": [
-        857,
-        1189,
-        3064,
-        5167
+        0,
+        0,
+        1029,
+        1371
       ],
       "outputSize": [
-        2207,
-        3978
+        1029,
+        1371
       ],
-      "outputSha256": "3566f8976c31ad52e2958a559877f6f307d8550d1417f1ebba824962e9a74a28",
+      "outputSha256": "b56928544fc4533e200ecd96124ac142d6f1bfbd44c8b1229e42a3b504db5390",
       "pixelIdenticalToSourceCrop": true,
-      "previewFile": "automated-incubation-preview.webp",
-      "previewSize": [
-        533,
-        960
-      ]
+      "byteIdenticalToSource": true
     }
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "rows": [],
+  "adminWidths": [
+    1440,
+    390
+  ],
+  "exceptions": [],
+  "dataSource": "Disposable PostgreSQL publication output and mocked admin API. No production writes."
+}
