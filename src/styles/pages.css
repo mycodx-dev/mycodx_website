@@ -312,6 +312,22 @@
   object-fit: contain;
 }
 
+.product-card__visual--framed {
+  position: relative;
+  padding: 0;
+}
+
+.product-card__visual--framed img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  max-width: none;
+  height: calc(82% * var(--product-image-scale));
+  aspect-ratio: auto;
+  transform: translate(var(--product-image-x), var(--product-image-y));
+}
+
 .product-card__meta {
   display: flex;
   flex-wrap: wrap;

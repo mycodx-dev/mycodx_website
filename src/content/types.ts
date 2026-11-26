@@ -19,6 +19,15 @@ export interface ProductContent {
   family?: LocalizedText
   image?: string
   imagePreview?: string
+  /** Visible product bounds in full-size image pixels; excludes outer empty space. */
+  imageBounds?: {
+    width: number
+    height: number
+    left: number
+    top: number
+    right: number
+    bottom: number
+  }
   title: LocalizedText
   summary: LocalizedText
   listSummary?: LocalizedText

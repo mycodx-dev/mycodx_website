@@ -1,9 +1,21 @@
+import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import productData from '../content/products.json'
 import { localize, sortByOrder, type ProductContent } from '../content/types'
 
 const productItems = productData as ProductContent[]
+
+function imageFraming(bounds: ProductContent['imageBounds']): CSSProperties | undefined {
+  if (!bounds) return undefined
+
+  // Normalize the visible product, keeping the source photo and its proportions intact.
+  return {
+    '--product-image-scale': bounds.height / (bounds.bottom - bounds.top),
+    '--product-image-x': `${-50 * (bounds.left + bounds.right) / bounds.width}%`,
+    '--product-image-y': `${-50 * (bounds.top + bounds.bottom) / bounds.height}%`,
+  } as CSSProperties
+}
 
 export default function Product() {
   const { t, i18n } = useTranslation()
@@ -43,7 +55,10 @@ export default function Product() {
                 key={product.id}
               >
                 {product.image && (
-                  <div className="product-card__visual">
+                  <div
+                    className={`product-card__visual${product.imageBounds ? ' product-card__visual--framed' : ''}`}
+                    style={imageFraming(product.imageBounds)}
+                  >
                     <img src={product.imagePreview ?? product.image} alt="" loading="lazy" decoding="async" />
                   </div>
                 )}

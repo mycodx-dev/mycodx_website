@@ -75,5 +75,6 @@
       "pixelIdenticalToSourceCrop": true,
       "byteIdenticalToSource": true
     }
-  ]
+  ],
+  "listPresentation": "CSS uses imageBounds in products.json to center the visible product and align all three products at 82% of their shared 4:3 frame height. The original image files and enlarged views are unchanged."
 }

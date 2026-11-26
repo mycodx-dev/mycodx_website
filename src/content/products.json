@@ -7,6 +7,14 @@
     "category": "Module 01",
     "image": "/products/culture-plate.webp",
     "imagePreview": "/products/culture-plate-preview.webp",
+    "imageBounds": {
+      "width": 1536,
+      "height": 1024,
+      "left": 128,
+      "top": 62,
+      "right": 1480,
+      "bottom": 980
+    },
     "title": {
       "ko": "6-Well 배양 플레이트",
       "en": "6-Well Culture Plate for DST",
@@ -122,6 +130,14 @@
     "category": "Module 02",
     "image": "/products/automated-inoculation.webp",
     "imagePreview": "/products/automated-inoculation-preview.webp",
+    "imageBounds": {
+      "width": 3139,
+      "height": 3065,
+      "left": 102,
+      "top": 106,
+      "right": 3038,
+      "bottom": 2627
+    },
     "title": {
       "ko": "자동 접종 시스템",
       "en": "Automated Inoculation System",
@@ -236,6 +252,14 @@
     "order": 3,
     "category": "Module 03",
     "image": "/products/automated-incubation-open.png",
+    "imageBounds": {
+      "width": 1029,
+      "height": 1371,
+      "left": 94,
+      "top": 252,
+      "right": 888,
+      "bottom": 1230
+    },
     "title": {
       "ko": "자동 배양·이미징·AI 분석 시스템",
       "en": "Automated Incubation, Imaging & AI Analysis",
